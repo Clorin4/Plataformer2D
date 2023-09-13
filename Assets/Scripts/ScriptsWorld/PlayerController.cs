@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
         //Scoree = SafeData.sharedInstance.score;
         canvasFin.SetActive(false);
         //canvasPrimero.SetActive(true);
+        animator = GetComponent<Animator>();
+        animatorrun = GetComponent<Animator>();
     }
 
     private void Update()
@@ -46,8 +48,7 @@ public class PlayerController : MonoBehaviour
         Scoree = SafeData.sharedInstance.score;
         //int loadScoree = PlayerPrefs.GetInt("Score");
         //Scoree = loadScoree;
-        animator = GetComponent<Animator>();
-        animatorrun = GetComponent<Animator>();
+        
 
         if (canMove == true)
         {
@@ -132,9 +133,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    
     private void Girar()
     {
+        
         mirandoDerecha = !mirandoDerecha;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
     }
@@ -143,7 +145,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            animatorrun.SetTrigger("Correr");
+            if (!animatorrun.GetCurrentAnimatorStateInfo(0).IsName("Correr"))
+            {
+                animatorrun.Play("Correr");
+            }
+            else
+            {
+                animator.Play("Idle");
+            }
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -151,5 +160,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+   
 }
