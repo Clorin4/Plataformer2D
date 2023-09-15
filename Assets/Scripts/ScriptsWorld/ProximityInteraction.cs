@@ -9,14 +9,18 @@ public class ProximityInteraction : MonoBehaviour
 
     private Transform player; // Referencia al transform del jugador.
     private bool isInRange = false; // Indica si el jugador está en rango de interacción.
+    private bool isInteracting = false;
+
 
     public GameObject globoText;
+    public GameObject text;
 
     private void Start()
     {
         // Busca el objeto con la etiqueta "Player" y obtiene su Transform.
         player = GameObject.FindGameObjectWithTag("Player").transform;
         globoText.SetActive(false);
+        text.SetActive(false);
     }
 
     private void Update()
@@ -30,14 +34,16 @@ public class ProximityInteraction : MonoBehaviour
             globoText.SetActive(true);
             isInRange = true;
 
-            // Aquí puedes mostrar un icono de interacción o un mensaje en la pantalla.
-            // Por ejemplo: "Presiona E para interactuar".
-
             if (isInRange == true && Input.GetKeyDown(KeyCode.E))
             {
-                // El jugador ha presionado la tecla E, realiza la interacción.
                 Interact();
             }
+            
+        }
+        else if (!isInRange == true && isInteracting == true)
+        {
+            text.SetActive(false);
+            isInteracting = false;
         }
         else
         {
@@ -57,6 +63,20 @@ public class ProximityInteraction : MonoBehaviour
     {
         // Este método se llama cuando el jugador interactúa con el objeto o NPC.
         Debug.Log("E");
-        // Aquí puedes agregar la lógica de interacción específica, como mostrar un diálogo o activar una animación.
+        
+        globoText.SetActive(false);
+
+        if (!isInteracting)
+        {
+            text.SetActive(true);
+            isInteracting = true;
+        }
+        else if(isInteracting)
+        {
+            text.SetActive(false);
+            isInteracting = false;
+        }
+            
+
     }
 }
