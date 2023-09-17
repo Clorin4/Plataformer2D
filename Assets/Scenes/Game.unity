@@ -6379,9 +6379,10 @@ GameObject:
   - component: {fileID: 582118737}
   - component: {fileID: 582118736}
   - component: {fileID: 582118735}
+  - component: {fileID: 582118738}
   m_Layer: 0
   m_Name: Boy_Adventure A_0
-  m_TagString: Untagged
+  m_TagString: NPC2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6469,6 +6470,7 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 0
+  PC: {fileID: 2109652291}
   globoText: {fileID: 900298669}
   text: {fileID: 1767104944}
 --- !u!114 &582118736
@@ -6505,6 +6507,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &582118738
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582118732}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.17464352, y: 2.971015}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2.25}
+    newSize: {x: 2, y: 2.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 16.144178, y: 10.158396}
+  m_EdgeRadius: 0
 --- !u!1 &645276617
 GameObject:
   m_ObjectHideFlags: 0
@@ -8590,7 +8618,7 @@ GameObject:
   - component: {fileID: 1224954938}
   m_Layer: 0
   m_Name: Pig_Big_8
-  m_TagString: Untagged
+  m_TagString: NPC1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8611,6 +8639,7 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 0
+  PC: {fileID: 2109652291}
   globoText: {fileID: 906936665}
   text: {fileID: 1767104944}
 --- !u!114 &1224954939
@@ -8660,7 +8689,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000047683716, y: -0.1725645}
+  m_Offset: {x: -0.17464352, y: 2.971015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8671,7 +8700,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.500001, y: 3.871233}
+  m_Size: {x: 16.144178, y: 10.158396}
   m_EdgeRadius: 0
 --- !u!212 &1224954942
 SpriteRenderer:
@@ -8733,7 +8762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224954937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6892128, y: -2.1141086, z: 0.28382564}
+  m_LocalPosition: {x: -0.6892128, y: -2.1141086, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19306,7 +19335,7 @@ GameObject:
   - component: {fileID: 1465173824}
   m_Layer: 0
   m_Name: Wizzart_A_8
-  m_TagString: Untagged
+  m_TagString: NPC3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19342,6 +19371,7 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 0
+  PC: {fileID: 2109652291}
   globoText: {fileID: 902900146}
   text: {fileID: 1767104944}
 --- !u!114 &1465173821
@@ -19370,7 +19400,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.17464352, y: 2.971015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19381,7 +19411,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.125, y: 2.75}
+  m_Size: {x: 16.144178, y: 10.158396}
   m_EdgeRadius: 0
 --- !u!212 &1465173823
 SpriteRenderer:
@@ -20743,6 +20773,7 @@ MonoBehaviour:
   canvasFin: {fileID: 1803915821}
   canvasPrimero: {fileID: 2049322278}
   textMeshScore: {fileID: 0}
+  O: 0
   mirandoDerecha: 1
 --- !u!50 &2109652292
 Rigidbody2D:

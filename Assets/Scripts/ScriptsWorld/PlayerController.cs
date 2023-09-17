@@ -25,11 +25,24 @@ public class PlayerController : MonoBehaviour
     public TMP_Text textMeshScore;
     int Scoree;
 
+    //public static PlayerController Instance;
+    public int O;
+
     public bool mirandoDerecha = true;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        /*if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }*/
     }
 
     private void Start()
@@ -46,9 +59,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Scoree = SafeData.sharedInstance.score;
-        //int loadScoree = PlayerPrefs.GetInt("Score");
-        //Scoree = loadScoree;
-        
 
         if (canMove == true)
         {
@@ -65,6 +75,10 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void FixedUpdate()
+    {
+        animator.SetBool("TouchGround", TouchGround);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -76,6 +90,8 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(2); //NIVEL2
         }
+        
+
 
         if (collision.gameObject.tag == "Finish")
         {
@@ -95,7 +111,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "NPC1")
+        {
+            O = 1;
+            Debug.Log("VALE 1 OOOOO");
+        }
+        else if (collision.gameObject.tag == "NPC2")
+        {
+            O = 2;
+            Debug.Log("VALE 2 OOOOO");
+        }
+        else if (collision.gameObject.tag == "NPC3")
+        {
+            O = 3;
+            Debug.Log("VALE 3 OOOOO");
+        }
+    }
 
     public void Rebote(Vector2 puntoGolpe)
     {
@@ -110,7 +143,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SoundManager.Instance.EjecutarSonido(saltoSonido);
-            animator.SetTrigger("Saltar");
+            //animator.SetTrigger("Saltar");
             playerRB.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
             TouchGround = false;
             
@@ -122,6 +155,8 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector2(moveHorizontal, 0);
         playerRB.AddForce(movement * playerSpeed);
+
+        animatorrun.SetFloat("Horizontal", Mathf.Abs(moveHorizontal));
 
         if(moveHorizontal > 0 && !mirandoDerecha)
         {
@@ -156,7 +191,14 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            animatorrun.SetTrigger("Correr");
+            if (!animatorrun.GetCurrentAnimatorStateInfo(0).IsName("Correr"))
+            {
+                animatorrun.Play("Correr");
+            }
+            else
+            {
+                animator.Play("Idle");
+            }
         }
     }
 

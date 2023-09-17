@@ -9,6 +9,9 @@ TagManager:
   - Meta1
   - Bullet
   - Enemy
+  - NPC1
+  - NPC2
+  - NPC3
   layers:
   - Default
   - TransparentFX

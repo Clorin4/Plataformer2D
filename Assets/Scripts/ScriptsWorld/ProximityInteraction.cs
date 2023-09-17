@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProximityInteraction : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ProximityInteraction : MonoBehaviour
     private bool isInRange = false; // Indica si el jugador está en rango de interacción.
     private bool isInteracting = false;
 
+    public PlayerController PC;
 
     public GameObject globoText;
     public GameObject text;
@@ -52,6 +54,8 @@ public class ProximityInteraction : MonoBehaviour
         }
     }
 
+
+
     private void OnDrawGizmosSelected()
     {
         // Dibuja un gizmo en el editor para visualizar el radio de interacción.
@@ -71,12 +75,27 @@ public class ProximityInteraction : MonoBehaviour
             text.SetActive(true);
             isInteracting = true;
         }
-        else if(isInteracting)
+        else if(isInteracting && PC.O == 1)
         {
             text.SetActive(false);
             isInteracting = false;
+            Debug.Log("NOS FUIMOS");
+            SceneManager.LoadScene(2);
         }
-            
+        else if (isInteracting && PC.O == 2)
+        {
+            text.SetActive(false);
+            isInteracting = false;
+            Debug.Log("NOS FUIMOS");
+            //SceneManager.LoadScene(2);
+        }
+        else if (isInteracting && PC.O == 3)
+        {
+            text.SetActive(false);
+            isInteracting = false;
+            Debug.Log("NOS FUIMOS");
+            //SceneManager.LoadScene(2);
+        }
 
     }
 }
