@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526b4664cee83c4b978ccfc81e46b72, type: 3}
   m_Name: Wizar
   m_EditorClassIdentifier: 
-  personajeJugable: {fileID: 9092938529909214987, guid: 056d58c5f705b3f46922e9c3fc55c716, type: 3}
+  personajeJugable: {fileID: 6072205971768769864, guid: 76b6f743af5b7a14cbd473301b6019c1, type: 3}
   imagen: {fileID: 871541640, guid: 775f35a67d97f044e9671cf68eb243ad, type: 3}
   nombre: Wichard

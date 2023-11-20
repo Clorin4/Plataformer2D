@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526b4664cee83c4b978ccfc81e46b72, type: 3}
   m_Name: Piggy
   m_EditorClassIdentifier: 
-  personajeJugable: {fileID: 4623572403100212914, guid: 4cb7c73ce960b3c43b3ec8d955de98fa, type: 3}
+  personajeJugable: {fileID: 8500401008117390031, guid: 54a9806b33874e04c985771c723079da, type: 3}
   imagen: {fileID: -777025005, guid: 7c16af1ef1f1c704e95f928f39135719, type: 3}
   nombre: Piggy
