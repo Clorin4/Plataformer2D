@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+//using System.Collections.Generic;
 
 public class MenuSeleccion : MonoBehaviour
 {
     public GameObject canvasPersonajes;
     public GameObject canvasDificultad;
 
-    public RawImage[] introVideo;
+    public RawImage introVideoRawImage;
+    public VideoPlayer videoPlayer;
+    public VideoClip[] videos; // Array para almacenar los videos de las combinaciones de personajes.
+
+    private Dictionary<string, VideoClip> videoClipsDict = new Dictionary<string, VideoClip>();
+
 
     [SerializeField] private Image[] imagenes; // Arreglo de imágenes para los personajes de los jugadores.
     [SerializeField] private TextMeshProUGUI[] nombres; // Arreglo de TextMeshProUGUI para los nombres de los personajes.
@@ -25,6 +32,7 @@ public class MenuSeleccion : MonoBehaviour
 
         canvasPersonajes.SetActive(true);
         canvasDificultad.SetActive(false);
+        introVideoRawImage.gameObject.SetActive(false);
 
         index = new int[2]; // Inicializar arreglo de índices para los dos jugadores.
         index[0] = PlayerPrefs.GetInt("Jugador1Index"); // Obtener índice del jugador 1 desde PlayerPrefs.
@@ -39,6 +47,21 @@ public class MenuSeleccion : MonoBehaviour
             }
             CambiarPantalla(i);
         }
+
+
+        // Asegúrate de que los tamaños del array 'introVideo' y 'videos' coincidan
+        if (introVideoRawImage == null || videoPlayer == null || videos.Length != 3) // Ajusta la longitud según sea necesario
+        {
+            Debug.LogError("RawImage o VideoPlayer no asignados, o la cantidad de VideoClips no coincide.");
+            return;
+        }
+
+        // Llena el diccionario con las combinaciones de personajes y sus respectivos videos.
+        videoClipsDict.Add("Comb0-0", videos[0]);
+        videoClipsDict.Add("Comb0-1", videos[1]);
+        videoClipsDict.Add("Comb1-0", videos[1]);
+        videoClipsDict.Add("Comb1-1", videos[2]);
+        // Agrega el resto de combinaciones
     }
 
     private void CambiarPantalla(int jugador)
@@ -75,23 +98,74 @@ public class MenuSeleccion : MonoBehaviour
         canvasDificultad.SetActive(false);
     }
 
+    public void SelectDifficulty(string difficulty)
+    {
+        PlayerPrefs.SetString("SelectedDifficulty", difficulty);
+
+
+        Debug.Log(difficulty);
+    }
+
+
+    public string DetermineCombination()
+    {
+        int indexJugador1 = PlayerPrefs.GetInt("Jugador1Index");
+        int indexJugador2 = PlayerPrefs.GetInt("Jugador2Index");
+
+        string combinationIdentifier = "Comb" + indexJugador1 + "-" + indexJugador2;
+        return combinationIdentifier;
+    }
+
     public void StartGame()
     {
+        introVideoRawImage.gameObject.SetActive(true);
         StartCoroutine(PlayIntroAndStartGame());
     }
 
     IEnumerator PlayIntroAndStartGame()
     {
+        // Obtén la combinación de personajes.
+        string combination = DetermineCombination();
 
-        // Activar el RawImage y reproducir el video o GIF correspondiente a la combinación de personajes.
-        introVideo[0].gameObject.SetActive(true);
-        // Aquí carga y reproduce el video o GIF según la combinación de personajes elegida por los jugadores.
+        // Obtén el video correspondiente a la combinación.
+        VideoClip video = null;
+        if (videoClipsDict.ContainsKey(combination))
+        {
+            video = videoClipsDict[combination];
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un video para la combinación de personajes.");
+            yield break;
+        }
 
-        // Esperar durante el tiempo necesario para mostrar la introducción.
-        yield return new WaitForSeconds(3f);
+        // Prepara el VideoPlayer para reproducir el video correspondiente.
+        videoPlayer.clip = video;
+        videoPlayer.Prepare();
 
-        // Después de la presentación, desactivar el RawImage y cargar la siguiente escena.
-        introVideo[0].gameObject.SetActive(false);
+        // Espera hasta que el VideoPlayer esté preparado.
+        while (!videoPlayer.isPrepared)
+        {
+            yield return null;
+        }
+
+        // Muestra el RawImage con el video del VideoPlayer.
+        introVideoRawImage.texture = videoPlayer.texture;
+        videoPlayer.Play();
+
+        // Espera hasta que termine de reproducirse el video.
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        // Después de la presentación, desactiva el RawImage y carga la siguiente escena.
+        introVideoRawImage.texture = null;
+        canvasPersonajes.SetActive(false);
+        canvasDificultad.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
+
+
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<Personajes> personajes;
 
+    //private string selectedDifficulty;
 
     private void Awake()
     {
@@ -20,4 +21,6 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    
 }
