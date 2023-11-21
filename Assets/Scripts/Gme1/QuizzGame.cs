@@ -82,7 +82,7 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(.3f);
+        //yield return new WaitForSeconds(.3f);
 
         sprite3Renderer.gameObject.SetActive(true);
         yield return ScaleSpriteTo(sprite3Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
@@ -106,7 +106,7 @@ public class QuizzGame : MonoBehaviour
         yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
         spriteAdelanteRenderer.gameObject.SetActive(false);
 
-        yield return StartCoroutine(ShowQuestionPanel());
+        
         // Lógica para iniciar el juego después de la cuenta regresiva
         StartGame();
     }
@@ -128,11 +128,14 @@ public class QuizzGame : MonoBehaviour
 
     public void StartGame()
     {
+        StartCoroutine(ShowQuestionPanel());
         StartCoroutine(DetectKeyPress());
     }
 
     IEnumerator DetectKeyPress()
     {
+        //yield return 
+
         yield return new WaitForSeconds(5f);
 
         countDownStarted = false;
@@ -146,6 +149,7 @@ public class QuizzGame : MonoBehaviour
             {
                 player1Pressed = true;
                 countDownStarted = true;
+
                 // Realizar acciones para el jugador 1 cuando presiona la tecla D
             }
 
@@ -164,11 +168,11 @@ public class QuizzGame : MonoBehaviour
         // Lógica para determinar quién presionó más rápido y proceder en consecuencia
         DetermineWinner();
 
-        if (player1Pressed || player2Pressed)
+        /*if (player1Pressed || player2Pressed)
         {
             yield return new WaitForSeconds(2f); // Agregar un pequeño retraso antes de reiniciar
             ReiniciarJuego();
-        }
+        }*/
     } //OJOOOOOOOOO
 
     void DetermineWinner() //definir banderas de jugadores
@@ -203,6 +207,7 @@ public class QuizzGame : MonoBehaviour
             teclaD.SetActive(false);
             teclaK.SetActive(false);
             Debug.Log("Ninguno");
+            ReiniciarJuego();
             // Acciones si ninguno presionó
         }
     }
@@ -210,8 +215,8 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator ShowQuestionPanel()
     {
-        StartCoroutine(ShowQuestionAndAnswers());
-
+        //StartCoroutine(ShowQuestionAndAnswers());
+        Debug.Log("PANEEEEEEEEEEEEEEL");
 
         // Mostrar el panel usando iTween (escala desde 0 a 1)
         panelQuestion.SetActive(true);
@@ -229,10 +234,13 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator ShowQuestionAndAnswers()
     {
+         
+
         // Obtener una pregunta aleatoria de la lista
         int randomIndex = Random.Range(0, questionManager.questions.Count);
         currentQuestion = questionManager.questions[randomIndex];
 
+        Debug.Log(randomIndex);
         // Mostrar la pregunta en el TextMeshPro
         questionText.text = currentQuestion.questionText;
 
@@ -273,6 +281,7 @@ public class QuizzGame : MonoBehaviour
 
     public void OnWrongAnswerSelected()
     {
+        ReiniciarJuego();
         // Acciones cuando se selecciona una respuesta incorrecta
         Debug.Log("Respuesta incorrecta seleccionada");
         // Aquí puedes llamar a la función que maneja la respuesta incorrecta
@@ -306,6 +315,28 @@ public class QuizzGame : MonoBehaviour
         player2Pressed = false;
 
         // Llamar a la función que maneja el ciclo del juego desde el principio
-        StartGame();
+        //StartCoroutine(Countdown());
+        StartCoroutine(ShowNextQuestion());
     }
+
+    IEnumerator ShowNextQuestion()
+    {
+        // Espera 2 segundos antes de mostrar la siguiente pregunta
+        yield return new WaitForSeconds(2f);
+
+        // Limpia los eventos de los botones
+        ClearButtonEvents();
+
+        // Muestra la siguiente pregunta
+        yield return StartCoroutine(Countdown());
+    }
+
+    void ClearButtonEvents()
+    {
+        foreach (Button button in answerButtons)
+        {
+            button.onClick.RemoveAllListeners();
+        }
+    }
+
 }

@@ -1504,9 +1504,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questions: []
   Easyquestions:
-  - questionText: 
-    options: []
-    correctAnswerIndex: 0
+  - questionText: fgrthre
+    options:
+    - a
+    - c
+    - fe
+    - f4e
+    correctAnswerIndex: 2
   - questionText: 
     options: []
     correctAnswerIndex: 0
@@ -1524,6 +1528,13 @@ MonoBehaviour:
     - yo
     - beywfw
     - apoco?
+    correctAnswerIndex: 2
+  - questionText: Porque tan sexy
+    options:
+    - aaaaaa
+    - bbbbbbbb
+    - cccccc
+    - dddddd
     correctAnswerIndex: 2
   Hardquestions:
   - questionText: 
