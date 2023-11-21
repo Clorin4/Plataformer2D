@@ -13,6 +13,9 @@ public class QuizzGame : MonoBehaviour
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
+    public bool J1Responde;
+    public bool J2Responde;
+
     private bool player1Pressed;
     private bool player2Pressed;
     private bool countDownStarted;
@@ -33,6 +36,9 @@ public class QuizzGame : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite1Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+
+        J1Responde = false;
+        J2Responde = false;
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
@@ -149,7 +155,7 @@ public class QuizzGame : MonoBehaviour
             {
                 player1Pressed = true;
                 countDownStarted = true;
-
+                
                 // Realizar acciones para el jugador 1 cuando presiona la tecla D
             }
 
@@ -157,30 +163,27 @@ public class QuizzGame : MonoBehaviour
             {
                 player2Pressed = true;
                 countDownStarted = true;
+                
                 // Realizar acciones para el jugador 2 cuando presiona la tecla K
             }
 
             countdownTimer -= Time.deltaTime;
-            Debug.Log(countdownTimer);
+            //Debug.Log(countdownTimer);
             yield return null;
         }
 
-        // Lógica para determinar quién presionó más rápido y proceder en consecuencia
+        teclaD.SetActive(false);
+        teclaK.SetActive(false);
+
         DetermineWinner();
 
-        /*if (player1Pressed || player2Pressed)
-        {
-            yield return new WaitForSeconds(2f); // Agregar un pequeño retraso antes de reiniciar
-            ReiniciarJuego();
-        }*/
-    } //OJOOOOOOOOO
+    } 
 
     void DetermineWinner() //definir banderas de jugadores
     {
         if (player1Pressed && !player2Pressed)
         {
-            teclaD.SetActive(false);
-            teclaK.SetActive(false);
+            J1Responde = true;
 
             EnableAnswerButtons();
             Debug.Log("GANA EL 1");
@@ -188,8 +191,7 @@ public class QuizzGame : MonoBehaviour
         }
         else if (!player1Pressed && player2Pressed)
         {
-            teclaD.SetActive(false);
-            teclaK.SetActive(false);
+            J2Responde = true;
 
             EnableAnswerButtons();
             Debug.Log("GANA EL 2");
@@ -197,15 +199,11 @@ public class QuizzGame : MonoBehaviour
         }
         else if (player1Pressed && player2Pressed) //Palomita
         {
-            teclaD.SetActive(false);
-            teclaK.SetActive(false);
             Debug.Log("Ambos?");
             // Acciones si ambos jugadores presionaron, se puede considerar un empate
         }
         else
         {
-            teclaD.SetActive(false);
-            teclaK.SetActive(false);
             Debug.Log("Ninguno");
             ReiniciarJuego();
             // Acciones si ninguno presionó
@@ -273,13 +271,19 @@ public class QuizzGame : MonoBehaviour
 
     public void OnCorrectAnswerSelected()
     {
+        if (J1Responde)
+        {
+            Debug.Log("RESPONDE BIEN EL 1");
+        }
+        else if (J2Responde)
+        {
+            Debug.Log("RESPONDE BIEN EL 2");
+        }
         ReiniciarJuego();
         // Acciones cuando se selecciona la respuesta correcta
-        Debug.Log("¡Respuesta correcta seleccionada!");
-        // Aquí puedes llamar a la función que maneja la respuesta correcta
     }
 
-    public void OnWrongAnswerSelected()
+    public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
     {
         ReiniciarJuego();
         // Acciones cuando se selecciona una respuesta incorrecta
