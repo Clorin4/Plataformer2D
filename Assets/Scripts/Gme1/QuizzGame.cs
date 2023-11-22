@@ -2,19 +2,29 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class QuizzGame : MonoBehaviour
 {
+    //List<int> usedIndices = new List<int>();
+
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
+
+    public GameObject apuntador1;
+    public GameObject apuntador2;
 
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
     public bool J1Responde;
     public bool J2Responde;
+    public bool venganza;
+
+    private bool J1Dañado;
+    private bool J2Dañado;
 
     private bool player1Pressed;
     private bool player2Pressed;
@@ -28,9 +38,15 @@ public class QuizzGame : MonoBehaviour
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
 
+    public int player1Health = 100;
+    public int player2Health = 100;
+
     private void Start()
     {
         panelQuestion.SetActive(false);
+
+        apuntador1.SetActive(false);
+        apuntador2.SetActive(false);
 
         sprite3Renderer.gameObject.SetActive(false);
         sprite2Renderer.gameObject.SetActive(false);
@@ -39,6 +55,10 @@ public class QuizzGame : MonoBehaviour
 
         J1Responde = false;
         J2Responde = false;
+        venganza = false;
+
+        J1Dañado = false;
+        J2Dañado = false;
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
@@ -140,8 +160,6 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator DetectKeyPress()
     {
-        //yield return 
-
         yield return new WaitForSeconds(5f);
 
         countDownStarted = false;
@@ -168,19 +186,22 @@ public class QuizzGame : MonoBehaviour
             }
 
             countdownTimer -= Time.deltaTime;
-            //Debug.Log(countdownTimer);
+            //HACER HUD PARA QUE SEA VISIBLE EL TIEMPO
             yield return null;
         }
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
 
+        
         DetermineWinner();
 
     } 
 
     void DetermineWinner() //definir banderas de jugadores
     {
+        EnableArrows();
+
         if (player1Pressed && !player2Pressed)
         {
             J1Responde = true;
@@ -204,18 +225,30 @@ public class QuizzGame : MonoBehaviour
         }
         else
         {
+            //DAÑOOO A AMBOS
             Debug.Log("Ninguno");
-            ReiniciarJuego();
+            Daños();
             // Acciones si ninguno presionó
         }
     }
 
+    void EnableArrows()
+    {
+        if (player1Pressed)
+        {
+            apuntador1.SetActive(true);
+            apuntador2.SetActive(false);
+        }
+        else if (player2Pressed)
+        {
+            apuntador2.SetActive(true);
+            apuntador1.SetActive(false);
+        }
+        
+    }
 
     IEnumerator ShowQuestionPanel()
     {
-        //StartCoroutine(ShowQuestionAndAnswers());
-        Debug.Log("PANEEEEEEEEEEEEEEL");
-
         // Mostrar el panel usando iTween (escala desde 0 a 1)
         panelQuestion.SetActive(true);
         iTween.ScaleFrom(panelQuestion, Vector3.zero, panelScaleDuration);
@@ -225,70 +258,150 @@ public class QuizzGame : MonoBehaviour
 
         // Esperar a que un jugador presione su tecla
         yield return ShowQuestionAndAnswers();
-
-        // Una vez que un jugador presiona la tecla, habilitar los botones
-        //EnableAnswerButtons();
     }
 
     IEnumerator ShowQuestionAndAnswers()
     {
-         
-
         // Obtener una pregunta aleatoria de la lista
         int randomIndex = Random.Range(0, questionManager.questions.Count);
         currentQuestion = questionManager.questions[randomIndex];
 
-        Debug.Log(randomIndex);
         // Mostrar la pregunta en el TextMeshPro
         questionText.text = currentQuestion.questionText;
 
-        // Mostrar las respuestas en los botones
+        List<string> answers = new List<string>(currentQuestion.options);
+        List<string> displayedAnswers = new List<string>();
+
+        // Añadir la respuesta correcta a las respuestas mostradas
+        displayedAnswers.Add(answers[currentQuestion.correctAnswerIndex]);
+        answers.RemoveAt(currentQuestion.correctAnswerIndex);
+
+        // Mostrar las respuestas incorrectas en los botones restantes
+        for (int i = 0; i < answerButtons.Length - 1; i++)
+        {
+            int randomAnswerIndex = Random.Range(0, answers.Count);
+            displayedAnswers.Add(answers[randomAnswerIndex]);
+            answers.RemoveAt(randomAnswerIndex);
+        }
+
+        // Mezclar las respuestas mostradas
+        displayedAnswers = ShuffleList(displayedAnswers);
+
+        // Asignar las respuestas a los botones y añadir listeners
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            // Verificar si el índice del botón coincide con el índice de la respuesta correcta
-            if (i == currentQuestion.correctAnswerIndex)
+            answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
+
+            if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
             {
-                // La respuesta correcta se asigna al botón correspondiente
-                answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.options[i];
                 answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
             }
             else
             {
-                // Las respuestas incorrectas se asignan a los botones restantes
-                int wrongAnswerIndex = Random.Range(0, currentQuestion.options.Length);
-                // Se evita que una respuesta incorrecta se muestre más de una vez
-                while (wrongAnswerIndex == currentQuestion.correctAnswerIndex)
-                {
-                    wrongAnswerIndex = Random.Range(0, currentQuestion.options.Length);
-                }
-                answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.options[wrongAnswerIndex];
                 answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
             }
         }
 
+        //EnableAnswerButtons(); // Permitir interacción con los botones
+
         yield return null;
     }
+
+    List<T> ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+
+        return list;
+    }
+
+
 
     public void OnCorrectAnswerSelected()
     {
         if (J1Responde)
         {
+            J2Dañado = true;
+            player2Health -= 10;
+            //DAÑO AL 2
             Debug.Log("RESPONDE BIEN EL 1");
         }
         else if (J2Responde)
         {
+            J1Dañado = true;
+            player1Health -= 10;
+            //DAÑO AL 1
             Debug.Log("RESPONDE BIEN EL 2");
         }
-        ReiniciarJuego();
-        // Acciones cuando se selecciona la respuesta correcta
+        Daños();
     }
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
     {
-        ReiniciarJuego();
-        // Acciones cuando se selecciona una respuesta incorrecta
-        Debug.Log("Respuesta incorrecta seleccionada");
-        // Aquí puedes llamar a la función que maneja la respuesta incorrecta
+        if (J1Responde && !venganza)
+        {
+            player1Pressed = false;
+            player2Pressed = true;
+            J1Responde = false;
+            venganza = true;
+            
+            DetermineWinner();
+            Debug.Log("RESPONDE MALL EL 1");
+        }
+        else if (J2Responde && !venganza)
+        {
+            player2Pressed = false;
+            player1Pressed = true;
+            J2Responde = false;
+            venganza = true;
+
+            DetermineWinner();
+            Debug.Log("RESPONDE MAL EL 2");
+        }
+        else if (venganza)
+        {
+            player1Health -= 5;
+            player2Health -= 5;
+            //DAÑO A AMBOS
+            Debug.Log("DAÑO PA LOS DOS");
+            Daños();
+        }
+
+    }
+
+    public void Daños() //AQUI VAN LAS ANIMACIONES DE LOS DAÑOS
+    {
+        if (player1Health > 0 && player2Health > 0)
+        {
+            if (J1Dañado)
+            {
+                Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
+            }
+            else if (J2Dañado)
+            {
+                Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
+            }
+            else
+                Debug.Log("ANIMACION DAÑO MUTUO");
+
+            ReiniciarJuego();
+        }
+        else
+        {
+            if (player1Health <= 0) //Gana P2
+            {
+                Debug.Log("GANA JUGADOR 2");
+            }
+            else if (player2Health <= 0) //Gana P1
+            {
+                Debug.Log("GANA JUGADOR 1");
+            }   
+        }  
     }
 
     void DisableAnswerButtons()
@@ -312,14 +425,24 @@ public class QuizzGame : MonoBehaviour
         // Deshabilitar todos los elementos, reiniciar variables, etc.
         // Aquí reinicias todo lo necesario para comenzar un nuevo ciclo del juego
 
+        apuntador1.SetActive(false);
+        apuntador2.SetActive(false);
+
         panelQuestion.SetActive(false);
-        teclaD.SetActive(false);
-        teclaK.SetActive(false);
         player1Pressed = false;
         player2Pressed = false;
 
+        J1Responde = false;
+        J2Responde = false;
+        venganza = false;
+
+        J1Dañado = false;
+        J2Dañado = false;
+
+        Debug.Log("Vida del jugador 1: " + player1Health);
+        Debug.Log("Vida del jugador 2: " + player2Health);
+
         // Llamar a la función que maneja el ciclo del juego desde el principio
-        //StartCoroutine(Countdown());
         StartCoroutine(ShowNextQuestion());
     }
 
