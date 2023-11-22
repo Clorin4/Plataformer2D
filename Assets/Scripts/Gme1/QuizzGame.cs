@@ -7,6 +7,10 @@ using System.Collections.Generic;
 public class QuizzGame : MonoBehaviour
 {
     //List<int> usedIndices = new List<int>();
+    public GameObject[] P1Hearts = new GameObject[10];
+    public GameObject[] P2Hearts = new GameObject[10];
+    public int arrindex1 = 9;
+    public int arrindex2 = 9;
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
@@ -25,6 +29,7 @@ public class QuizzGame : MonoBehaviour
 
     private bool J1Dañado;
     private bool J2Dañado;
+    private bool dañoPaDos;
 
     private bool player1Pressed;
     private bool player2Pressed;
@@ -45,6 +50,12 @@ public class QuizzGame : MonoBehaviour
     {
         panelQuestion.SetActive(false);
 
+        for(int i = 0; i < 10; i++)
+        {
+            P1Hearts[i].SetActive(true);
+            P2Hearts[i].SetActive(true);
+        }
+
         apuntador1.SetActive(false);
         apuntador2.SetActive(false);
 
@@ -59,6 +70,7 @@ public class QuizzGame : MonoBehaviour
 
         J1Dañado = false;
         J2Dañado = false;
+        dañoPaDos = false;
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
@@ -321,7 +333,6 @@ public class QuizzGame : MonoBehaviour
     }
 
 
-
     public void OnCorrectAnswerSelected()
     {
         if (J1Responde)
@@ -367,7 +378,8 @@ public class QuizzGame : MonoBehaviour
         {
             player1Health -= 5;
             player2Health -= 5;
-            //DAÑO A AMBOS
+
+            dañoPaDos = true;
             Debug.Log("DAÑO PA LOS DOS");
             Daños();
         }
@@ -388,6 +400,8 @@ public class QuizzGame : MonoBehaviour
             }
             else
                 Debug.Log("ANIMACION DAÑO MUTUO");
+
+            HeartsHUD();
 
             ReiniciarJuego();
         }
@@ -463,6 +477,36 @@ public class QuizzGame : MonoBehaviour
         foreach (Button button in answerButtons)
         {
             button.onClick.RemoveAllListeners();
+        }
+    }
+
+    public void HeartsHUD()
+    {
+        if (J1Dañado)
+        {
+            int i = arrindex1;
+            do
+            {
+                J1Dañado = false;
+                P1Hearts[i].SetActive(false);
+                arrindex1--;
+            }
+            while (J1Dañado);
+        }
+        else if (J2Dañado)
+        {
+            int j = arrindex2;
+            do
+            {
+                J2Dañado = false;
+                P2Hearts[j].SetActive(false);
+                arrindex2--;
+            }
+            while (J2Dañado);
+        }
+        else if (dañoPaDos)
+        {
+
         }
     }
 
