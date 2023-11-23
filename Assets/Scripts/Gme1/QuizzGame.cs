@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class QuizzGame : MonoBehaviour
 {
-    //List<int> usedIndices = new List<int>();
+    #region  VARIABLEEEES
     public GameObject[] P1Hearts = new GameObject[10];
     public GameObject[] P2Hearts = new GameObject[10];
     public int arrindex1 = 9;
@@ -24,6 +24,12 @@ public class QuizzGame : MonoBehaviour
 
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
+
+    public Canvas canvasWinners;
+    public GameObject panelP1Winner;
+    public GameObject panelP2Winner;
+
+    public Canvas howToPlay;
 
     public bool J1Responde;
     public bool J2Responde;
@@ -51,11 +57,30 @@ public class QuizzGame : MonoBehaviour
     public int player1Health = 100;
     public int player2Health = 100;
 
+    #endregion
     private void Start()
     {
-        panelQuestion.SetActive(false);
+        howToPlay.gameObject.SetActive(true);
 
-        for(int i = 0; i < 10; i++)
+        TurnOffVariables();
+
+        SaberDificultad();
+    }
+
+    public void ButtonStart()
+    {
+        howToPlay.gameObject.SetActive(false);
+        StartCoroutine(Countdown());
+    }
+
+    public void TurnOffVariables()
+    {
+        panelQuestion.SetActive(false);
+        canvasWinners.gameObject.SetActive(false);
+        panelP1Winner.SetActive(false);
+        panelP2Winner.SetActive(false);
+
+        for (int i = 0; i < 10; i++)
         {
             P1Hearts[i].SetActive(true);
             P2Hearts[i].SetActive(true);
@@ -83,11 +108,6 @@ public class QuizzGame : MonoBehaviour
         teclaD.SetActive(false);
         teclaK.SetActive(false);
 
-        //RECUERDA HACER FUNCION PARA BOTON DE INSTRUCCIONES Y YA EMPEZAR AL JUEGO
-
-        SaberDificultad();
-
-        StartCoroutine(Countdown());
     }
 
     public void SaberDificultad()
@@ -183,7 +203,7 @@ public class QuizzGame : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         countDownStarted = false;
-        float countdownTimer = 10f;
+        float countdownTimer = 8f;
         while (countdownTimer > 0f && !countDownStarted)
         {
             teclaD.SetActive(true);
@@ -245,9 +265,8 @@ public class QuizzGame : MonoBehaviour
         }
         else
         {
-            //DAÑOOO A AMBOS
             Debug.Log("Ninguno");
-            Daños();
+            
             // Acciones si ninguno presionó
         }
     }
@@ -283,7 +302,7 @@ public class QuizzGame : MonoBehaviour
     IEnumerator ShowQuestionAndAnswers()
     {
         secondCountDownStarted = false;
-        float countdownTimer = 8f;
+        float countdownTimer = 12f;
 
         if (countdownTimer > 0f && !secondCountDownStarted)
         {
@@ -335,6 +354,8 @@ public class QuizzGame : MonoBehaviour
 
             if (countdownTimer <= 0f)
             {
+                player1Health -= 5;
+                player2Health -= 5;
                 dañoPaDos = true;
                 Daños();
             }
@@ -438,10 +459,14 @@ public class QuizzGame : MonoBehaviour
             if (player1Health <= 0) //Gana P2
             {
                 Debug.Log("GANA JUGADOR 2");
+                canvasWinners.gameObject.SetActive(true);
+                panelP2Winner.SetActive(true);
             }
             else if (player2Health <= 0) //Gana P1
             {
                 Debug.Log("GANA JUGADOR 1");
+                canvasWinners.gameObject.SetActive(true);
+                panelP1Winner.SetActive(true);
             }   
         }  
     }
