@@ -11,6 +11,8 @@ public class QuizzGame : MonoBehaviour
     public GameObject[] P2Hearts = new GameObject[10];
     public int arrindex1 = 9;
     public int arrindex2 = 9;
+    public GameObject[] P1HalfHearts = new GameObject[10];
+    public GameObject[] P2HalfHearts = new GameObject[10];
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
@@ -30,10 +32,13 @@ public class QuizzGame : MonoBehaviour
     private bool J1Dañado;
     private bool J2Dañado;
     private bool dañoPaDos;
+    private bool halfHeart;
 
     private bool player1Pressed;
     private bool player2Pressed;
     private bool countDownStarted;
+    private bool secondCountDownStarted;
+
     public GameObject teclaD;
     public GameObject teclaK;
 
@@ -54,6 +59,8 @@ public class QuizzGame : MonoBehaviour
         {
             P1Hearts[i].SetActive(true);
             P2Hearts[i].SetActive(true);
+            P1HalfHearts[i].SetActive(false);
+            P2HalfHearts[i].SetActive(false);
         }
 
         apuntador1.SetActive(false);
@@ -71,6 +78,7 @@ public class QuizzGame : MonoBehaviour
         J1Dañado = false;
         J2Dañado = false;
         dañoPaDos = false;
+        halfHeart = false;
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
@@ -172,7 +180,7 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator DetectKeyPress()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
 
         countDownStarted = false;
         float countdownTimer = 10f;
@@ -274,50 +282,65 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator ShowQuestionAndAnswers()
     {
-        // Obtener una pregunta aleatoria de la lista
-        int randomIndex = Random.Range(0, questionManager.questions.Count);
-        currentQuestion = questionManager.questions[randomIndex];
+        secondCountDownStarted = false;
+        float countdownTimer = 8f;
 
-        // Mostrar la pregunta en el TextMeshPro
-        questionText.text = currentQuestion.questionText;
-
-        List<string> answers = new List<string>(currentQuestion.options);
-        List<string> displayedAnswers = new List<string>();
-
-        // Añadir la respuesta correcta a las respuestas mostradas
-        displayedAnswers.Add(answers[currentQuestion.correctAnswerIndex]);
-        answers.RemoveAt(currentQuestion.correctAnswerIndex);
-
-        // Mostrar las respuestas incorrectas en los botones restantes
-        for (int i = 0; i < answerButtons.Length - 1; i++)
+        if (countdownTimer > 0f && !secondCountDownStarted)
         {
-            int randomAnswerIndex = Random.Range(0, answers.Count);
-            displayedAnswers.Add(answers[randomAnswerIndex]);
-            answers.RemoveAt(randomAnswerIndex);
-        }
+            // Obtener una pregunta aleatoria de la lista
+            int randomIndex = Random.Range(0, questionManager.questions.Count);
+            currentQuestion = questionManager.questions[randomIndex];
 
-        // Mezclar las respuestas mostradas
-        displayedAnswers = ShuffleList(displayedAnswers);
+            // Mostrar la pregunta en el TextMeshPro
+            questionText.text = currentQuestion.questionText;
 
-        // Asignar las respuestas a los botones y añadir listeners
-        for (int i = 0; i < answerButtons.Length; i++)
-        {
-            answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
+            List<string> answers = new List<string>(currentQuestion.options);
+            List<string> displayedAnswers = new List<string>();
 
-            if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
+            // Añadir la respuesta correcta a las respuestas mostradas
+            displayedAnswers.Add(answers[currentQuestion.correctAnswerIndex]);
+            answers.RemoveAt(currentQuestion.correctAnswerIndex);
+
+            // Mostrar las respuestas incorrectas en los botones restantes
+            for (int i = 0; i < answerButtons.Length - 1; i++)
             {
-                answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
+                int randomAnswerIndex = Random.Range(0, answers.Count);
+                displayedAnswers.Add(answers[randomAnswerIndex]);
+                answers.RemoveAt(randomAnswerIndex);
             }
-            else
+
+            // Mezclar las respuestas mostradas
+            displayedAnswers = ShuffleList(displayedAnswers);
+
+            // Asignar las respuestas a los botones y añadir listeners
+            for (int i = 0; i < answerButtons.Length; i++)
             {
-                answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
+
+                if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
+                {
+                    answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
+                }
+                else
+                {
+                    answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                }
+            }
+
+            while (countdownTimer > 0f && !secondCountDownStarted)
+            {
+                countdownTimer -= Time.deltaTime;
+                yield return null;
+            }
+
+            if (countdownTimer <= 0f)
+            {
+                dañoPaDos = true;
+                Daños();
             }
         }
-
-        //EnableAnswerButtons(); // Permitir interacción con los botones
-
-        yield return null;
     }
+
 
     List<T> ShuffleList<T>(List<T> list)
     {
@@ -335,6 +358,8 @@ public class QuizzGame : MonoBehaviour
 
     public void OnCorrectAnswerSelected()
     {
+        secondCountDownStarted = true;
+
         if (J1Responde)
         {
             J2Dañado = true;
@@ -354,6 +379,8 @@ public class QuizzGame : MonoBehaviour
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
     {
+        secondCountDownStarted = true;
+
         if (J1Responde && !venganza)
         {
             player1Pressed = false;
@@ -399,6 +426,7 @@ public class QuizzGame : MonoBehaviour
                 Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
             }
             else
+                dañoPaDos = true;
                 Debug.Log("ANIMACION DAÑO MUTUO");
 
             HeartsHUD();
@@ -452,6 +480,7 @@ public class QuizzGame : MonoBehaviour
 
         J1Dañado = false;
         J2Dañado = false;
+        dañoPaDos = false;
 
         Debug.Log("Vida del jugador 1: " + player1Health);
         Debug.Log("Vida del jugador 2: " + player2Health);
@@ -482,32 +511,102 @@ public class QuizzGame : MonoBehaviour
 
     public void HeartsHUD()
     {
-        if (J1Dañado)
+        if (!halfHeart)
         {
-            int i = arrindex1;
-            do
+            if (J1Dañado && !dañoPaDos)
             {
-                J1Dañado = false;
-                P1Hearts[i].SetActive(false);
-                arrindex1--;
+                int i = arrindex1;
+                do
+                {
+                    J1Dañado = false;
+                    P1Hearts[i].SetActive(false);
+                    arrindex1--;
+                }
+                while (J1Dañado);
             }
-            while (J1Dañado);
-        }
-        else if (J2Dañado)
-        {
-            int j = arrindex2;
-            do
+            else if (J2Dañado && !dañoPaDos)
             {
-                J2Dañado = false;
-                P2Hearts[j].SetActive(false);
-                arrindex2--;
+                int j = arrindex2;
+                do
+                {
+                    J2Dañado = false;
+                    P2Hearts[j].SetActive(false);
+                    arrindex2--;
+                }
+                while (J2Dañado);
             }
-            while (J2Dañado);
-        }
-        else if (dañoPaDos)
-        {
+            else if (dañoPaDos)
+            {
+                int i = arrindex1;
+                int j = arrindex2;
+                do
+                {
+                    halfHeart = true;
 
+                    P2Hearts[j].SetActive(false);
+                    P2HalfHearts[j].SetActive(true);
+                    arrindex2--;
+
+                    P1Hearts[i].SetActive(false);
+                    P1HalfHearts[i].SetActive(true);
+                    arrindex1--;
+
+                    dañoPaDos = false;
+                }
+                while (dañoPaDos);
+            }
         }
+
+        else if (halfHeart)
+        {
+            if (J1Dañado && !dañoPaDos)
+            {
+                int i = arrindex1;
+                int aux = i + 1;
+                do
+                {
+                    J1Dañado = false;
+                    P1Hearts[i].SetActive(false);
+                    P1HalfHearts[aux].SetActive(false);
+                    P1HalfHearts[i].SetActive(true);
+                    arrindex1--;
+                }
+                while (J1Dañado);
+            }
+            else if (J2Dañado && !dañoPaDos)
+            {
+                int j = arrindex2;
+                int aux = j + 1;
+                do
+                {
+                    J2Dañado = false;
+                    P2Hearts[j].SetActive(false);
+                    P2HalfHearts[aux].SetActive(false);
+                    P2HalfHearts[j].SetActive(true);
+                    arrindex2--;
+                }
+                while (J2Dañado);
+            }
+            else if (dañoPaDos)
+            {
+                int i = arrindex1;
+                int aux = i + 1;
+                int j = arrindex2;
+                int aux2 = j + 1;
+                do
+                {
+                    halfHeart = false;
+
+                    P1HalfHearts[aux].SetActive(false);
+                    //arrindex1--;
+                    P2HalfHearts[aux2].SetActive(false);
+                    //arrindex2--;
+                    dañoPaDos = false;
+                }
+                while (dañoPaDos);
+            }
+        }
+
     }
 
 }
