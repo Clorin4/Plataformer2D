@@ -2318,6 +2318,8 @@ MonoBehaviour:
   apuntador2: {fileID: 1893236012}
   panelQuestion: {fileID: 1912975674}
   panelScaleDuration: 1
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   canvasWinners: {fileID: 199772179}
   panelP1Winner: {fileID: 1608228423}
   panelP2Winner: {fileID: 1304126907}
@@ -4643,12 +4645,153 @@ MonoBehaviour:
     options: []
     correctAnswerIndex: 0
   Insanequestions:
-  - questionText: 
-    options: []
+  - questionText: Como se le llama al personaje principal
+    options:
+    - Antaonista
+    - Protagonista
+    - Secundario
+    - Extra
+    correctAnswerIndex: 1
+  - questionText: Las dos dormas de usar el lenguaje
+    options:
+    - Informal/ escrito
+    - oral / formal
+    - formal - informal
+    - popular-coloquial
+    correctAnswerIndex: 2
+  - questionText: Cuando los anuncios quieren vender un producto se le llama
+    options:
+    - Publicidad
+    - anuncio publi
+    - propaganda
+    - anuncio comercial
+    correctAnswerIndex: 1
+  - questionText: Que sucede cuando un espermatozoide llega al ovulo?
+    options:
+    - Ocurre una ETS
+    - ligero malestar
+    - ocurre la fecundacion
+    - ocasiona alergias
+    correctAnswerIndex: 2
+  - questionText: a que se deben los eclipse?
+    options:
+    - mov de rotacion
+    - mov eliptico del sol
+    - mov traslacion
+    - mov rotacion de la luna
+    correctAnswerIndex: 1
+  - questionText: consecuencias medicas del consumo de alcohol y tabaco
+    options:
+    - "da\xF1o cerebral cancer"
+    - violencia
+    - cancer bronquitis
+    - cancer de pulmon
+    correctAnswerIndex: 2
+  - questionText: servicio que consiste en la compra y venta de productos
+    options:
+    - comercio
+    - construccion
+    - agricultura
+    - transporte
     correctAnswerIndex: 0
-  - questionText: 
-    options: []
+  - questionText: que es la biodiversidad?
+    options:
+    - amplia variedad de seres en la tierra
+    - animales en peligro de extincion
+    - plantas exoticas
+    - conjunto de personas en paises
     correctAnswerIndex: 0
+  - questionText: caracteristicas de los relieves
+    options:
+    - oceanos rios
+    - desiertos
+    - llanuras
+    - volcanes
+    correctAnswerIndex: 3
+  - questionText: que aspectos influyen en el clima?
+    options:
+    - relieve y ubicacion
+    - relieve y montanas
+    - ubicacion y cultura
+    - ubicacion y ecosistema
+    correctAnswerIndex: 3
+  - questionText: que herramienta se recomienda para viajar en otro pais bien?
+    options:
+    - mapa
+    - croquis
+    - globo terraqueo
+    - localizador
+    correctAnswerIndex: 3
+  - questionText: forma de relieve continental
+    options:
+    - fosas marinas
+    - acantilados
+    - dorsales oceanicas
+    - mesetas o altiplanas
+    correctAnswerIndex: 3
+  - questionText: el derecho que tenemos a ser respetados
+    options:
+    - libertad
+    - equidad
+    - dignidad humana
+    - expresion
+    correctAnswerIndex: 1
+  - questionText: es el aprecio a ti mismo
+    options:
+    - carino
+    - inteligencia
+    - autoestima
+    - libertad
+    correctAnswerIndex: 2
+  - questionText: mejor herramienta para resolver conflictos
+    options:
+    - empatia
+    - dialogo
+    - discucion
+    - ignorar al otro
+    correctAnswerIndex: 2
+  - questionText: son oportunidades para mejorar la convivencia
+    options:
+    - empatia
+    - conflictos interpersonales
+    - quedarse callado
+    - rcurrir a las autoridades
+    correctAnswerIndex: 1
+  - questionText: es la autoridad que determina en un juicio quien tiene la razon
+    options:
+    - sacerdote
+    - policia
+    - juez
+    - maestro
+    correctAnswerIndex: 2
+  - questionText: 8964 en notacion desarrollada
+    options:
+    - 800+9+60+4
+    - 8000+90+60+4
+    - 8000+900+60+4
+    - 80+9000+60+4
+    correctAnswerIndex: 2
+  - questionText: saca el area de un cuadrado que mide 15x2.5
+    options:
+    - 36.5
+    - 38.5
+    - 37.5
+    - 37
+    correctAnswerIndex: 2
+  - questionText: uno de los recursos que ocupan los chistes para sar risa
+    options:
+    - juegos de gestos
+    - juegos de oraciones
+    - juegos de verbos
+    - juegos de palabras
+    correctAnswerIndex: 3
+  - questionText: en una narracion en que tiempo se conjugan los verbos
+    options:
+    - presnte pasado
+    - preterito pasado
+    - copreterito y futuro
+    - preterito y copreterito
+    correctAnswerIndex: 3
   Demonquestions:
   - questionText: 
     options: []

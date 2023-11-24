@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuSeleccion : MonoBehaviour
 {
-    public GameObject[] personajePrefabs; // Array de prefabs de los personajes.
+    //public GameObject[] personajePrefabs; // Array de prefabs de los personajes.
 
     public GameObject canvasPersonajes;
     public GameObject canvasDificultad;

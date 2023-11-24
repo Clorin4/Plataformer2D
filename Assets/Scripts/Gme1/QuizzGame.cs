@@ -27,6 +27,8 @@ public class QuizzGame : MonoBehaviour
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
+    public GameObject player1;
+    public GameObject player2;
     public Canvas canvasWinners;
     public GameObject panelP1Winner;
     public GameObject panelP2Winner;
