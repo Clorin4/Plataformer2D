@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class QuizzGame : MonoBehaviour
 {
     #region  VARIABLEEEES
+    //public SelecDificultad selecDificultad;
+
     public GameObject[] P1Hearts = new GameObject[10];
     public GameObject[] P2Hearts = new GameObject[10];
     public int arrindex1 = 9;
@@ -172,7 +174,6 @@ public class QuizzGame : MonoBehaviour
         yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
         spriteAdelanteRenderer.gameObject.SetActive(false);
 
-        
         // Lógica para iniciar el juego después de la cuenta regresiva
         StartGame();
     }
@@ -461,12 +462,15 @@ public class QuizzGame : MonoBehaviour
                 Debug.Log("GANA JUGADOR 2");
                 canvasWinners.gameObject.SetActive(true);
                 panelP2Winner.SetActive(true);
+
+                //selecDificultad.ActivatePlayer1();
             }
             else if (player2Health <= 0) //Gana P1
             {
                 Debug.Log("GANA JUGADOR 1");
                 canvasWinners.gameObject.SetActive(true);
                 panelP1Winner.SetActive(true);
+                //selecDificultad.ActivatePlayer2();
             }   
         }  
     }

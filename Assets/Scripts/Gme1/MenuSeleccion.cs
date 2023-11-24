@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuSeleccion : MonoBehaviour
 {
+    public GameObject[] personajePrefabs; // Array de prefabs de los personajes.
+
     public GameObject canvasPersonajes;
     public GameObject canvasDificultad;
 
@@ -167,5 +169,19 @@ public class MenuSeleccion : MonoBehaviour
 
     }
 
+    public void ActivarPersonajeGanador(int jugadorGanador)
+    {
+        // Lógica para activar el personaje correspondiente
+        if (jugadorGanador == 1)
+        {
+            // Activa el personaje del jugador 1
+            // Ejemplo: player1.SetActive(true);
+        }
+        else if (jugadorGanador == 2)
+        {
+            // Activa el personaje del jugador 2
+            // Ejemplo: player2.SetActive(true);
+        }
+    }
 
 }

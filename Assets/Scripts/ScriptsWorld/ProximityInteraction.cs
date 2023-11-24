@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ProximityInteraction : MonoBehaviour
 {
@@ -11,18 +12,22 @@ public class ProximityInteraction : MonoBehaviour
     private Transform player; // Referencia al transform del jugador.
     private bool isInRange = false; // Indica si el jugador está en rango de interacción.
     private bool isInteracting = false;
+    private bool isOnClickedE = false;
 
     public PlayerController PC;
 
-    public GameObject globoText;
-    public GameObject text;
+    public GameObject globoText1;
+    public GameObject globoText2;
+    public TextMeshProUGUI text;
+
 
     private void Start()
     {
         // Busca el objeto con la etiqueta "Player" y obtiene su Transform.
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        globoText.SetActive(false);
-        text.SetActive(false);
+        globoText1.SetActive(false);
+        globoText2.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -33,24 +38,34 @@ public class ProximityInteraction : MonoBehaviour
         // Comprueba si el jugador está dentro del radio de interacción.
         if (distance <= interactionRadius)
         {
-            globoText.SetActive(true);
             isInRange = true;
 
+            if (!isOnClickedE)
+            {
+                globoText1.SetActive(true);
+            }
+            
             if (isInRange == true && Input.GetKeyDown(KeyCode.E))
             {
+                globoText1.SetActive(false);
+                isOnClickedE = true;
                 Interact();
             }
             
         }
         else if (!isInRange == true && isInteracting == true)
         {
-            text.SetActive(false);
+            globoText1.SetActive(false);
+            globoText2.SetActive(false);
+            text.gameObject.SetActive(false);
             isInteracting = false;
         }
         else
         {
             isInRange = false;
-            globoText.SetActive(false);
+            globoText1.SetActive(false);
+            globoText2.SetActive(false);
+            text.gameObject.SetActive(false);
         }
     }
 
@@ -68,30 +83,33 @@ public class ProximityInteraction : MonoBehaviour
         // Este método se llama cuando el jugador interactúa con el objeto o NPC.
         Debug.Log("E");
         
-        globoText.SetActive(false);
+        //globoText1.SetActive(false);
+        globoText2.SetActive(true);
+        text.gameObject.SetActive(true);
 
         if (!isInteracting)
         {
-            text.SetActive(true);
+            
+            text.gameObject.SetActive(true);
             isInteracting = true;
         }
         else if(isInteracting && PC.O == 1)
         {
-            text.SetActive(false);
+            text.gameObject.SetActive(false);
             isInteracting = false;
             Debug.Log("NOS FUIMOS");
             SceneManager.LoadScene(2);
         }
         else if (isInteracting && PC.O == 2)
         {
-            text.SetActive(false);
+            text.gameObject.SetActive(false);
             isInteracting = false;
             Debug.Log("NOS FUIMOS");
             //SceneManager.LoadScene(2);
         }
         else if (isInteracting && PC.O == 3)
         {
-            text.SetActive(false);
+            text.gameObject.SetActive(false);
             isInteracting = false;
             Debug.Log("NOS FUIMOS");
             //SceneManager.LoadScene(2);
