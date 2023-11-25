@@ -55,6 +55,7 @@ public class ProximityInteraction : MonoBehaviour
         }
         else if (!isInRange == true && isInteracting == true)
         {
+            isOnClickedE = false;
             globoText1.SetActive(false);
             globoText2.SetActive(false);
             text.gameObject.SetActive(false);
@@ -62,6 +63,7 @@ public class ProximityInteraction : MonoBehaviour
         }
         else
         {
+            isOnClickedE = false;
             isInRange = false;
             globoText1.SetActive(false);
             globoText2.SetActive(false);
