@@ -7,7 +7,9 @@ using System.Collections.Generic;
 public class QuizzGame : MonoBehaviour
 {
     #region  VARIABLEEEES
-    //public SelecDificultad selecDificultad;
+
+    public Transform[] spawnPoints;
+    //private InicioJugadorr inicioJugador;
 
     public GameObject[] P1Hearts = new GameObject[10];
     public GameObject[] P2Hearts = new GameObject[10];
@@ -27,8 +29,6 @@ public class QuizzGame : MonoBehaviour
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
-    public GameObject player1;
-    public GameObject player2;
     public Canvas canvasWinners;
     public GameObject panelP1Winner;
     public GameObject panelP2Winner;
@@ -457,23 +457,41 @@ public class QuizzGame : MonoBehaviour
 
             ReiniciarJuego();
         }
+
+        // ELSE IF EMPATE
+
         else
         {
-            if (player1Health <= 0) //Gana P2
-            {
-                Debug.Log("GANA JUGADOR 2");
-                canvasWinners.gameObject.SetActive(true);
-                panelP2Winner.SetActive(true);
+            //inicioJugador.DesactivarJugadores();
+            apuntador2.SetActive(false);
+            apuntador1.SetActive(false);
 
-                //selecDificultad.ActivatePlayer1();
-            }
-            else if (player2Health <= 0) //Gana P1
+            int indexJugador1 = PlayerPrefs.GetInt("Jugador1Index");
+            int indexJugador2 = PlayerPrefs.GetInt("Jugador2Index");
+
+            if (indexJugador1 >= 0 && indexJugador1 < GameManager.Instance.personajes.Count &&
+            indexJugador2 >= 0 && indexJugador2 < GameManager.Instance.personajes.Count &&
+            spawnPoints.Length >= 2)
             {
-                Debug.Log("GANA JUGADOR 1");
-                canvasWinners.gameObject.SetActive(true);
-                panelP1Winner.SetActive(true);
-                //selecDificultad.ActivatePlayer2();
-            }   
+                if (player1Health <= 0) //Gana P2
+                {
+                    Debug.Log("GANA JUGADOR 2");
+                    canvasWinners.gameObject.SetActive(true);
+                    panelP2Winner.SetActive(true);
+                    GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
+                    
+                }
+                else if (player2Health <= 0) //Gana P1
+                {
+                    Debug.Log("GANA JUGADOR 1");
+                    canvasWinners.gameObject.SetActive(true);
+                    panelP1Winner.SetActive(true);
+                    GameObject jugador1 = Instantiate(GameManager.Instance.personajes[indexJugador1].personajeJugable, spawnPoints[0].position, Quaternion.identity);
+                    
+                }
+            }
+
+               
         }  
     }
 
