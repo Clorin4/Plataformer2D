@@ -165,23 +165,30 @@ public class MenuSeleccion : MonoBehaviour
         introVideoRawImage.texture = null;
         canvasPersonajes.SetActive(false);
         canvasDificultad.SetActive(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
+        LoadGameScene();
     }
 
-    public void ActivarPersonajeGanador(int jugadorGanador)
+    void LoadGameScene()
     {
-        // Lógica para activar el personaje correspondiente
-        if (jugadorGanador == 1)
+        int gameChoice = PlayerPrefs.GetInt("gameIndex");
+
+        // Redirigir al juego específico según la elección del jugador
+        switch (gameChoice)
         {
-            // Activa el personaje del jugador 1
-            // Ejemplo: player1.SetActive(true);
-        }
-        else if (jugadorGanador == 2)
-        {
-            // Activa el personaje del jugador 2
-            // Ejemplo: player2.SetActive(true);
+            case 1:
+                SceneManager.LoadScene(3);
+                break;
+            case 2:
+                SceneManager.LoadScene(4);
+                break;
+            case 3:
+                SceneManager.LoadScene("NombreDelTercerMinijuego");
+                break;
+            // Otros casos según sea necesario para más minijuegos
+            default:
+                Debug.LogWarning("??????????");
+                break;
         }
     }
-
 }

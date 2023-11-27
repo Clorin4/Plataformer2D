@@ -18,8 +18,9 @@ public class InicioJugadorr : MonoBehaviour
             GameObject jugador1 = Instantiate(GameManager.Instance.personajes[indexJugador1].personajeJugable, spawnPoints[0].position, Quaternion.identity);
             GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
 
+            int gameChoice = PlayerPrefs.GetInt("gameIndex");
             // Cambiar la orientación del personaje del jugador 2 hacia la izquierda
-            if (jugador2 != null)
+            if (jugador2 != null && gameChoice  == 1)
             {
                 // Obtener el componente de escala (scale) del Transform
                 Vector3 scale = jugador2.transform.localScale;
@@ -28,6 +29,18 @@ public class InicioJugadorr : MonoBehaviour
                 // Aplicar la nueva escala al Transform
                 jugador2.transform.localScale = scale;
             }
+            else
+            {
+                float escala = 0.5f;
+
+                Transform transformJugador1 = jugador1.transform;
+                transformJugador1.localScale = new Vector2(escala, escala);
+
+                Transform transformJugador2 = jugador2.transform;
+                transformJugador2.localScale = new Vector2(escala, escala);
+            }
+
+
         }
     }
 

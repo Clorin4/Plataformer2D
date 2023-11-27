@@ -20,6 +20,7 @@ public class ProximityInteraction : MonoBehaviour
     public GameObject globoText2;
     public TextMeshProUGUI text;
 
+    int gameIndex; 
 
     private void Start()
     {
@@ -85,13 +86,13 @@ public class ProximityInteraction : MonoBehaviour
         // Este método se llama cuando el jugador interactúa con el objeto o NPC.
         Debug.Log("E");
         
+
         //globoText1.SetActive(false);
         globoText2.SetActive(true);
         text.gameObject.SetActive(true);
 
         if (!isInteracting)
         {
-            
             text.gameObject.SetActive(true);
             isInteracting = true;
         }
@@ -99,22 +100,40 @@ public class ProximityInteraction : MonoBehaviour
         {
             text.gameObject.SetActive(false);
             isInteracting = false;
-            Debug.Log("NOS FUIMOS");
+
+            gameIndex = 1;
+            Debug.Log(gameIndex);
+
+            PlayerPrefs.SetInt("gameIndex", gameIndex);
+            PlayerPrefs.Save();
+
             SceneManager.LoadScene(2);
         }
         else if (isInteracting && PC.O == 2)
         {
             text.gameObject.SetActive(false);
             isInteracting = false;
-            Debug.Log("NOS FUIMOS");
-            //SceneManager.LoadScene(2);
+
+            gameIndex = 2;
+            Debug.Log(gameIndex);
+
+            PlayerPrefs.SetInt("gameIndex", gameIndex);
+            PlayerPrefs.Save();
+
+            SceneManager.LoadScene(2);
         }
         else if (isInteracting && PC.O == 3)
         {
             text.gameObject.SetActive(false);
             isInteracting = false;
-            Debug.Log("NOS FUIMOS");
-            //SceneManager.LoadScene(2);
+
+            gameIndex = 3;
+            Debug.Log(gameIndex);
+
+            PlayerPrefs.SetInt("gameIndex", gameIndex);
+            PlayerPrefs.Save();
+
+            SceneManager.LoadScene(2);
         }
 
     }
