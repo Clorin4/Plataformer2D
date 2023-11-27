@@ -19,8 +19,9 @@ public class InicioJugadorr : MonoBehaviour
             GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
 
             int gameChoice = PlayerPrefs.GetInt("gameIndex");
+            Debug.Log(gameChoice);
             // Cambiar la orientación del personaje del jugador 2 hacia la izquierda
-            if (jugador2 != null && gameChoice  == 1)
+            if (jugador2 != null && gameChoice == 1)
             {
                 // Obtener el componente de escala (scale) del Transform
                 Vector3 scale = jugador2.transform.localScale;
