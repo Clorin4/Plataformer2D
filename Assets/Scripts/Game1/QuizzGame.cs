@@ -26,6 +26,8 @@ public class QuizzGame : MonoBehaviour
     public GameObject apuntador1;
     public GameObject apuntador2;
 
+    public GameObject Reloj;
+
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
@@ -79,6 +81,7 @@ public class QuizzGame : MonoBehaviour
 
     public void TurnOffVariables()
     {
+        Reloj.SetActive(false);
         panelQuestion.SetActive(false);
         canvasWinners.gameObject.SetActive(false);
         panelP1Winner.SetActive(false);
@@ -211,6 +214,7 @@ public class QuizzGame : MonoBehaviour
         {
             teclaD.SetActive(true);
             teclaK.SetActive(true);
+            Reloj.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.D) && !player1Pressed)
             {
@@ -229,7 +233,6 @@ public class QuizzGame : MonoBehaviour
             }
 
             countdownTimer -= Time.deltaTime;
-            //HACER HUD PARA QUE SEA VISIBLE EL TIEMPO
             yield return null;
         }
 
@@ -264,12 +267,13 @@ public class QuizzGame : MonoBehaviour
         else if (player1Pressed && player2Pressed) //Palomita
         {
             Debug.Log("Ambos?");
+            Reloj.SetActive(false);
             // Acciones si ambos jugadores presionaron, se puede considerar un empate
         }
         else
         {
             Debug.Log("Ninguno");
-            
+            Reloj.SetActive(false);
             // Acciones si ninguno presionó
         }
     }
@@ -352,6 +356,7 @@ public class QuizzGame : MonoBehaviour
             while (countdownTimer > 0f && !secondCountDownStarted)
             {
                 countdownTimer -= Time.deltaTime;
+                //Debug.Log(countdownTimer);
                 yield return null;
             }
 
@@ -360,6 +365,7 @@ public class QuizzGame : MonoBehaviour
                 player1Health -= 5;
                 player2Health -= 5;
                 dañoPaDos = true;
+                Reloj.SetActive(false);
                 Daños();
             }
         }
@@ -382,6 +388,7 @@ public class QuizzGame : MonoBehaviour
 
     public void OnCorrectAnswerSelected()
     {
+        Reloj.SetActive(false);
         secondCountDownStarted = true;
 
         if (J1Responde)
@@ -429,7 +436,7 @@ public class QuizzGame : MonoBehaviour
         {
             player1Health -= 5;
             player2Health -= 5;
-
+            Reloj.SetActive(false);
             dañoPaDos = true;
             Debug.Log("DAÑO PA LOS DOS");
             Daños();
@@ -518,6 +525,7 @@ public class QuizzGame : MonoBehaviour
 
         apuntador1.SetActive(false);
         apuntador2.SetActive(false);
+        Reloj.SetActive(false);
 
         panelQuestion.SetActive(false);
         player1Pressed = false;
