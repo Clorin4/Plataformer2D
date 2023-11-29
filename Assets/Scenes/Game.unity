@@ -21179,7 +21179,7 @@ MonoBehaviour:
   saltoSonido: {fileID: 8300000, guid: 88f42092b662a874baa1537cdf55fc8c, type: 3}
   canvasFin: {fileID: 1803915821}
   canvasPrimero: {fileID: 2049322278}
-  textMeshScore: {fileID: 0}
+  textMeshScore: {fileID: 1955372816}
   O: 0
   mirandoDerecha: 1
 --- !u!50 &2109652292
