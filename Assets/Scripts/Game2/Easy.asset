@@ -15,8 +15,8 @@ MonoBehaviour:
   difficultyLevel: 0
   phraseTime: 10
   phrases:
-  - Hola
-  - Adios
-  - Huevo
-  - Juan
-  - Dedo
+  - hola
+  - adios
+  - huevo
+  - juan
+  - dedo

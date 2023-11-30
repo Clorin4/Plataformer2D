@@ -146,64 +146,49 @@ public class RunningGame : MonoBehaviour
     }
 
     IEnumerator ShowRandomPhrase()
+{
+    panelFrases.SetActive(true);
+    iTween.ScaleFrom(panelFrases, Vector3.zero, 1f);
+
+    inputField.gameObject.SetActive(true);
+
+    if (selectedPhraseData != null)
     {
-        panelFrases.SetActive(true);
-        iTween.ScaleFrom(panelFrases, Vector3.zero, 1f);
+        string randomPhrase = phrases[Random.Range(0, phrases.Length)];
+        textPanel.text = randomPhrase;
 
-        inputField.gameObject.SetActive(true);
+        yield return new WaitForSeconds(phraseTime);
 
-        if (selectedPhraseData != null)
-        {
-            while (true)
-            {
-                // Muestra una frase aleatoria del conjunto de frases
-                string randomPhrase = phrases[Random.Range(0, phrases.Length)];
-                textPanel.text = randomPhrase;
+        textPanel.text = "";
 
-                // Espera el tiempo específico para mostrar la frase
-                yield return new WaitForSeconds(phraseTime);
-
-                // Borra el texto después de mostrarlo
-                textPanel.text = "";
-
-                // Espera un tiempo antes de mostrar la siguiente frase
-                //yield return new WaitForSeconds(0.1f);
-
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
-
-                string playerTypedPhrase = inputField.text;
-
-                // Comparar la frase escrita con la frase mostrada
-                if (playerTypedPhrase == randomPhrase)
-                {
-                    inputField.text = "";
-                    inputField.gameObject.SetActive(false);
-                    // Avanzar el Grid del jugador correspondiente
-                    AdvancePlayerGrid();
-                    Debug.Log("BIEEEN");
-                    ReiniciarJuego();
-                    // Limpiar el InputField y desactivarlo
-                    
-                    break; // Salir del bucle al completar la acción del jugador actual
-                }
-                else
-                {
-                    inputField.text = "";
-                    inputField.gameObject.SetActive(false);
-                    // Pasar al siguiente jugador o manejar la lógica de error
-                    Debug.Log("MAAAL");
-                    ReiniciarJuego();
-                    //NextPlayerTurn();
-                }
-
-
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No se encontraron datos para la dificultad seleccionada.");
-        }
+        inputField.onEndEdit.AddListener(delegate { VerifyTypedPhrase(randomPhrase); });
     }
+    else
+    {
+        Debug.LogWarning("No se encontraron datos para la dificultad seleccionada.");
+    }
+}
+
+void VerifyTypedPhrase(string randomPhrase)
+{
+    string playerTypedPhrase = inputField.text;
+
+    if (playerTypedPhrase == randomPhrase)
+    {
+        inputField.text = "";
+        inputField.gameObject.SetActive(false);
+        AdvancePlayerGrid();
+        Debug.Log("¡Correcto!");
+        ReiniciarJuego();
+    }
+    else
+    {
+        inputField.text = "";
+        inputField.gameObject.SetActive(false);
+        Debug.Log("¡Incorrecto!");
+        ReiniciarJuego();
+    }
+}
 
     public void AdvancePlayerGrid()
     {
