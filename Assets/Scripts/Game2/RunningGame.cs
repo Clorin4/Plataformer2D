@@ -11,22 +11,42 @@ public class RunningGame : MonoBehaviour
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
 
+    private Coroutine countdownCoroutine; 
+    private Coroutine showPhraseCoroutine; 
+    private Coroutine playerTurnTimerCoroutine;
+
     public GameObject panelFrases;
-    public TextMeshProUGUI textPanel; // Referencia al TextMeshPro para mostrar la frase
+    public TextMeshProUGUI textPanel; // frase
     public TMP_InputField inputField;
-    
+    public Button submitButton;
+    private string currentRandomPhrase;
+
     public PhraseManager phraseManager;
     PhraseData selectedPhraseData;
     float phraseTime;
     string[] phrases;
 
+    //private string currentRandomPhrase;
+    private bool isTimerRunning = false;
+    private float elapsedTime = 0f;
+
+    private bool isPlayer1Turn = true; // Variable para controlar los turnos
+    private int currentPlayer = 1; // Variable para identificar el jugador actual
+
+
     // Start is called before the first frame update
     void Start()
     {
+        submitButton.onClick.AddListener(SubmitAnswerWithoutParameter); // Cambia esta línea
         TurnOffVariables();
         SaberDificultad();
         StartCoroutine(Countdown());
     }
+    private void SubmitAnswerWithoutParameter()
+    {
+        SubmitAnswer(currentRandomPhrase); // Llama a SubmitAnswer con el parámetro almacenado
+    }
+
 
     public void TurnOffVariables()
     {
@@ -146,49 +166,97 @@ public class RunningGame : MonoBehaviour
     }
 
     IEnumerator ShowRandomPhrase()
-{
-    panelFrases.SetActive(true);
-    iTween.ScaleFrom(panelFrases, Vector3.zero, 1f);
-
-    inputField.gameObject.SetActive(true);
-
-    if (selectedPhraseData != null)
     {
-        string randomPhrase = phrases[Random.Range(0, phrases.Length)];
-        textPanel.text = randomPhrase;
+        panelFrases.SetActive(true);
+        panelFrases.transform.localScale = Vector3.one; // Establecer el tamaño inicial
 
-        yield return new WaitForSeconds(phraseTime);
+        iTween.ScaleFrom(panelFrases, Vector3.zero, 1f);
 
-        textPanel.text = "";
+        inputField.gameObject.SetActive(true);
 
-        inputField.onEndEdit.AddListener(delegate { VerifyTypedPhrase(randomPhrase); });
+        if (selectedPhraseData != null)
+        {
+            currentRandomPhrase = phrases[Random.Range(0, phrases.Length)];
+            textPanel.text = currentRandomPhrase;
+
+            isTimerRunning = true;
+            elapsedTime = 0f;
+
+            while (elapsedTime < phraseTime)
+            {
+                if (!isTimerRunning) break;
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            if (isTimerRunning)
+            {
+                textPanel.text = "";
+                inputField.onEndEdit.AddListener(delegate { SubmitAnswer(currentRandomPhrase); });
+                EndCurrentTurn();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se encontraron datos para la dificultad seleccionada.");
+        }
+
+
     }
-    else
+
+    IEnumerator PlayerTurnTimer()
     {
-        Debug.LogWarning("No se encontraron datos para la dificultad seleccionada.");
-    }
-}
+        yield return new WaitForSeconds(.1f);
 
-void VerifyTypedPhrase(string randomPhrase)
-{
-    string playerTypedPhrase = inputField.text;
+        if (isTimerRunning)
+        {
+            isTimerRunning = false;
+            Debug.Log("Tiempo agotado para el Jugador " + currentPlayer);
+            EndCurrentTurn();
+        }
+    }
 
-    if (playerTypedPhrase == randomPhrase)
+    void EndCurrentTurn()
     {
-        inputField.text = "";
-        inputField.gameObject.SetActive(false);
-        AdvancePlayerGrid();
-        Debug.Log("¡Correcto!");
-        ReiniciarJuego();
+        if (isPlayer1Turn)
+        {
+            currentPlayer = 2;
+        }
+        else
+        {
+            currentPlayer = 1;
+        }
+
+        isPlayer1Turn = !isPlayer1Turn;
+
+        Debug.Log("Turno del Jugador " + currentPlayer);
+        StartCoroutine(ShowRandomPhrase());
     }
-    else
+
+    private void SubmitAnswer(string randomPhrase)
     {
-        inputField.text = "";
-        inputField.gameObject.SetActive(false);
-        Debug.Log("¡Incorrecto!");
-        ReiniciarJuego();
+        randomPhrase = textPanel.text;
+
+        string playerTypedPhrase = inputField.text;
+
+        if (playerTypedPhrase == randomPhrase)
+        {
+            inputField.text = "";
+            inputField.DeactivateInputField();
+            AdvancePlayerGrid();
+            Debug.Log("¡Correcto! Jugador " + currentPlayer);
+            ReiniciarJuego();
+        }
+        else
+        {
+            inputField.text = "";
+            inputField.DeactivateInputField();
+            Debug.Log("¡Incorrecto! Jugador " + currentPlayer);
+            ReiniciarJuego();
+        }
     }
-}
+
 
     public void AdvancePlayerGrid()
     {
@@ -206,8 +274,29 @@ void VerifyTypedPhrase(string randomPhrase)
 
     private void ReiniciarJuego()
     {
+        // Detener las corrutinas activas si es que están ejecutándose
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+
+        if (showPhraseCoroutine != null)
+        {
+            StopCoroutine(showPhraseCoroutine);
+        }
+
+        if (playerTurnTimerCoroutine != null)
+        {
+            StopCoroutine(playerTurnTimerCoroutine);
+        }
+
+        // Restablecer variables
+        isPlayer1Turn = true;
+        currentPlayer = 0;
+
         panelFrases.SetActive(false);
-        StartCoroutine(Countdown());
+        showPhraseCoroutine = StartCoroutine(ShowRandomPhrase()); // Iniciar la siguiente frase directamente
     }
+
 
 }
