@@ -34,7 +34,8 @@ public class RunningGame : MonoBehaviour
     private bool isPlayer1Turn = true; // Variable para controlar los turnos
     private int currentPlayer = 1; // Variable para identificar el jugador actual
 
-    int i = -10;
+    private bool gridWasMoved;
+    int i = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,7 @@ public class RunningGame : MonoBehaviour
 
     public void TurnOffVariables()
     {
+        gridWasMoved = false;
         isPlayer1Turn = true;
         panelFrases.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
@@ -226,6 +228,8 @@ public class RunningGame : MonoBehaviour
 
     void EndCurrentTurn()
     {
+        
+
         if (isPlayer1Turn)
         {
             isPlayer1Turn = false;
@@ -289,18 +293,24 @@ public class RunningGame : MonoBehaviour
             // Movimiento suavizado del Grid hacia la posición de destino
             gridObject.transform.position = Vector3.Lerp(gridObject.transform.position, destinoPos, Time.deltaTime * velocidadMovimiento);
         }
+        
+        yield return new WaitForSeconds(1.0f);
+        gridWasMoved = true;
         avanzamo = false;
-        i = i - 10;
-        
-        
-        
-        yield return new WaitForSeconds(1f);
         EndCurrentTurn();
-        Debug.Log(i);
+        
     }
 
     private void ReiniciarJuego()
     {
+        if (gridWasMoved)
+        {
+            i = i - 10;
+            gridWasMoved = false;
+            
+
+            Debug.Log(i);
+        }
         // Detener las corrutinas activas si es que están ejecutándose
         if (countdownCoroutine != null)
         {
