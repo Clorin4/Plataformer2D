@@ -30,9 +30,11 @@ public class RunningGame : MonoBehaviour
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
 
+    private bool avanzamo = false;
     private bool isPlayer1Turn = true; // Variable para controlar los turnos
     private int currentPlayer = 1; // Variable para identificar el jugador actual
 
+    int i = -10;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +52,7 @@ public class RunningGame : MonoBehaviour
 
     public void TurnOffVariables()
     {
+        isPlayer1Turn = true;
         panelFrases.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
         sprite2Renderer.gameObject.SetActive(false);
@@ -194,7 +197,11 @@ public class RunningGame : MonoBehaviour
             {
                 textPanel.text = "";
                 inputField.onEndEdit.AddListener(delegate { SubmitAnswer(currentRandomPhrase); });
-                EndCurrentTurn();
+                //EndCurrentTurn();
+            }
+            else
+            {
+                PlayerTurnTimer();
             }
         }
         else
@@ -221,17 +228,17 @@ public class RunningGame : MonoBehaviour
     {
         if (isPlayer1Turn)
         {
+            isPlayer1Turn = false;
             currentPlayer = 2;
         }
         else
         {
+            isPlayer1Turn = true;
             currentPlayer = 1;
         }
 
-        isPlayer1Turn = !isPlayer1Turn;
-
         Debug.Log("Turno del Jugador " + currentPlayer);
-        StartCoroutine(ShowRandomPhrase());
+        ReiniciarJuego();
     }
 
     private void SubmitAnswer(string randomPhrase)
@@ -244,24 +251,36 @@ public class RunningGame : MonoBehaviour
         {
             inputField.text = "";
             inputField.DeactivateInputField();
-            AdvancePlayerGrid();
+            avanzamo = true;
+            //AdvancePlayerGrid();
             Debug.Log("¡Correcto! Jugador " + currentPlayer);
-            ReiniciarJuego();
+            
+            //ReiniciarJuego();
         }
         else
         {
             inputField.text = "";
             inputField.DeactivateInputField();
             Debug.Log("¡Incorrecto! Jugador " + currentPlayer);
-            ReiniciarJuego();
+            EndCurrentTurn();
+            //ReiniciarJuego();
         }
     }
-
-
-    public void AdvancePlayerGrid()
+    private void Update()
     {
+        if (avanzamo)
+        {
+           StartCoroutine(AdvancePlayerGrid());
+            
+        }
+        
+    }
+
+    IEnumerator AdvancePlayerGrid()
+    {
+
         float velocidadMovimiento = 1.0f; // Modifica este valor según la velocidad deseada
-        Vector3 destinoPos = new Vector3(-10.0f, 0.0f, 0.0f); // Modifica esto con la posición a la que quieres mover el Grid
+        Vector3 destinoPos = new Vector3(i, 0.0f, 0.0f); // Modifica esto con la posición a la que quieres mover el Grid
 
         GameObject gridObject = GameObject.Find("GridP1");
 
@@ -270,6 +289,14 @@ public class RunningGame : MonoBehaviour
             // Movimiento suavizado del Grid hacia la posición de destino
             gridObject.transform.position = Vector3.Lerp(gridObject.transform.position, destinoPos, Time.deltaTime * velocidadMovimiento);
         }
+        avanzamo = false;
+        i = i - 10;
+        
+        
+        
+        yield return new WaitForSeconds(1f);
+        EndCurrentTurn();
+        Debug.Log(i);
     }
 
     private void ReiniciarJuego()
@@ -290,10 +317,7 @@ public class RunningGame : MonoBehaviour
             StopCoroutine(playerTurnTimerCoroutine);
         }
 
-        // Restablecer variables
-        isPlayer1Turn = true;
-        currentPlayer = 0;
-
+        //avanzamo = false;
         panelFrases.SetActive(false);
         showPhraseCoroutine = StartCoroutine(ShowRandomPhrase()); // Iniciar la siguiente frase directamente
     }
