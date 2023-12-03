@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 689499878675420791}
   - component: {fileID: 9173891210912183788}
   - component: {fileID: 8622301635302198539}
+  - component: {fileID: 5133293995966176744}
   m_Layer: 0
   m_Name: Wichard
   m_TagString: NPC3
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5133293995966176744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072205971768769864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c4ff6721d91a24183fca5cc81c711f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

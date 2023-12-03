@@ -470,8 +470,8 @@ TextureImporter:
         serializedVersion: 2
         x: 17
         y: 0
-        width: 30
-        height: 26
+        width: 37
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -489,9 +489,9 @@ TextureImporter:
       name: Pig_Big_17
       rect:
         serializedVersion: 2
-        x: 89
+        x: 81
         y: 0
-        width: 18
+        width: 37
         height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -510,10 +510,10 @@ TextureImporter:
       name: Pig_Big_18
       rect:
         serializedVersion: 2
-        x: 151
-        y: 2
-        width: 21
-        height: 35
+        x: 148
+        y: 0
+        width: 37
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -532,9 +532,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 216
-        y: 1
+        y: 0
         width: 37
-        height: 39
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -576,7 +576,7 @@ TextureImporter:
         x: 344
         y: 0
         width: 37
-        height: 26
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

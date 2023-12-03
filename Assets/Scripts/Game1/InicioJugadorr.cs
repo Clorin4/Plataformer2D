@@ -16,7 +16,18 @@ public class InicioJugadorr : MonoBehaviour
             spawnPoints.Length >= 2)
         {
             GameObject jugador1 = Instantiate(GameManager.Instance.personajes[indexJugador1].personajeJugable, spawnPoints[0].position, Quaternion.identity);
+            PlayerAnimatorController player1Controller = jugador1.GetComponent<PlayerAnimatorController>();
+            if (player1Controller != null)
+            {
+                player1Controller.SetPlayerIndexAndTag(indexJugador1, "Player1");
+            }
+
             GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
+            PlayerAnimatorController player2Controller = jugador2.GetComponent<PlayerAnimatorController>();
+            if (player2Controller != null)
+            {
+                player2Controller.SetPlayerIndexAndTag(indexJugador2, "Player2");
+            }
 
             int gameChoice = PlayerPrefs.GetInt("gameIndex");
             Debug.Log(gameChoice);

@@ -10,6 +10,7 @@ public class QuizzGame : MonoBehaviour
 
     public Transform[] spawnPoints;
     //private InicioJugadorr inicioJugador;
+    
 
     public GameObject[] P1Hearts = new GameObject[10];
     public GameObject[] P2Hearts = new GameObject[10];
@@ -34,6 +35,7 @@ public class QuizzGame : MonoBehaviour
     public Canvas canvasWinners;
     public GameObject panelP1Winner;
     public GameObject panelP2Winner;
+    public GameObject panelEmpate;
 
     public Canvas howToPlay;
 
@@ -59,15 +61,16 @@ public class QuizzGame : MonoBehaviour
 
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
+    int correctButtonIndex = -1;
 
     public int player1Health = 100;
     public int player2Health = 100;
+
 
     #endregion
     private void Start()
     {
         howToPlay.gameObject.SetActive(true);
-
         TurnOffVariables();
 
         SaberDificultad();
@@ -86,6 +89,7 @@ public class QuizzGame : MonoBehaviour
         canvasWinners.gameObject.SetActive(false);
         panelP1Winner.SetActive(false);
         panelP2Winner.SetActive(false);
+        panelEmpate.SetActive(false);
 
         for (int i = 0; i < 10; i++)
         {
@@ -266,6 +270,8 @@ public class QuizzGame : MonoBehaviour
         }
         else if (player1Pressed && player2Pressed) //Palomita
         {
+            dañoPaDos = true;
+            Daños();
             Debug.Log("Ambos?");
             Reloj.SetActive(false);
             // Acciones si ambos jugadores presionaron, se puede considerar un empate
@@ -341,6 +347,10 @@ public class QuizzGame : MonoBehaviour
             // Asignar las respuestas a los botones y añadir listeners
             for (int i = 0; i < answerButtons.Length; i++)
             {
+                if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
+                {
+                    correctButtonIndex = i; // Almacena el índice del botón con la respuesta correcta
+                }
                 answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
 
                 if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
@@ -390,6 +400,7 @@ public class QuizzGame : MonoBehaviour
     {
         Reloj.SetActive(false);
         secondCountDownStarted = true;
+        ChangeButtonColor(true);
 
         if (J1Responde)
         {
@@ -405,12 +416,13 @@ public class QuizzGame : MonoBehaviour
             //DAÑO AL 1
             Debug.Log("RESPONDE BIEN EL 2");
         }
-        Daños();
+        //Daños();
     }
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
     {
         secondCountDownStarted = true;
+        //ChangeButtonColor(false);
 
         if (J1Responde && !venganza)
         {
@@ -444,32 +456,118 @@ public class QuizzGame : MonoBehaviour
 
     }
 
+    void ChangeButtonColor(bool correctAnswer)
+    {
+        Color color = correctAnswer ? Color.green : Color.red;
+
+        // Cambia solo el color del botón que contiene la respuesta correcta
+        if (correctAnswer && correctButtonIndex != -1)
+        {
+            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+            if (img != null)
+            {
+                img.color = color;
+            }
+        }
+
+        // Restablecer el color del botón correcto después de un tiempo determinado
+        StartCoroutine(ChangeButtonColorBack());
+    }
+
+    IEnumerator ChangeButtonColorBack()
+    {
+        yield return new WaitForSeconds(1f); // Cambia esto al tiempo que desees mantener los colores
+
+        if (correctButtonIndex != -1)
+        {
+            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+            if (img != null)
+            {
+                img.color = Color.white; // Cambia esto al color original que desees para el botón correcto
+            }
+        }
+        Daños();
+    }
+
+
     public void Daños() //AQUI VAN LAS ANIMACIONES DE LOS DAÑOS
     {
+        PlayerAnimatorController[] playerControllers = FindObjectsOfType<PlayerAnimatorController>();
+
         if (player1Health > 0 && player2Health > 0)
         {
-            if (J1Dañado)
+            
+
+            foreach (var playerController in playerControllers)
             {
-                Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
+                if (dañoPaDos) // Verifica si dañoPaDos es verdadero para ejecutar la animación de daño en ambos jugadores
+                {
+                    playerController.StartDamageAnimation();
+                    Debug.Log("ANIMACION DE DAÑO A JUGADOR");
+                }
+                else
+                {
+                    if (playerController.playerTag == "Player1" && J1Dañado)
+                    {
+                        playerController.StartDamageAnimation();
+                        Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
+
+                        // Encuentra al jugador 2 y comienza la animación de ataque
+                        PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                        foreach (var controller in controllers)
+                        {
+                            if (controller.playerTag == "Player2")
+                            {
+                                controller.StartAttackAnimation();
+                                Debug.Log("ANIMACION DE ATAQUE A JUGADOR 2");
+                                break;
+                            }
+                        }
+                    }
+                    else if (playerController.playerTag == "Player2" && J2Dañado)
+                    {
+                        playerController.StartDamageAnimation();
+                        Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
+
+                        // Encuentra al jugador 1 y comienza la animación de ataque
+                        PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                        foreach (var controller in controllers)
+                        {
+                            if (controller.playerTag == "Player1")
+                            {
+                                controller.StartAttackAnimation();
+                                Debug.Log("ANIMACION DE ATAQUE A JUGADOR 1");
+                                break;
+                            }
+                        }
+                    }
+                }
             }
-            else if (J2Dañado)
-            {
-                Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
-            }
-            else
-                dañoPaDos = true;
-                Debug.Log("ANIMACION DAÑO MUTUO");
 
             HeartsHUD();
-
             ReiniciarJuego();
         }
 
-        // ELSE IF EMPATE
+        else if (player1Health <= 0 && player2Health <= 0)
+        {
+            apuntador2.SetActive(false);
+            apuntador1.SetActive(false);
+            canvasWinners.gameObject.SetActive(true);
+            panelEmpate.SetActive(true);
+
+            PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+            foreach (var controller in controllers)
+            {
+                if (controller.playerTag == "Player1" || controller.playerTag == "Player2")
+                {
+                    controller.StartVictoryAnimation();
+                }
+            }
+
+        }
 
         else
         {
-            //inicioJugador.DesactivarJugadores();
             apuntador2.SetActive(false);
             apuntador1.SetActive(false);
 
@@ -477,29 +575,50 @@ public class QuizzGame : MonoBehaviour
             int indexJugador2 = PlayerPrefs.GetInt("Jugador2Index");
 
             if (indexJugador1 >= 0 && indexJugador1 < GameManager.Instance.personajes.Count &&
-            indexJugador2 >= 0 && indexJugador2 < GameManager.Instance.personajes.Count &&
-            spawnPoints.Length >= 2)
+                indexJugador2 >= 0 && indexJugador2 < GameManager.Instance.personajes.Count &&
+                spawnPoints.Length >= 2)
             {
-                if (player1Health <= 0) //Gana P2
+                if (player1Health <= 0) // Gana P2
                 {
                     Debug.Log("GANA JUGADOR 2");
                     canvasWinners.gameObject.SetActive(true);
                     panelP2Winner.SetActive(true);
-                    GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
-                    
+
+                    PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                    foreach (var controller in controllers)
+                    {
+                        if (controller.playerTag == "Player2")
+                        {
+                            controller.StartVictoryAnimation();
+                        }
+                        else if (controller.playerTag == "Player1")
+                        {
+                            controller.StartLoseAnimation();
+                        }
+                    }
                 }
-                else if (player2Health <= 0) //Gana P1
+                else if (player2Health <= 0) // Gana P1
                 {
                     Debug.Log("GANA JUGADOR 1");
                     canvasWinners.gameObject.SetActive(true);
                     panelP1Winner.SetActive(true);
-                    GameObject jugador1 = Instantiate(GameManager.Instance.personajes[indexJugador1].personajeJugable, spawnPoints[0].position, Quaternion.identity);
-                    
+
+                    PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                    foreach (var controller in controllers)
+                    {
+                        if (controller.playerTag == "Player1")
+                        {
+                            controller.StartVictoryAnimation();
+                        }
+                        else if (controller.playerTag == "Player2")
+                        {
+                            controller.StartLoseAnimation();
+                        }
+                    }
                 }
             }
+        }
 
-               
-        }  
     }
 
     void DisableAnswerButtons()
