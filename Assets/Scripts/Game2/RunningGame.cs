@@ -15,6 +15,9 @@ public class RunningGame : MonoBehaviour
     private Coroutine showPhraseCoroutine; 
     private Coroutine playerTurnTimerCoroutine;
 
+    public GameObject howToPlay;
+    public GameObject canvasMain;
+
     public GameObject WinnerP1;
     public GameObject WinnerP2;
     public GameObject panelFrases;
@@ -49,8 +52,16 @@ public class RunningGame : MonoBehaviour
         submitButton.onClick.AddListener(SubmitAnswerWithoutParameter);
         TurnOffVariables();
         SaberDificultad();
+        
+    }
+
+    public void ButtonStartGame()
+    {
+        canvasMain.SetActive(true);
+        howToPlay.SetActive(false);
         StartCoroutine(Countdown());
     }
+
     private void SubmitAnswerWithoutParameter()
     {
         SubmitAnswer(currentRandomPhrase); // Llama a SubmitAnswer con el parámetro almacenado
@@ -59,6 +70,8 @@ public class RunningGame : MonoBehaviour
 
     public void TurnOffVariables()
     {
+        canvasMain.SetActive(false);
+        howToPlay.SetActive(true);
         WinnerP1.SetActive(false);
         WinnerP2.SetActive(false);
         isPlayer1Turn = true;

@@ -4826,16 +4826,104 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questions: []
   Easyquestions:
-  - questionText: fgrthre
+  - questionText: "Cu\xE1ntos dedos tiene tu mano?"
     options:
-    - a
-    - c
-    - fe
-    - f4e
-    correctAnswerIndex: 2
-  - questionText: 
-    options: []
+    - 5
+    - 6
+    - 3
+    - 4
     correctAnswerIndex: 0
+  - questionText: "Cu\xE1les son las 5 vocales"
+    options:
+    - g, e, u, h, f
+    - a, b, c, d, e
+    - i, e, o, a, u
+    - a, e, i, o, c
+    correctAnswerIndex: 2
+  - questionText: Continua la serie  2, 4, 6...
+    options:
+    - 8, 10
+    - 7, 8
+    - 8, 9
+    - 5, 3
+    correctAnswerIndex: 0
+  - questionText: "Las estaciones del a\xF1o son..."
+    options:
+    - "Primavera, Verano, Oto\xF1o, Invierno"
+    - Lunes, Martes, Miercoles, Jueves
+    - Enero, Febrero, Marzo, Abril
+    - "Lunes, Febrero, Oto\xF1o, pan"
+    correctAnswerIndex: 0
+  - questionText: Palabra que termina igual que "RANA"
+    options:
+    - Jugar
+    - Campana
+    - Sala
+    - Gata
+    correctAnswerIndex: 1
+  - questionText: Cuanto es  2 + 2 +2
+    options:
+    - 8
+    - 4
+    - 6
+    - 10
+    correctAnswerIndex: 2
+  - questionText: Domingo, Lunes, Martes, Miercoles, Jueves, Viernes y...
+    options:
+    - Junio
+    - Sabado
+    - Domingo
+    - Invierno
+    correctAnswerIndex: 1
+  - questionText: Antonimo de abierto
+    options:
+    - Cerca
+    - Abajo
+    - Claro
+    - Cerrado
+    correctAnswerIndex: 3
+  - questionText: Cuanto es  3 + 3 + 3
+    options:
+    - 9
+    - 6
+    - 8
+    - 3
+    correctAnswerIndex: 0
+  - questionText: Es un animal marino
+    options:
+    - Ballena
+    - Perro
+    - Loro
+    - Vaca
+    correctAnswerIndex: 0
+  - questionText: NO es un animal marino
+    options:
+    - Sardina
+    - "At\xFAn"
+    - "Tibur\xF3n"
+    - Oso
+    correctAnswerIndex: 3
+  - questionText: Figura con 4 lados iguales
+    options:
+    - "Rect\xE1ngulo"
+    - Cuadrado
+    - Triangulo
+    - Trapecio
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1les son las 5 vocales"
+    options:
+    - g, e, u, h, f
+    - a, b, c, d, e
+    - i, e, o, a, u
+    - a, e, i, o, c
+    correctAnswerIndex: 2
+  - questionText: "Cu\xE1les son las 5 vocales"
+    options:
+    - g, e, u, h, f
+    - a, b, c, d, e
+    - i, e, o, a, u
+    - a, e, i, o, c
+    correctAnswerIndex: 2
   Normalquestions:
   - questionText: hola
     options:
