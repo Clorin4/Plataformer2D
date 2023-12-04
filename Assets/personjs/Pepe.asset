@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pepe
   m_EditorClassIdentifier: 
   personajeJugable: {fileID: 612142504355553740, guid: ead80c7cf4d12a84c9041ceaa41b9c2c, type: 3}
-  imagen: {fileID: 583701878, guid: 92fb528683c4fcb4a9c8903aa1bfb6d1, type: 3}
+  imagen: {fileID: 639192656, guid: 92fb528683c4fcb4a9c8903aa1bfb6d1, type: 3}
   nombre: Pepe
