@@ -15,6 +15,8 @@ public class RunningGame : MonoBehaviour
     private Coroutine showPhraseCoroutine; 
     private Coroutine playerTurnTimerCoroutine;
 
+    public GameObject WinnerP1;
+    public GameObject WinnerP2;
     public GameObject panelFrases;
     public TextMeshProUGUI textPanel; // frase
     public TMP_InputField inputField;
@@ -26,21 +28,25 @@ public class RunningGame : MonoBehaviour
     float phraseTime;
     string[] phrases;
 
-    //private string currentRandomPhrase;
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
 
     private bool avanzamo = false;
+    private bool avanzamo2 = false;
     private bool isPlayer1Turn = true; // Variable para controlar los turnos
     private int currentPlayer = 1; // Variable para identificar el jugador actual
 
-    private bool gridWasMoved;
-    int i = 10;
+    int i = -10;
+    int j = -10;
+
+    int zonaP1;
+    int zonaP2;
+    bool alguienGano = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        submitButton.onClick.AddListener(SubmitAnswerWithoutParameter); // Cambia esta línea
+        submitButton.onClick.AddListener(SubmitAnswerWithoutParameter);
         TurnOffVariables();
         SaberDificultad();
         StartCoroutine(Countdown());
@@ -53,7 +59,8 @@ public class RunningGame : MonoBehaviour
 
     public void TurnOffVariables()
     {
-        gridWasMoved = false;
+        WinnerP1.SetActive(false);
+        WinnerP2.SetActive(false);
         isPlayer1Turn = true;
         panelFrases.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
@@ -194,42 +201,32 @@ public class RunningGame : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+            isTimerRunning = false;
 
             if (isTimerRunning)
             {
                 textPanel.text = "";
                 inputField.onEndEdit.AddListener(delegate { SubmitAnswer(currentRandomPhrase); });
-                //EndCurrentTurn();
             }
             else
             {
-                PlayerTurnTimer();
+                if (!alguienGano)
+                {
+                    Debug.Log("Tiempo agotado para el Jugador " + currentPlayer);
+                    EndCurrentTurn();
+                }
+                
             }
         }
         else
         {
             Debug.LogWarning("No se encontraron datos para la dificultad seleccionada.");
         }
-
-
-    }
-
-    IEnumerator PlayerTurnTimer()
-    {
-        yield return new WaitForSeconds(.1f);
-
-        if (isTimerRunning)
-        {
-            isTimerRunning = false;
-            Debug.Log("Tiempo agotado para el Jugador " + currentPlayer);
-            EndCurrentTurn();
-        }
     }
 
     void EndCurrentTurn()
     {
         
-
         if (isPlayer1Turn)
         {
             isPlayer1Turn = false;
@@ -253,64 +250,168 @@ public class RunningGame : MonoBehaviour
 
         if (playerTypedPhrase == randomPhrase)
         {
-            inputField.text = "";
-            inputField.DeactivateInputField();
-            avanzamo = true;
-            //AdvancePlayerGrid();
-            Debug.Log("¡Correcto! Jugador " + currentPlayer);
+            if (isPlayer1Turn)
+            {
+                inputField.text = "";
+                inputField.DeactivateInputField();
+                avanzamo = true;
+                Debug.Log("¡Correcto! Jugador " + currentPlayer);
+
+            }
+            else
+            {
+                inputField.text = "";
+                inputField.DeactivateInputField();
+                avanzamo2 = true;
+                Debug.Log("¡Correcto! Jugador " + currentPlayer);
+            }
             
-            //ReiniciarJuego();
         }
         else
         {
-            inputField.text = "";
-            inputField.DeactivateInputField();
-            Debug.Log("¡Incorrecto! Jugador " + currentPlayer);
-            EndCurrentTurn();
-            //ReiniciarJuego();
+            if (!alguienGano)
+            {
+                inputField.text = "";
+                inputField.DeactivateInputField();
+                Debug.Log("¡Incorrecto! Jugador " + currentPlayer);
+                EndCurrentTurn();
+            }
+
         }
     }
     private void Update()
     {
-        if (avanzamo)
-        {
-           StartCoroutine(AdvancePlayerGrid());
-            
-        }
+        RunAnimations();
         
     }
 
-    IEnumerator AdvancePlayerGrid()
+    private void RunAnimations()
     {
+        PlayerAnimatorController[] playerControllers = FindObjectsOfType<PlayerAnimatorController>();
 
-        float velocidadMovimiento = 1.0f; // Modifica este valor según la velocidad deseada
-        Vector3 destinoPos = new Vector3(i, 0.0f, 0.0f); // Modifica esto con la posición a la que quieres mover el Grid
+        foreach (var playerController in playerControllers)
+        {
+            if (zonaP1 < 10 && zonaP2 < 10)
+            {
+                if (playerController.playerTag == "Player1" && avanzamo)
+                {
+                    zonaP1++;
+                    Debug.Log("PLAYER 1" + zonaP1);
+                    avanzamo = false;
+                    playerController.StartRunningAnimation();
+                    StartCoroutine(AdvancePlayer1Grid());
+
+                }
+
+                else if (playerController.playerTag == "Player2" && avanzamo2)
+                {
+                    zonaP2++;
+                    Debug.Log("PLAYER 2" + zonaP2);
+                    avanzamo2 = false;
+                    playerController.StartRunningAnimation();
+                    StartCoroutine(AdvancePlayer2Grid());
+                }
+            }
+            else
+            {
+                alguienGano = true;
+
+                if (playerController.playerTag == "Player1" && zonaP1 == 10)
+                {
+
+                    WinnerP1.SetActive(true);
+                }
+                else if (playerController.playerTag == "Player2" && zonaP2 == 10)
+                {
+
+                    WinnerP2.SetActive(true);
+                }
+            }
+        }
+
+    }
+
+    IEnumerator AdvancePlayer1Grid()
+    {
+        //float velocidadMovimiento = 1.0f; // Modifica este valor según la velocidad deseada
+        int distanciaEntreMovimientos = 10; // Distancia a moverse entre cada avance
+        float tiempoDeMovimiento = 1.0f; // Tiempo que tarda el movimiento
 
         GameObject gridObject = GameObject.Find("GridP1");
 
         if (gridObject != null)
         {
-            // Movimiento suavizado del Grid hacia la posición de destino
-            gridObject.transform.position = Vector3.Lerp(gridObject.transform.position, destinoPos, Time.deltaTime * velocidadMovimiento);
+            Vector3 destinoPos = new Vector3(i, 0.0f, 0.0f); // Posición de destino
+
+            float tiempoTranscurrido = 0.0f;
+            Vector3 posiciónInicial = gridObject.transform.position;
+
+            while (tiempoTranscurrido < tiempoDeMovimiento)
+            {
+                tiempoTranscurrido += Time.deltaTime;
+                float t = tiempoTranscurrido / tiempoDeMovimiento;
+
+                gridObject.transform.position = Vector3.Lerp(posiciónInicial, destinoPos, t);
+
+                yield return null;
+            }
+
+            gridObject.transform.position = destinoPos; // Asegura que termine en la posición exacta
+            i -= distanciaEntreMovimientos; // Actualiza la posición del grid
+            Debug.Log(i);
+
         }
-        
-        yield return new WaitForSeconds(1.0f);
-        gridWasMoved = true;
-        avanzamo = false;
-        EndCurrentTurn();
-        
+
+        if (!alguienGano)
+        {
+            EndCurrentTurn();
+
+        }
+
+
     }
+
+    IEnumerator AdvancePlayer2Grid()
+    {
+        int distanciaEntreMovimientos = 10; // Distancia a moverse entre cada avance
+        float tiempoDeMovimiento = 1.0f; // Tiempo que tarda el movimiento
+
+        GameObject gridObject = GameObject.Find("GridP2");
+
+        if (gridObject != null)
+        {
+            Vector3 destinoPos = new Vector3(j, 0.0f, 0.0f); // Posición de destino
+
+            float tiempoTranscurrido = 0.0f;
+            Vector3 posiciónInicial = gridObject.transform.position;
+
+            while (tiempoTranscurrido < tiempoDeMovimiento)
+            {
+                tiempoTranscurrido += Time.deltaTime;
+                float t = tiempoTranscurrido / tiempoDeMovimiento;
+
+                gridObject.transform.position = Vector3.Lerp(posiciónInicial, destinoPos, t);
+
+                yield return null;
+            }
+
+            gridObject.transform.position = destinoPos; // Asegura que termine en la posición exacta
+            j -= distanciaEntreMovimientos; // Actualiza la posición del grid
+            Debug.Log(j);
+
+        }
+
+        if (!alguienGano)
+        {
+            EndCurrentTurn();
+
+        }
+    }
+
 
     private void ReiniciarJuego()
     {
-        if (gridWasMoved)
-        {
-            i = i - 10;
-            gridWasMoved = false;
-            
-
-            Debug.Log(i);
-        }
+        
         // Detener las corrutinas activas si es que están ejecutándose
         if (countdownCoroutine != null)
         {
@@ -326,6 +427,7 @@ public class RunningGame : MonoBehaviour
         {
             StopCoroutine(playerTurnTimerCoroutine);
         }
+        StopCoroutine(AdvancePlayer1Grid());
 
         //avanzamo = false;
         panelFrases.SetActive(false);

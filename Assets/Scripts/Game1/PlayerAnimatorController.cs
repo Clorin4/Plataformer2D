@@ -34,6 +34,11 @@ public class PlayerAnimatorController : MonoBehaviour
         StartCoroutine(Attacking());
     }
 
+    public void StartRunningAnimation()
+    {
+        StartCoroutine(Running());
+    }
+
     public void StartVictoryAnimation()
     {
         //animator.SetBool("Ganador", true);
@@ -60,5 +65,11 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetBool("Atacando", false);
     }
 
+    IEnumerator Running()
+    {
+        animator.SetBool("Corriendo", true);
+        yield return new WaitForSeconds(1.0f);
+        animator.SetBool("Corriendo", false);
+    }
 
 }
