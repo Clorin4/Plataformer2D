@@ -4910,89 +4910,413 @@ MonoBehaviour:
     - Triangulo
     - Trapecio
     correctAnswerIndex: 1
-  - questionText: "Cu\xE1les son las 5 vocales"
+  - questionText: "Los colores del sem\xE1foro son..."
     options:
-    - g, e, u, h, f
-    - a, b, c, d, e
-    - i, e, o, a, u
-    - a, e, i, o, c
-    correctAnswerIndex: 2
-  - questionText: "Cu\xE1les son las 5 vocales"
+    - Amarillo, Verde, Rojo
+    - Verde, Azul, Rojo
+    - Verde Rosa, Rojo
+    - Blanco, Verde, Amarillo
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1nto es 1 + 1 + 1 ?"
     options:
-    - g, e, u, h, f
-    - a, b, c, d, e
-    - i, e, o, a, u
-    - a, e, i, o, c
+    - 2
+    - 3
+    - 1
+    - 5
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1l es la primera consonante del alfabeto ?"
+    options:
+    - A
+    - B
+    - R
+    - Z
+    correctAnswerIndex: 1
+  - questionText: "Pap\xE1, Mam\xE1 e hijos forman una..."
+    options:
+    - Orquesta
+    - Secta
+    - Familia
+    - Comunidad
     correctAnswerIndex: 2
+  - questionText: Deporte que puedes hacer en el agua
+    options:
+    - Golf
+    - Futbol
+    - Tennis
+    - Natacion
+    correctAnswerIndex: 3
+  - questionText: Sombrero rima con
+    options:
+    - Pirata
+    - Tambor
+    - Florero
+    - Agente
+    correctAnswerIndex: 2
+  - questionText: Si tengo 2 manzanas, cuantas me faltan para tener 6 manzanas
+    options:
+    - 8
+    - 3
+    - 4
+    - 5
+    correctAnswerIndex: 2
+  - questionText: Es un animal terrestre
+    options:
+    - Ballena
+    - Tiburon
+    - Anguila
+    - Perro
+    correctAnswerIndex: 3
+  - questionText: "Cu\xE1ntas letras tiene el alfabeto?"
+    options:
+    - 32
+    - 23
+    - 33
+    - 30
+    correctAnswerIndex: 0
   Normalquestions:
-  - questionText: hola
+  - questionText: "Cu\xE1ntos lados tiene un rombo ?"
     options:
-    - ola
-    - depende
-    - presio
-    - optimumpraim
+    - 4
+    - 3
+    - 5
+    - 2
     correctAnswerIndex: 0
-  - questionText: bfghwjuibw
+  - questionText: El hielo es agua en estado...
     options:
-    - cuando
-    - yo
-    - beywfw
-    - apoco?
-    correctAnswerIndex: 2
-  - questionText: Porque tan sexy
+    - Solido
+    - Liquido
+    - Plasma
+    - Gaseoso
+    correctAnswerIndex: 0
+  - questionText: "\xC9sta es una palabra con dieresis"
     options:
-    - aaaaaa
-    - bbbbbbbb
-    - cccccc
-    - dddddd
+    - "M\xE9xico"
+    - "Ping\xFCino"
+    - "Le\xF3n"
+    - Hablar.
+    correctAnswerIndex: 1
+  - questionText: "\xC9sta es una palabra indigena"
+    options:
+    - Chocolate
+    - Wifi
+    - Bagette
+    - Cofre
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1ntas palabras tiene el enunciado \"Maria tiene dos mu\xF1ecas\""
+    options:
+    - 3
+    - 2
+    - 4
+    - 5
     correctAnswerIndex: 2
+  - questionText: Esta es una palabra "BISILABA"
+    options:
+    - Sal
+    - Pato
+    - Caballo
+    - Cabeza
+    correctAnswerIndex: 1
+  - questionText: "\xC9ste alimento tiene sabor salado"
+    options:
+    - Palomitas
+    - Pastel
+    - "Lim\xF3n"
+    - Chile
+    correctAnswerIndex: 0
+  - questionText: "10, 20, 30, 40, \xC9sta serie va..."
+    options:
+    - De 2 en 2
+    - De 20 en 20
+    - De 10 en 10
+    - De 11 en 11
+    correctAnswerIndex: 2
+  - questionText: "Cu\xE1nto es 3 x 7"
+    options:
+    - 18
+    - 21
+    - 20
+    - 10
+    correctAnswerIndex: 1
+  - questionText: "La mam\xE1 de mi mam\xE1 es mi..."
+    options:
+    - Tia
+    - Comadre
+    - "Mam\xE1"
+    - Abuela
+    correctAnswerIndex: 3
+  - questionText: La palabra "Correr" es un...
+    options:
+    - Adjetivo
+    - Verbo
+    - Sustantivo
+    - Adverbio
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1nto son 2 decenas y 5 unidades"
+    options:
+    - 7
+    - 52
+    - 205
+    - 25
+    correctAnswerIndex: 3
+  - questionText: "Es un platillo t\xEDpico mexicano"
+    options:
+    - Pizza
+    - Tacos
+    - Sushi
+    - Spaggetti
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1ntas centenas tiene el n\xFAmero 358"
+    options:
+    - 3
+    - 5
+    - 8
+    - 358
+    correctAnswerIndex: 0
+  - questionText: Documento que te dan al nacer
+    options:
+    - Pasaporte
+    - Acta de matrimonio
+    - INE
+    - Acta de nacimiento
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1l es la estrella m\xE1s grande del sistema solar"
+    options:
+    - Luna
+    - Sol
+    - Marte
+    - Neptuno
+    correctAnswerIndex: 1
+  - questionText: "C\xF3mo se le llaman a los animales que comen carne"
+    options:
+    - Omnivoros
+    - Hervivoros
+    - Carnivoros
+    - Insectivoros
+    correctAnswerIndex: 2
+  - questionText: Con este sentido puedes percibir olores
+    options:
+    - Gusto
+    - Tacto
+    - Oido
+    - Olfato
+    correctAnswerIndex: 3
+  - questionText: "\"Cu\xE1ntos a\xF1os tienes?\" Esta es un enunciado de tipo..."
+    options:
+    - Exclamativo
+    - Interrogativo
+    - Imperativo
+    - Negativo
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1nto es 2 x 4"
+    options:
+    - 9
+    - 8
+    - 6
+    - 2
+    correctAnswerIndex: 1
+  - questionText: 14 es el resultado de...
+    options:
+    - 2 x 7
+    - 2 x 6
+    - 3 x 3
+    - 5 x 3
+    correctAnswerIndex: 0
   Hardquestions:
-  - questionText: 
-    options: []
+  - questionText: "Cu\xE1ntos meses tiene el a\xF1o?"
+    options:
+    - 12
+    - 14
+    - 31
+    - 7
     correctAnswerIndex: 0
-  - questionText: 
-    options: []
+  - questionText: "Cu\xE1ntos lados tiene un hexagono?"
+    options:
+    - 5
+    - 6
+    - 8
+    - 2
+    correctAnswerIndex: 1
+  - questionText: "Cu\xE1ntas horas tiene un dia?"
+    options:
+    - 60
+    - 12
+    - 24
+    - 365
+    correctAnswerIndex: 2
+  - questionText: "Cu\xE1ntos dias tiene el a\xF1o?"
+    options:
+    - 360
+    - 365
+    - 24
+    - 60
+    correctAnswerIndex: 1
+  - questionText: Es una palabra aguda
+    options:
+    - "Coraz\xF3n"
+    - "J\xEDcama"
+    - Pelota
+    - "M\xE9xico"
+    correctAnswerIndex: 0
+  - questionText: "El n\xFAmero 254 se escibe as\xED"
+    options:
+    - Doscientos cincuenta y cuatro
+    - Dosientos cincuenta y cuatro
+    - Doscientos sincuenta y cuatro
+    - Doszientos cinkuenta y cuatro
+    correctAnswerIndex: 0
+  - questionText: Alimento de origen animal
+    options:
+    - Papas
+    - Uvas
+    - Leche
+    - Azucar
+    correctAnswerIndex: 2
+  - questionText: "Cu\xE1ntos medios tiene un entero?"
+    options:
+    - 2
+    - 4
+    - 1
+    - 1/2
+    correctAnswerIndex: 0
+  - questionText: "Si tienes 20 galletas y 5 cajas, cu\xE1ntas pones en cada caja?"
+    options:
+    - 4
+    - 20
+    - 5
+    - 25
+    correctAnswerIndex: 0
+  - questionText: "Qu\xE9 unidad usas para medir una puerta?"
+    options:
+    - Metros
+    - Litros
+    - Galones
+    - Kilos
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1ntos dedos tienes en total?"
+    options:
+    - 20
+    - 21
+    - 10
+    - 5
+    correctAnswerIndex: 0
+  - questionText: "Quienes conquistaron M\xE9xico?"
+    options:
+    - "Espa\xF1oles"
+    - Ingleses
+    - Americanos
+    - Japoneses
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1ntos centimetros tiene un metro? "
+    options:
+    - 100
+    - 10
+    - 1000
+    - 200
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1ntos mililitros tiene un litro?"
+    options:
+    - 1000
+    - 100
+    - 1
+    - 2000
+    correctAnswerIndex: 0
+  - questionText: "En este enunciado, \"La ni\xF1a traviesa juega en el campo\",
+      cu\xE1l es el adjetivo?"
+    options:
+    - Traviesa
+    - "Ni\xF1a"
+    - Juega
+    - Campo
+    correctAnswerIndex: 0
+  - questionText: Es un recurso renovable
+    options:
+    - Agua
+    - Madera
+    - Petroleo
+    - Gasolina
+    correctAnswerIndex: 0
+  - questionText: "Es un derecho de los ni\xF1os"
+    options:
+    - Acceso a la educaciom
+    - Irse a chambear
+    - "Jugar todo el d\xEDa"
+    - Domrir tarde
+    correctAnswerIndex: 0
+  - questionText: Los liquidos los mides con
+    options:
+    - Litros
+    - Metros
+    - Kilos
+    - Millas
+    correctAnswerIndex: 0
+  - questionText: "Texto en d\xF3nde puedes leer una reseta de cocina"
+    options:
+    - Recetario
+    - Manual
+    - Encuesta
+    - Revista
+    correctAnswerIndex: 0
+  - questionText: "En que tiempo est\xE1 la palabra \"Correr\xE9\""
+    options:
+    - Futuro
+    - Pasado
+    - Presente
+    - Preterito
+    correctAnswerIndex: 0
+  - questionText: "Cu\xE1nto tiempo tarda el movimiento de rotaci\xF3n de la tierra?"
+    options:
+    - 24 horas
+    - 365 dias
+    - 12 horas
+    - 12 meses
+    correctAnswerIndex: 0
+  - questionText: "\xC9sta es una palabra grave "
+    options:
+    - "Az\xFAcar"
+    - "Bomb\xF3n"
+    - "Capit\xE1n"
+    - "M\xE1s"
     correctAnswerIndex: 0
   Insanequestions:
-  - questionText: Como se le llama al personaje principal
+  - questionText: Tiene inicio, desarrollo y final
     options:
-    - Antaonista
-    - Protagonista
-    - Secundario
-    - Extra
-    correctAnswerIndex: 1
-  - questionText: Las dos dormas de usar el lenguaje
+    - Cuento
+    - Texto
+    - Noticia
+    - Poema
+    correctAnswerIndex: 0
+  - questionText: Flora y fauna del desierto
     options:
-    - Informal/ escrito
-    - oral / formal
-    - formal - informal
-    - popular-coloquial
-    correctAnswerIndex: 2
+    - "C\xE1ctus y Camellos"
+    - Palmera y Cangrejos
+    - Arboles y Tucanes
+    - Arboles y vacas
+    correctAnswerIndex: 0
   - questionText: Cuando los anuncios quieren vender un producto se le llama
     options:
     - Publicidad
-    - anuncio publi
-    - propaganda
-    - anuncio comercial
+    - Anuncio publicitario
+    - Propaganda
+    - Anuncio comercial
     correctAnswerIndex: 1
-  - questionText: Que sucede cuando un espermatozoide llega al ovulo?
+  - questionText: Animal mamifero que puede vivir en el agua
     options:
-    - Ocurre una ETS
-    - ligero malestar
-    - ocurre la fecundacion
-    - ocasiona alergias
-    correctAnswerIndex: 2
-  - questionText: a que se deben los eclipse?
+    - Delfin
+    - "Camar\xF3n"
+    - Tortuga
+    - Cangrejo
+    correctAnswerIndex: 0
+  - questionText: "Qu\xE9 pasar\xEDa si no hubiera gravedad?"
     options:
-    - mov de rotacion
-    - mov eliptico del sol
-    - mov traslacion
-    - mov rotacion de la luna
+    - Nada
+    - "Flotar\xEDamos"
+    - "No te mover\xEDas"
+    - Todos se caen
     correctAnswerIndex: 1
-  - questionText: consecuencias medicas del consumo de alcohol y tabaco
+  - questionText: 
     options:
     - "da\xF1o cerebral cancer"
-    - violencia
+    - 
     - cancer bronquitis
     - cancer de pulmon
     correctAnswerIndex: 2
@@ -5102,15 +5426,69 @@ MonoBehaviour:
     - preterito y copreterito
     correctAnswerIndex: 3
   Demonquestions:
+  - questionText: "C\xF3mo se le lama al personaje principal"
+    options:
+    - Protagonista
+    - Antagonista
+    - Extra
+    - Secundario
+    correctAnswerIndex: 0
+  - questionText: Que sucede cuando un espermatozoide llega al ovulo?
+    options:
+    - Ocurre una ETS
+    - Ligero malestar
+    - Ocurre la fecundacion
+    - Ocasiona alergias
+    correctAnswerIndex: 2
+  - questionText: Consecuencias medicas del consumo de alcohol y tabaco
+    options:
+    - Violencia
+    - Cancer y bronquitis
+    - Dolor de cabeza
+    - Alucinaciones
+    correctAnswerIndex: 1
   - questionText: 
-    options: []
+    options:
+    - 
+    - 
+    - 
+    - 
     correctAnswerIndex: 0
   - questionText: 
-    options: []
+    options:
+    - 
+    - 
+    - 
+    - 
+    correctAnswerIndex: 0
+  - questionText: 
+    options:
+    - 
+    - 
+    - 
+    - 
+    correctAnswerIndex: 0
+  - questionText: 
+    options:
+    - 
+    - 
+    - 
+    - 
+    correctAnswerIndex: 0
+  - questionText: 
+    options:
+    - 
+    - 
+    - 
+    - 
     correctAnswerIndex: 0
   SuperDemonquestions:
-  - questionText: 
-    options: []
+  - questionText: 'Las dos formas de usar el lenguaje son:'
+    options:
+    - formal / informal
+    - oral / formal
+    - Informal / escrito
+    - popular / coloquial
     correctAnswerIndex: 0
   - questionText: 
     options: []
@@ -5343,8 +5721,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0ad7e8a156d5f474e982d7783f966c96, type: 2}
-  m_sharedMaterial: {fileID: -3237613273424263367, guid: 0ad7e8a156d5f474e982d7783f966c96, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5355,8 +5733,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 0.9031549, b: 0.14528298, a: 1}
-    topRight: {r: 1, g: 0.9031549, b: 0.14528298, a: 1}
+    topLeft: {r: 0.066037714, g: 0.06535899, b: 0.06011924, a: 1}
+    topRight: {r: 0.066037714, g: 0.06535899, b: 0.06011924, a: 1}
     bottomLeft: {r: 0.8679245, g: 0, b: 0, a: 1}
     bottomRight: {r: 0.8679245, g: 0, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
@@ -5368,8 +5746,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7069,7 +7447,7 @@ RectTransform:
   m_Children:
   - {fileID: 1380882688}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9203,7 +9581,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018246106
 GameObject:
