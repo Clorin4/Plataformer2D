@@ -43,6 +43,9 @@ public class RunningGame : MonoBehaviour
     int i = -10;
     int j = -10;
 
+    public GameObject apuntadorP1;
+    public GameObject apuntadorP2;
+
     int zonaP1;
     int zonaP2;
     bool alguienGano = false;
@@ -76,6 +79,8 @@ public class RunningGame : MonoBehaviour
         WinnerP1.SetActive(false);
         WinnerP2.SetActive(false);
         isPlayer1Turn = true;
+        apuntadorP1.SetActive(true);
+        apuntadorP2.SetActive(false);
         panelFrases.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
         sprite2Renderer.gameObject.SetActive(false);
@@ -245,11 +250,15 @@ public class RunningGame : MonoBehaviour
         {
             isPlayer1Turn = false;
             currentPlayer = 2;
+            apuntadorP1.SetActive(false);
+            apuntadorP2.SetActive(true);
         }
         else
         {
             isPlayer1Turn = true;
             currentPlayer = 1;
+            apuntadorP1.SetActive(true);
+            apuntadorP2.SetActive(false);
         }
 
         Debug.Log("Turno del Jugador " + currentPlayer);
