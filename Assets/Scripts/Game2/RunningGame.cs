@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class RunningGame : MonoBehaviour
 {
@@ -447,5 +448,10 @@ public class RunningGame : MonoBehaviour
         showPhraseCoroutine = StartCoroutine(ShowRandomPhrase()); // Iniciar la siguiente frase directamente
     }
 
+
+    public void Salir()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 }

@@ -202,5 +202,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+    public void ExitGame()
+    {
+        Application.Quit();
+
+        // Esto solo se ejecutará en el Editor de Unity para simular la salida del juego
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+
 }

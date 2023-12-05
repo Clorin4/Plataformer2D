@@ -333,7 +333,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5175688
 GameObject:
@@ -1081,7 +1081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &199772177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1160,7 +1160,7 @@ RectTransform:
   - {fileID: 1692403639}
   - {fileID: 733338436}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2111,7 +2111,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457204924
 GameObject:
@@ -2209,7 +2209,7 @@ RectTransform:
   - {fileID: 1912975675}
   - {fileID: 1995633549}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3590,8 +3590,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733338435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400.0395, y: -214.335, z: 1}
-  m_LocalScale: {x: 4.6522794, y: 4.5204835, z: 1}
+  m_LocalPosition: {x: -400.0395, y: -212.1336, z: 1}
+  m_LocalScale: {x: 4.6522794, y: 4.697086, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 199772180}
@@ -3827,7 +3827,7 @@ RectTransform:
   m_Children:
   - {fileID: 1701246367}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5078,7 +5078,7 @@ MonoBehaviour:
     - Acta de matrimonio
     - INE
     - Acta de nacimiento
-    correctAnswerIndex: 1
+    correctAnswerIndex: 3
   - questionText: "Cu\xE1l es la estrella m\xE1s grande del sistema solar"
     options:
     - Luna
@@ -6823,7 +6823,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380882687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6879,8 +6879,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 453557376}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 477910669}
+        m_TargetAssemblyTypeName: QuizzGame, Assembly-CSharp
         m_MethodName: Salir
         m_Mode: 1
         m_Arguments:
@@ -7447,7 +7447,7 @@ RectTransform:
   m_Children:
   - {fileID: 1380882688}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7532,8 +7532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 301, y: 159.65851}
+  m_AnchoredPosition: {x: 3.2999878, y: -3.960022}
+  m_SizeDelta: {x: 339.11, y: 203.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597181026
 MonoBehaviour:
@@ -7766,7 +7766,7 @@ Transform:
   - {fileID: 477910668}
   - {fileID: 1020256040}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1656975918
 GameObject:
@@ -9857,7 +9857,7 @@ Transform:
   - {fileID: 297749113}
   - {fileID: 1656975919}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2023663156
 MonoBehaviour:

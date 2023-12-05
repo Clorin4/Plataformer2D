@@ -27,6 +27,7 @@ public class MenuSeleccion : MonoBehaviour
     private GameManager gameManager;
     private int[] index; // Arreglo de índices de selección para los dos jugadores.
 
+    public GameObject quitButton;
 
     private void Start()
     {
@@ -126,6 +127,7 @@ public class MenuSeleccion : MonoBehaviour
 
     public void StartGame()
     {
+        quitButton.SetActive(false);
         introVideoRawImage.gameObject.SetActive(true);
         StartCoroutine(PlayIntroAndStartGame());
     }
@@ -196,5 +198,10 @@ public class MenuSeleccion : MonoBehaviour
                 Debug.LogWarning("??????????");
                 break;
         }
+    }
+
+    public void Salir()
+    {
+        SceneManager.LoadScene(1);
     }
 }

@@ -22,21 +22,4 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-
-    public void Salir()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-
-        // Esto solo se ejecutará en el Editor de Unity para simular la salida del juego
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-    }
-
 }

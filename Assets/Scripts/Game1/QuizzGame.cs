@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class QuizzGame : MonoBehaviour
 {
@@ -783,6 +784,12 @@ public class QuizzGame : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void Salir()
+    {
+        SceneManager.LoadScene(1);
     }
 
 }

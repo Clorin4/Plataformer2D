@@ -1556,8 +1556,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1006531909}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1640650416}
+        m_TargetAssemblyTypeName: MenuSeleccion, Assembly-CSharp
         m_MethodName: Salir
         m_Mode: 1
         m_Arguments:
@@ -3709,6 +3709,7 @@ MonoBehaviour:
   nombres:
   - {fileID: 194365530}
   - {fileID: 2023256532}
+  quitButton: {fileID: 652607552}
 --- !u!4 &1640650417
 Transform:
   m_ObjectHideFlags: 0
