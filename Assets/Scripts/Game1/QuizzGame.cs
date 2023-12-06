@@ -10,8 +10,6 @@ public class QuizzGame : MonoBehaviour
     #region  VARIABLEEEES
 
     public Transform[] spawnPoints;
-    //private InicioJugadorr inicioJugador;
-    
 
     public GameObject[] P1Hearts = new GameObject[10];
     public GameObject[] P2Hearts = new GameObject[10];
@@ -269,9 +267,12 @@ public class QuizzGame : MonoBehaviour
             Debug.Log("GANA EL 2");
             // Acciones si solo el jugador 2 presionó más rápido
         }
-        else if (player1Pressed && player2Pressed) //Palomita
+        else if (player1Pressed && player2Pressed)
         {
             dañoPaDos = true;
+            secondCountDownStarted = true;
+            player1Health -= 5;
+            player2Health -= 5;
             Daños();
             Debug.Log("Ambos?");
             Reloj.SetActive(false);
@@ -417,7 +418,6 @@ public class QuizzGame : MonoBehaviour
             //DAÑO AL 1
             Debug.Log("RESPONDE BIEN EL 2");
         }
-        //Daños();
     }
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
@@ -559,9 +559,13 @@ public class QuizzGame : MonoBehaviour
             PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
             foreach (var controller in controllers)
             {
-                if (controller.playerTag == "Player1" || controller.playerTag == "Player2")
+                if (controller.playerTag == "Player1")
                 {
-                    controller.StartVictoryAnimation();
+                    controller.StartLoseAnimation();
+                }
+                if (controller.playerTag == "Player2")
+                {
+                    controller.StartLoseAnimation();
                 }
             }
 
@@ -617,6 +621,7 @@ public class QuizzGame : MonoBehaviour
                         }
                     }
                 }
+                
             }
         }
 
@@ -640,8 +645,7 @@ public class QuizzGame : MonoBehaviour
 
     void ReiniciarJuego()
     {
-        // Deshabilitar todos los elementos, reiniciar variables, etc.
-        // Aquí reinicias todo lo necesario para comenzar un nuevo ciclo del juego
+
 
         apuntador1.SetActive(false);
         apuntador2.SetActive(false);

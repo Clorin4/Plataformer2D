@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Piggy
   m_EditorClassIdentifier: 
   personajeJugable: {fileID: 8500401008117390031, guid: 54a9806b33874e04c985771c723079da, type: 3}
-  imagen: {fileID: -777025005, guid: 7c16af1ef1f1c704e95f928f39135719, type: 3}
+  imagen: {fileID: 1577266678, guid: 7c16af1ef1f1c704e95f928f39135719, type: 3}
   nombre: Crosher

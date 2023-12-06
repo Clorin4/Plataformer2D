@@ -194,6 +194,7 @@ public class RunningGame : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(ShowRandomPhrase());
+        SelectInputField();
     }
 
     IEnumerator ShowRandomPhrase()
@@ -218,6 +219,7 @@ public class RunningGame : MonoBehaviour
                 if (!isTimerRunning) break;
 
                 elapsedTime += Time.deltaTime;
+                Debug.Log(elapsedTime);
                 yield return null;
             }
             isTimerRunning = false;
@@ -231,6 +233,7 @@ public class RunningGame : MonoBehaviour
             {
                 if (!alguienGano)
                 {
+                    
                     Debug.Log("Tiempo agotado para el Jugador " + currentPlayer);
                     EndCurrentTurn();
                 }
@@ -245,7 +248,9 @@ public class RunningGame : MonoBehaviour
 
     void EndCurrentTurn()
     {
-        
+        SelectInputField();
+        inputField.text = "";
+
         if (isPlayer1Turn)
         {
             isPlayer1Turn = false;
@@ -267,8 +272,8 @@ public class RunningGame : MonoBehaviour
 
     private void SubmitAnswer(string randomPhrase)
     {
+        SelectInputField();
         randomPhrase = textPanel.text;
-
         string playerTypedPhrase = inputField.text;
 
         if (playerTypedPhrase == randomPhrase)
@@ -292,7 +297,7 @@ public class RunningGame : MonoBehaviour
         }
         else
         {
-            if (!alguienGano)
+            if (!alguienGano && inputField.text != "")
             {
                 inputField.text = "";
                 inputField.DeactivateInputField();
@@ -339,14 +344,14 @@ public class RunningGame : MonoBehaviour
             {
                 alguienGano = true;
 
-                if (playerController.playerTag == "Player1" && zonaP1 == 10)
+                if (playerController.playerTag == "Player2" && zonaP1 == 10)
                 {
-
+                    playerController.StartLoseAnimation();
                     WinnerP1.SetActive(true);
                 }
-                else if (playerController.playerTag == "Player2" && zonaP2 == 10)
+                else if (playerController.playerTag == "Player1" && zonaP2 == 10)
                 {
-
+                    playerController.StartLoseAnimation();
                     WinnerP2.SetActive(true);
                 }
             }
@@ -392,6 +397,13 @@ public class RunningGame : MonoBehaviour
         }
 
 
+    }
+
+    void SelectInputField()
+    {
+        // Activa y selecciona el InputField
+        inputField.ActivateInputField();
+        inputField.Select();
     }
 
     IEnumerator AdvancePlayer2Grid()

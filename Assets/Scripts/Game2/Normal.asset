@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a7238369341dd4ba31125321f1ea8b, type: 3}
-  m_Name: Easy
+  m_Name: Normal
   m_EditorClassIdentifier: 
-  difficultyLevel: 0
-  phraseTime: 20
+  difficultyLevel: 1
+  phraseTime: 25
   phrases:
-  - hola
-  - adios
-  - huevo
-  - juan
-  - dedo
-  - pan
-  - sal
-  - sol
-  - coco
+  - iker
+  - lino
+  - perro
+  - bola
+  - hoja
+  - pc
+  - cuarto
+  - silla
+  - tv
+  - mar
+  - ramo
+  - mario
+  - rayo
+  - pez
+  - uva
+  - atun

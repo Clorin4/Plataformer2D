@@ -134,7 +134,7 @@ TextureImporter:
         serializedVersion: 2
         x: 14
         y: 544
-        width: 16
+        width: 17
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1476,10 +1476,10 @@ TextureImporter:
       name: Boy_Adventure A_64
       rect:
         serializedVersion: 2
-        x: 14
+        x: 11
         y: 16
-        width: 16
-        height: 18
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1497,10 +1497,10 @@ TextureImporter:
       name: Boy_Adventure A_65
       rect:
         serializedVersion: 2
-        x: 63
+        x: 60
         y: 16
-        width: 16
-        height: 19
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1518,10 +1518,10 @@ TextureImporter:
       name: Boy_Adventure A_66
       rect:
         serializedVersion: 2
-        x: 112
+        x: 109
         y: 16
-        width: 16
-        height: 19
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1539,10 +1539,10 @@ TextureImporter:
       name: Boy_Adventure A_67
       rect:
         serializedVersion: 2
-        x: 162
+        x: 159
         y: 16
-        width: 15
-        height: 17
+        width: 21
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1563,7 +1563,7 @@ TextureImporter:
         x: 209
         y: 16
         width: 22
-        height: 10
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1584,7 +1584,7 @@ TextureImporter:
         x: 256
         y: 16
         width: 23
-        height: 12
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1605,7 +1605,7 @@ TextureImporter:
         x: 305
         y: 16
         width: 22
-        height: 10
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1626,7 +1626,7 @@ TextureImporter:
         x: 353
         y: 16
         width: 22
-        height: 10
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

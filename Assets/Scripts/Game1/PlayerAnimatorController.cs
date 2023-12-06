@@ -46,7 +46,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void StartLoseAnimation()
     {
-        //animator.SetBool("Perdedor", true);
+        animator.SetBool("Pierde", true);
     }
 
     IEnumerator Hurt()
