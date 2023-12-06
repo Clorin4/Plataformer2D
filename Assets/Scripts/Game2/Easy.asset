@@ -13,14 +13,38 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   difficultyLevel: 0
-  phraseTime: 20
+  phraseTime: 18
   phrases:
-  - hola
-  - adios
-  - huevo
-  - juan
-  - dedo
-  - pan
-  - sal
+  - bar
+  - gol
+  - pum
+  - do
+  - re
+  - mi
+  - fa
   - sol
-  - coco
+  - la
+  - si
+  - no
+  - ron
+  - clan
+  - sed
+  - con
+  - ser
+  - ir
+  - voy
+  - club
+  - cien
+  - sin
+  - sur
+  - te
+  - tez
+  - voz
+  - miel
+  - tu
+  - yo
+  - el
+  - ella
+  - gas
+  - gel
+  - voz

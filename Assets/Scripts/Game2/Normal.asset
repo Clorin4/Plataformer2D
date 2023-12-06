@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Normal
   m_EditorClassIdentifier: 
   difficultyLevel: 1
-  phraseTime: 25
+  phraseTime: 16
   phrases:
   - iker
   - lino

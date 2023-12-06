@@ -53,7 +53,7 @@ public class MenuSeleccion : MonoBehaviour
 
 
         // Asegúrate de que los tamaños del array 'introVideo' y 'videos' coincidan
-        if (introVideoRawImage == null || videoPlayer == null || videos.Length != 3) // Ajusta la longitud según sea necesario
+        if (introVideoRawImage == null || videoPlayer == null || videos.Length != 5) // Ajusta la longitud según sea necesario
         {
             Debug.LogError("RawImage o VideoPlayer no asignados, o la cantidad de VideoClips no coincide.");
             return;
@@ -61,14 +61,14 @@ public class MenuSeleccion : MonoBehaviour
 
         // Llena el diccionario con las combinaciones de personajes y sus respectivos videos.
         videoClipsDict.Add("Comb0-0", videos[0]);
-        videoClipsDict.Add("Comb0-1", videos[1]);
-        videoClipsDict.Add("Comb0-2", videos[2]);
-        videoClipsDict.Add("Comb1-0", videos[1]);
-        videoClipsDict.Add("Comb1-1", videos[2]);
+        videoClipsDict.Add("Comb0-1", videos[0]);
+        videoClipsDict.Add("Comb0-2", videos[0]);
+        videoClipsDict.Add("Comb1-0", videos[0]);
+        videoClipsDict.Add("Comb1-1", videos[1]);
         videoClipsDict.Add("Comb1-2", videos[2]);
-        videoClipsDict.Add("Comb2-0", videos[2]);
-        videoClipsDict.Add("Comb2-1", videos[2]);
-        videoClipsDict.Add("Comb2-2", videos[2]);
+        videoClipsDict.Add("Comb2-0", videos[0]);
+        videoClipsDict.Add("Comb2-1", videos[3]);
+        videoClipsDict.Add("Comb2-2", videos[4]);
 
         // Agrega el resto de combinaciones
     }
