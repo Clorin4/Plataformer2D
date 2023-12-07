@@ -5447,150 +5447,193 @@ MonoBehaviour:
   SuperDemonquestions:
   - questionText: 'Las dos formas de usar el lenguaje son:'
     options:
-    - formal / informal
-    - oral / formal
-    - Informal / escrito
-    - popular / coloquial
+    - Formal / Informal
+    - Oral / Formal
+    - Informal / Escrito
+    - Popular / Coloquial
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "N\xFAmero que se forma con 30000 + 7000 + 500 + 60 + 9"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 37569
+    - 96573
+    - 307569
+    - 56379
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Pol\xEDgono que tiene dos bases ocho caras 12 y 18 aristas"
     options:
-    - 
-    - 
-    - 
-    - 
+    - Prisma hexagonal
+    - Prisma octagonal
+    - Prisma rectangular
+    - Prisma triangular
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Cu\xE1l es la regla de las 3 R\xB4s"
     options:
-    - 
-    - 
-    - 
-    - 
+    - Reducir, Reutilizar, Reciclar
+    - Reducir, Reusar, Rechazar
+    - Tapa, Lava, Voltea y Tira
+    - Retirar, Reciclar, Remover
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Es un ejemplo de m\xE1quina simple"
     options:
-    - 
-    - 
-    - 
-    - 
+    - La polea
+    - El fuego
+    - La impresora
+    - La estufa
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: Palabras que suenan igual, pero tienen diferente significado
     options:
-    - 
-    - 
-    - 
-    - 
+    - Homofonas
+    - Sinonimos
+    - Homonimos
+    - Anemona
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Cu\xE1ntos equinoxios se producen al a\xF1os?"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 2
+    - 12
+    - 24
+    - 1
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Campa\xF1as militares organizadas por los papas y las potencias
+      cristianas occidentales para la toma de Jerusalen y la tierra santa"
     options:
-    - 
-    - 
-    - 
-    - 
+    - Cruzadas
+    - Independencia
+    - Guerra fria
+    - "Santa inquisici\xF3n"
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Representaci\xF3n decimal de 1/4"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 0.25
+    - 0.5
+    - 0.333
+    - 0.75
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "1250 gramos a cu\xE1ntos kilos equivalen"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 1.25 kilos
+    - 0.1250 kilos
+    - 12.50 kilos
+    - 0.0125 kilos
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Cu\xE1les son multiplos de 8"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 16, 24, 32
+    - ocho pinocho
+    - 14, 21, 28
+    - 16, 23, 40
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "N\xFAmeros que al multiplicarlos te den 162"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 2, 81
+    - 60, 3
+    - 12, 14
+    - 16, 10
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: Es una palabra cuatrisilaba
     options:
-    - 
-    - 
-    - 
-    - 
+    - Renacuajo
+    - "Camale\xF3n"
+    - Avestruz
+    - Caliente
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "As\xED se le llamaba a los pueblos que iban de un lugar a otro"
     options:
-    - 
-    - 
-    - 
-    - 
+    - "N\xF3madas"
+    - Sedentarios
+    - Viajeros
+    - Caravanas
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Es un ejemplo de actividad econ\xF3mica"
     options:
-    - 
-    - 
-    - 
-    - 
+    - Agricultura
+    - Estudio
+    - Leer
+    - Dormir
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "En d\xF3nde llevan el acento las palabras esdr\xFAjulas"
     options:
-    - 
-    - 
-    - 
-    - 
+    - "En la antepen\xFAltima s\xEDlaba"
+    - "En la pen\xFAltima s\xEDlaba"
+    - "En la \xFAltima s\xEDlaba"
+    - "En la ante-antepen\xFAltima s\xEDlaba"
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Organizaci\xF3n encargada de mantener la paz y seguridad internacional "
     options:
-    - 
-    - 
-    - 
-    - 
+    - ONU
+    - OMS
+    - ISSTE
+    - UNICEF
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "A cu\xE1ntos km\xB2 equivalen una Hect\xE1rea"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 100
+    - 10
+    - 120
+    - 1000
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "A cu\xE1ntos km equivale un Hect\xF3metro"
     options:
-    - 
-    - 
-    - 
-    - 
+    - 10
+    - 100
+    - 120
+    - 1000
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "\xC9sta palabra tiene diptongo"
     options:
-    - 
-    - 
-    - 
-    - 
+    - Ciudad
+    - Wi-fi
+    - Cohete
+    - "Climatol\xF3gico"
     correctAnswerIndex: 0
-  - questionText: 
+  - questionText: "Qu\xE9 se debe de hacer en caso de un sismo"
     options:
-    - 
-    - 
-    - 
-    - 
+    - No corro, No grito y empujo
+    - No correr, No gritar, No empujar
+    - Tomar el elevador
+    - Esconderse en la estufa
+    correctAnswerIndex: 0
+  - questionText: "S\xEDmbolo que muestra los 4 puntos cardinales"
+    options:
+    - Rosa de los vientos
+    - "Estrella de Bel\xE9n"
+    - "Se\xF1ales de tr\xE1nsito"
+    - Rosa de Guadalupe
+    correctAnswerIndex: 0
+  - questionText: "Poblaci\xF3n que cuenta con servicios y medios de transporte"
+    options:
+    - "Poblaci\xF3n Urbana"
+    - "Poblaci\xF3n Rural"
+    - "Poblaci\xF3n Costera"
+    - "Poblaci\xF3n Primermundista"
+    correctAnswerIndex: 0
+  - questionText: "Qu\xE9 ocasion\xF3 la extinsion de los dinosaurios"
+    options:
+    - Meteorito
+    - Tsunami
+    - "Erupci\xF3n volcanica"
+    - Calentamiento global
+    correctAnswerIndex: 0
+  - questionText: "Por qu\xE9 se descongelan los polos ?"
+    options:
+    - Calentamiento Global
+    - Tsunami
+    - Porque tienen calor
+    - Por la rotacion de la tierra
+    correctAnswerIndex: 0
+  - questionText: Unidad de medida para representar el volumen
+    options:
+    - "m\xB3"
+    - m
+    - "m\xB2"
+    - "cm\xB2"
+    correctAnswerIndex: 0
+  - questionText: 34 x 5 =
+    options:
+    - 170
+    - 120
+    - 340
+    - 210
     correctAnswerIndex: 0
 --- !u!1 &1020539508
 GameObject:

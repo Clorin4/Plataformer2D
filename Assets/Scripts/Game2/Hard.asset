@@ -13,5 +13,30 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: 
   difficultyLevel: 2
-  phraseTime: 0
-  phrases: []
+  phraseTime: 18
+  phrases:
+  - Juan
+  - Pedro
+  - Isaac
+  - Karla
+  - Victor
+  - Rafael
+  - Kabul
+  - Europa
+  - Asia
+  - America
+  - Roma
+  - Africa
+  - Bolivia
+  - Brasil
+  - Belice
+  - Ottawa
+  - China
+  - Cuba
+  - Egipto
+  - India
+  - "Espa\xF1a"
+  - Tokio
+  - Laos
+  - Riga
+  - Malta

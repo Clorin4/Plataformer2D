@@ -13,5 +13,25 @@ MonoBehaviour:
   m_Name: Insane
   m_EditorClassIdentifier: 
   difficultyLevel: 3
-  phraseTime: 0
-  phrases: []
+  phraseTime: 18
+  phrases:
+  - "acci\xF3n"
+  - "acorde\xF3n"
+  - "adem\xE1s"
+  - "adicci\xF3n"
+  - "admiraci\xF3n"
+  - "admisi\xF3n"
+  - "colibr\xED"
+  - "avi\xF3n"
+  - "bal\xF3n"
+  - "cort\xE9s"
+  - "com\xFAn"
+  - "mel\xF3n"
+  - "sof\xE1"
+  - "uni\xF3n"
+  - "ol\xE9"
+  - "port\xF3n"
+  - "pap\xE1"
+  - "mam\xE1"
+  - "calz\xF3n"
+  - "man\xED"

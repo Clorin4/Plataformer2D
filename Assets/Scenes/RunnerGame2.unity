@@ -100041,3 +100041,7 @@ MonoBehaviour:
   phraseData:
   - {fileID: 11400000, guid: e1d4b31e99f43e94092ac2a0f00aef69, type: 2}
   - {fileID: 11400000, guid: 5f35e1859cec05140ba37d9e93a353e7, type: 2}
+  - {fileID: 11400000, guid: 79352d53cc8a58f4c8559054446a248e, type: 2}
+  - {fileID: 11400000, guid: 172cd3aa01af0c440bd6b561002c143d, type: 2}
+  - {fileID: 11400000, guid: 03aba78e93f69364da897028dc43931d, type: 2}
+  - {fileID: 11400000, guid: d2bc8aff8f10aa14582bc6de364f44e2, type: 2}
