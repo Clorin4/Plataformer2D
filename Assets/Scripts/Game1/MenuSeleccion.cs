@@ -191,7 +191,10 @@ public class MenuSeleccion : MonoBehaviour
                 SceneManager.LoadScene(4);
                 break;
             case 3:
-                SceneManager.LoadScene("NombreDelTercerMinijuego");
+                SceneManager.LoadScene(5);
+                break;
+            case 4:
+                SceneManager.LoadScene(6);
                 break;
             // Otros casos según sea necesario para más minijuegos
             default:

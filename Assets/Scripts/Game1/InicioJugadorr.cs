@@ -41,7 +41,7 @@ public class InicioJugadorr : MonoBehaviour
                 // Aplicar la nueva escala al Transform
                 jugador2.transform.localScale = scale;
             }
-            else
+            else if (jugador2 != null && gameChoice == 2)
             {
                 float escala = 0.5f;
 
@@ -50,9 +50,14 @@ public class InicioJugadorr : MonoBehaviour
 
                 Transform transformJugador2 = jugador2.transform;
                 transformJugador2.localScale = new Vector2(escala, escala);
+
             }
+            else if(jugador2 != null && gameChoice == 3){
+
+                //POSICIONES PARA JUGADORES EN EL DE RECOGER DIAMANTES
 
 
+            }
         }
     }
 
