@@ -55,6 +55,13 @@ public class InicioJugadorr : MonoBehaviour
             else if(jugador2 != null && gameChoice == 3){
 
                 //POSICIONES PARA JUGADORES EN EL DE RECOGER DIAMANTES
+                float escala = 0.4f;
+
+                Transform transformJugador1 = jugador1.transform;
+                transformJugador1.localScale = new Vector2(escala, escala);
+
+                Transform transformJugador2 = jugador2.transform;
+                transformJugador2.localScale = new Vector2(escala, escala);
 
 
             }
