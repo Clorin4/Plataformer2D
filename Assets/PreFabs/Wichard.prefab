@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 9173891210912183788}
   - component: {fileID: 8622301635302198539}
   - component: {fileID: 5133293995966176744}
+  - component: {fileID: 2598602652488579757}
+  - component: {fileID: 3355556181582826137}
+  - component: {fileID: -987709706069247979}
   m_Layer: 0
   m_Name: Wichard
   m_TagString: NPC3
@@ -119,3 +122,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c4ff6721d91a24183fca5cc81c711f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
+  playerTag: 
+--- !u!50 &2598602652488579757
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072205971768769864}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 6
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &3355556181582826137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072205971768769864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e68ff67d4ee42344bd1c68aaa1d072d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 2598602652488579757}
+  speed: 5
+  jumpForce: 100
+  playerController: {fileID: 5133293995966176744}
+  touchGround: 1
+--- !u!70 &-987709706069247979
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072205971768769864}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 4.25, y: 4.625}
+  m_Direction: 0

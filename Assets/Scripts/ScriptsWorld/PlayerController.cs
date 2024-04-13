@@ -33,16 +33,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
-        /*if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        else
-        {
-            Destroy(gameObject);
-        }*/
+        
     }
 
     private void Start()
