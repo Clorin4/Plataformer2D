@@ -440,7 +440,7 @@ InputManager:
   - serializedVersion: 3
     m_Name: Vertical2
     descriptiveName: 
-    descriptiveNegativeName: 
+    descriptiveNegativeName: up
     negativeButton: down
     positiveButton: 
     altNegativeButton: 
@@ -456,7 +456,7 @@ InputManager:
   - serializedVersion: 3
     m_Name: Vertical1
     descriptiveName: 
-    descriptiveNegativeName: 
+    descriptiveNegativeName: w
     negativeButton: s
     positiveButton: 
     altNegativeButton: 

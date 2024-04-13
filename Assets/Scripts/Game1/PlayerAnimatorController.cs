@@ -39,6 +39,16 @@ public class PlayerAnimatorController : MonoBehaviour
         StartCoroutine(Running());
     }
 
+    public void StartRunningAnimation2()
+    {
+        StartCoroutine(Running2());
+    }
+
+    public void StopRunningAnimation()
+    {
+        StartCoroutine(StopRunning());
+    }
+
     public void StartVictoryAnimation()
     {
         //animator.SetBool("Ganador", true);
@@ -69,6 +79,20 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetBool("Corriendo", true);
         yield return new WaitForSeconds(1.0f);
+        animator.SetBool("Corriendo", false);
+    }
+
+    IEnumerator Running2()
+    {
+        animator.SetBool("Corriendo", true);
+        yield return new WaitForSeconds(0);
+        //animator.SetBool("Corriendo", false);
+    }
+
+    IEnumerator StopRunning()
+    {
+        //animator.SetBool("Corriendo", true);
+        yield return new WaitForSeconds(0);
         animator.SetBool("Corriendo", false);
     }
 
