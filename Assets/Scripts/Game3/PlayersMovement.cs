@@ -99,7 +99,7 @@ public class PlayersMovement : MonoBehaviour
             // Aplicar una fuerza de salto al Rigidbody2D
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             Debug.Log("SALTOO");
-            playerController.StartAttackAnimation();
+            //playerController.StartAttackAnimation();
             // Reiniciar la variable de solicitud de salto
             jumpRequested = false;
         }
