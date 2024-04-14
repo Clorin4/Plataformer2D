@@ -1,25 +1,114 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CollectGame : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private void Awake()
-    {
-        Debug.Log("OLA CARA DE BOLA");
-    }
+    public SpriteRenderer sprite3Renderer;
+    public SpriteRenderer sprite2Renderer;
+    public SpriteRenderer sprite1Renderer;
+    public SpriteRenderer spriteAdelanteRenderer;
 
     void Start()
     {
-        
+        TurnOffVariables();
+        SaberDificultad();
+
+        StartCoroutine(Countdown());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOffVariables()
     {
+        sprite1Renderer.gameObject.SetActive(false);
+        sprite2Renderer.gameObject.SetActive(false);
+        sprite3Renderer.gameObject.SetActive(false);
+        spriteAdelanteRenderer.gameObject.SetActive(false);
+    }
+
+    public void SaberDificultad()
+    {
+        string selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
+        switch (selectedDifficulty)
+        {
+            case "dif1":
+                //questionManager.questions = questionManager.Easyquestions.ConvertAll(q => (Question)q);
+                break;
+
+            case "dif2":
+                //questionManager.questions = questionManager.Normalquestions.ConvertAll(q => (Question)q);
+                break;
+
+            case "dif3":
+                //questionManager.questions = questionManager.Hardquestions.ConvertAll(q => (Question)q);
+                break;
+
+            case "dif4":
+                //questionManager.questions = questionManager.Insanequestions.ConvertAll(q => (Question)q);
+                break;
+
+            case "dif5":
+                //questionManager.questions = questionManager.Demonquestions.ConvertAll(q => (Question)q);
+                break;
+
+            case "dif6":
+                //questionManager.questions = questionManager.SuperDemonquestions.ConvertAll(q => (Question)q);
+                break;
+
+            default:
+                // Manejar una dificultad inesperada
+                break;
+        }
+    }
+
+
+    IEnumerator Countdown()
+    {
+        //yield return new WaitForSeconds(.3f);
+
+        sprite3Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite3Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite3Renderer.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(.1f);
+
+        sprite2Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite2Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite2Renderer.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(.1f);
+
+        sprite1Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite1Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite1Renderer.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(.1f);
+
+        spriteAdelanteRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
+        spriteAdelanteRenderer.gameObject.SetActive(false);
+
         
+        //StartGame();
+    }
+
+    IEnumerator ScaleSpriteTo(SpriteRenderer spriteRenderer, Vector3 startScale, Vector3 endScale, float duration)
+    {
+        float currentTime = 0;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+            spriteRenderer.transform.localScale = Vector3.Lerp(startScale, endScale, t);
+            yield return null;
+        }
+
+        spriteRenderer.transform.localScale = endScale;
     }
 
 }
