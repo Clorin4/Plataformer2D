@@ -7,15 +7,12 @@ public class PlayersMovement : MonoBehaviour
     public float jumpForce = 5f; // Fuerza de salto
     private int index;
     public PlayerAnimatorController playerController;
-    public bool touchGround;
     int gameChoice;
-    private Animator animatorrun;
     private bool jumpRequested = false;
     public bool mirandoDerecha = true;
 
     private void Start()
     {
-        animatorrun = GetComponent<Animator>();
         gameChoice = PlayerPrefs.GetInt("gameIndex");
         rb = GetComponent<Rigidbody2D>();
 
@@ -97,10 +94,9 @@ public class PlayersMovement : MonoBehaviour
         if (jumpRequested && IsGrounded.isGrounded)
         {
             // Aplicar una fuerza de salto al Rigidbody2D
+            playerController.StartJumpingAnimation();
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             Debug.Log("SALTOO");
-            //playerController.StartAttackAnimation();
-            // Reiniciar la variable de solicitud de salto
             jumpRequested = false;
         }
     }

@@ -156,9 +156,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 20
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -176,9 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -3543087869833874225}
   speed: 5
-  jumpForce: 5
+  jumpForce: 100
   playerController: {fileID: -2526144885612934719}
-  touchGround: 0
+  mirandoDerecha: 1
 --- !u!1 &7499955766421991613
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,11 @@ public class PlayerAnimatorController : MonoBehaviour
         StartCoroutine(Attacking());
     }
 
+    public void StartJumpingAnimation()
+    {
+        StartCoroutine(Jumping());
+    }
+
     public void StartRunningAnimation()
     {
         StartCoroutine(Running());
@@ -69,10 +74,16 @@ public class PlayerAnimatorController : MonoBehaviour
 
     IEnumerator Attacking()
     {
-
         animator.SetBool("Atacando", true);
         yield return new WaitForSeconds(1.2f);
         animator.SetBool("Atacando", false);
+    }
+
+    IEnumerator Jumping()
+    {
+        //animator.SetBool("Atacando", true);
+        yield return new WaitForSeconds(1.2f);
+        //animator.SetBool("Atacando", false);
     }
 
     IEnumerator Running()
@@ -86,14 +97,13 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetBool("Corriendo", true);
         yield return new WaitForSeconds(0);
-        //animator.SetBool("Corriendo", false);
+        
     }
 
     IEnumerator StopRunning()
     {
-        //animator.SetBool("Corriendo", true);
-        yield return new WaitForSeconds(0);
         animator.SetBool("Corriendo", false);
+        yield return new WaitForSeconds(0);
     }
 
 }
