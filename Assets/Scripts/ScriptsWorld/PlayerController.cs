@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("GAME OVER");
         }
 
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -118,6 +119,11 @@ public class PlayerController : MonoBehaviour
         {
             O = 3;
             Debug.Log("VALE 3 OOOOO");
+        }
+        else if (collision.gameObject.tag == "NPC4")
+        {
+            O = 4;
+            Debug.Log("VALE 4 OOOOO");
         }
     }
 

@@ -6145,7 +6145,7 @@ GameObject:
   - component: {fileID: 574289926}
   - component: {fileID: 574289927}
   m_Layer: 0
-  m_Name: 'Copyright Free Adventure Music - by Vadim Krakhmal '
+  m_Name: MUSIC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -135,6 +135,18 @@ public class ProximityInteraction : MonoBehaviour
 
             SceneManager.LoadScene(2);
         }
+        else if (isInteracting && PC.O == 4)
+        {
+            text.gameObject.SetActive(false);
+            isInteracting = false;
 
+            gameIndex = 4;
+            Debug.Log(gameIndex);
+
+            PlayerPrefs.SetInt("gameIndex", gameIndex);
+            PlayerPrefs.Save();
+
+            SceneManager.LoadScene(2);
+        }
     }
 }
