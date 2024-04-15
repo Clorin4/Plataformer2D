@@ -9,7 +9,8 @@ public class IsGrounded : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "NPC1"
+            || collision.gameObject.tag == "NPC2" || collision.gameObject.tag == "NPC3")
         {
             isGrounded = true;
             Debug.Log("SUELOOO");

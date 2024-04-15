@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1996128, y: -2.3900263}
+  m_Offset: {x: 0.046940506, y: -2.5172532}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5027283, y: 0.19751692}
+  m_Size: {x: 1.4688011, y: 0.45197058}
   m_EdgeRadius: 0
 --- !u!114 &5292064431156215482
 MonoBehaviour:
@@ -210,7 +210,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 111
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 20
   m_Material: {fileID: 0}
@@ -235,6 +235,8 @@ MonoBehaviour:
   jumpForce: 100
   playerController: {fileID: 3680281469843322976}
   mirandoDerecha: 1
+  numManzanas: 0
+  numPlatanus: 0
 --- !u!70 &-3775141080816040456
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -58,7 +58,7 @@ public class PlayersMovement : MonoBehaviour
 
             
             // Calcular la dirección del movimiento
-            Vector2 movement = new Vector2(moveHorizontal, moveVertical).normalized;
+            Vector2 movement = new Vector2(moveHorizontal, 0).normalized;
             rb.velocity = movement * speed;
 
             if (moveHorizontal > 0 && !mirandoDerecha)
@@ -72,12 +72,14 @@ public class PlayersMovement : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.D) && index == 1 || Input.GetKeyDown(KeyCode.A) && index == 1)
             {
+                
                 playerController.StartRunningAnimation2();
             }
             else if (Input.GetKeyUp(KeyCode.D) && index == 1 || Input.GetKeyUp(KeyCode.A) && index == 1)
             {
+                rb.velocity = movement * 0;
                 playerController.StopRunningAnimation();
-                Debug.Log("TIESO");
+                //Debug.Log("TIESO");
             }
 
             else if (Input.GetKeyDown(KeyCode.RightArrow) && index == 2 || Input.GetKeyDown(KeyCode.LeftArrow) && index == 2)
@@ -87,7 +89,7 @@ public class PlayersMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.RightArrow) && index == 2 || Input.GetKeyUp(KeyCode.LeftArrow) && index == 2)
             {
                 playerController.StopRunningAnimation();
-                Debug.Log("TIESO");
+                //Debug.Log("TIESO");
             }
 
             //SALTOO
