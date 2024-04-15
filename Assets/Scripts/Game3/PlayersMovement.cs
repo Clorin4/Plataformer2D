@@ -11,8 +11,18 @@ public class PlayersMovement : MonoBehaviour
     private bool jumpRequested = false;
     public bool mirandoDerecha = true;
 
+    public int numManzanas;
+    public int numPlatanus;
+
+
     private void Start()
     {
+        numManzanas = 0;
+        numPlatanus = 0;
+        PlayerPrefs.SetInt("Manzanas", numManzanas);
+        PlayerPrefs.SetInt("Platanos", numPlatanus);
+        Debug.Log(numManzanas);
+
         gameChoice = PlayerPrefs.GetInt("gameIndex");
         rb = GetComponent<Rigidbody2D>();
 
@@ -106,4 +116,19 @@ public class PlayersMovement : MonoBehaviour
         mirandoDerecha = !mirandoDerecha;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(gameChoice == 3)
+        {
+            if (collision.gameObject.tag == "Apple" && index ==1)
+            {
+                numManzanas += 1;
+                PlayerPrefs.SetInt("Manzanas", numManzanas);
+            }
+                
+        }
+    }
+
+
 }

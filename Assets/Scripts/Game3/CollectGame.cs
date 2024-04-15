@@ -14,6 +14,13 @@ public class CollectGame : MonoBehaviour
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
 
+    public List<Image> fruitImages; // Lista de objetos tipo Image para los sprites de las frutas
+    public List<TextMeshProUGUI> quantityTexts; // Lista de objetos tipo TextMeshProUGUI para las cantidades
+    private Order currentOrder;
+
+
+
+
     void Start()
     {
         TurnOffVariables();
@@ -33,37 +40,36 @@ public class CollectGame : MonoBehaviour
     public void SaberDificultad()
     {
         string selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
-        switch (selectedDifficulty)
+        ShowOrder(selectedDifficulty);
+    }
+
+    public void ShowOrder(string difficulty)
+    {
+        FruitOrderManager fruitOrderManager = FindObjectOfType<FruitOrderManager>();
+        if (fruitOrderManager != null)
         {
-            case "dif1":
-                //questionManager.questions = questionManager.Easyquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif2":
-                //questionManager.questions = questionManager.Normalquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif3":
-                //questionManager.questions = questionManager.Hardquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif4":
-                //questionManager.questions = questionManager.Insanequestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif5":
-                //questionManager.questions = questionManager.Demonquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif6":
-                //questionManager.questions = questionManager.SuperDemonquestions.ConvertAll(q => (Question)q);
-                break;
-
-            default:
-                // Manejar una dificultad inesperada
-                break;
+            List<Order> orders = fruitOrderManager.GetCurrentOrders(difficulty);
+            if (orders != null && orders.Count > 0)
+            {
+                int randomIndex = Random.Range(0, orders.Count);
+                currentOrder = orders[randomIndex]; // Seleccionar un pedido aleatorio
+                for (int i = 0; i < fruitImages.Count; i++)
+                {
+                    fruitImages[i].sprite = currentOrder.fruits[i];
+                    quantityTexts[i].text = currentOrder.quantities[i].ToString();
+                }
+            }
+            else
+            {
+                Debug.LogError("No se encontraron órdenes para la dificultad: " + difficulty);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró ningún objeto FruitOrderManager en la escena.");
         }
     }
+
 
 
     IEnumerator Countdown()
