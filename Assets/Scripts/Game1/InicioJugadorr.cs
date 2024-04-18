@@ -67,6 +67,24 @@ public class InicioJugadorr : MonoBehaviour
                 scale.x = -Mathf.Abs(scale.x);
                 jugador2.transform.localScale = scale;
             }
+            else  if (jugador2 != null && gameChoice == 4)
+            {
+                float escala = 0.65f;
+
+                Transform transformJugador1 = jugador1.transform;
+                transformJugador1.localScale = new Vector2(escala, escala);
+
+                Transform transformJugador2 = jugador2.transform;
+                transformJugador2.localScale = new Vector2(escala, escala);
+
+                // Obtener el componente de escala (scale) del Transform
+                Vector3 scale = jugador2.transform.localScale;
+                // Voltear el personaje hacia la izquierda
+                scale.x = -Mathf.Abs(scale.x);
+                // Aplicar la nueva escala al Transform
+                jugador2.transform.localScale = scale;
+            }
+
         }
     }
 
