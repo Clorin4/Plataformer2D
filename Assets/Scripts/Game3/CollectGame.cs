@@ -15,18 +15,31 @@ public class CollectGame : MonoBehaviour
     public SpriteRenderer spriteAdelanteRenderer;
 
     public List<Image> fruitImages; // Lista de objetos tipo Image para los sprites de las frutas
-    public List<TextMeshProUGUI> quantityTexts; // Lista de objetos tipo TextMeshProUGUI para las cantidades
+    public List<TextMeshProUGUI> quantityTexts;
+    public List<TextMeshProUGUI> operationTexts;
     private Order currentOrder;
 
+    public GameObject canvasPedido;
 
+    public Transform player1;
+    public Transform player2;
+    public float interactionRadius = 3f;
+    private bool isInRange = false; // Indica si el jugador está en rango de interacción.
+    private bool isInteracting = false;
+    private bool isOnClickedE = false;
+    public GameObject globoTextE;
+
+    public string selectedDifficulty;
 
 
     void Start()
     {
+        
         TurnOffVariables();
         SaberDificultad();
-
+        
         StartCoroutine(Countdown());
+        
     }
 
     public void TurnOffVariables()
@@ -35,16 +48,23 @@ public class CollectGame : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+
+        canvasPedido.SetActive(false);
+        globoTextE.SetActive(false);
+
+        
     }
 
     public void SaberDificultad()
     {
-        string selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
-        ShowOrder(selectedDifficulty);
+        selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
+        
     }
 
     public void ShowOrder(string difficulty)
     {
+        canvasPedido.SetActive(true);
+
         FruitOrderManager fruitOrderManager = FindObjectOfType<FruitOrderManager>();
         if (fruitOrderManager != null)
         {
@@ -57,6 +77,11 @@ public class CollectGame : MonoBehaviour
                 {
                     fruitImages[i].sprite = currentOrder.fruits[i];
                     quantityTexts[i].text = currentOrder.quantities[i].ToString();
+                    // Mostrar el símbolo matemático en el TextMeshProUGUI correspondiente
+                    if (i < currentOrder.operations.Count)
+                    {
+                        operationTexts[i].text = currentOrder.operations[i];
+                    }
                 }
             }
             else
@@ -72,9 +97,12 @@ public class CollectGame : MonoBehaviour
 
 
 
+
     IEnumerator Countdown()
     {
-        //yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.01f);
+        player1 = GameObject.FindGameObjectWithTag("Player1").transform;
+        player2 = GameObject.FindGameObjectWithTag("Player2").transform;
 
         sprite3Renderer.gameObject.SetActive(true);
         yield return ScaleSpriteTo(sprite3Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
@@ -98,8 +126,15 @@ public class CollectGame : MonoBehaviour
         yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
         spriteAdelanteRenderer.gameObject.SetActive(false);
 
-        
-        //StartGame();
+        yield return new WaitForSeconds(.1f);
+
+        ShowOrder(selectedDifficulty);
+        canvasPedido.SetActive(true);
+        iTween.ScaleFrom(canvasPedido, Vector3.zero, 1f); // Animar la escala del canvas desde cero a su tamaño normal en 1 segundo
+
+
+
+        StartGame();
     }
 
     IEnumerator ScaleSpriteTo(SpriteRenderer spriteRenderer, Vector3 startScale, Vector3 endScale, float duration)
@@ -116,5 +151,105 @@ public class CollectGame : MonoBehaviour
 
         spriteRenderer.transform.localScale = endScale;
     }
+
+
+    public void StartGame()
+    {
+        
+    }
+
+
+    private void Update()
+    {
+        float distance1 = Vector3.Distance(transform.position, player1.position);
+        float distance2 = Vector3.Distance(transform.position, player2.position);
+
+
+        // Comprueba si el jugador está dentro del radio de interacción.
+        if (distance1 <= interactionRadius || distance2 <= interactionRadius)
+        {
+            isInRange = true;
+
+            if (!isOnClickedE)
+            {
+                globoTextE.SetActive(true);
+            }
+
+            if (isInRange == true && Input.GetKeyDown(KeyCode.E))
+            {
+                globoTextE.SetActive(false);
+                isOnClickedE = true;
+                //CheckOrderCompletion();
+            }
+
+        }
+        else if (!isInRange == true && isInteracting == true)
+        {
+            isOnClickedE = false;
+            globoTextE.SetActive(false);
+            isInteracting = false;
+        }
+        else
+        {
+            isOnClickedE = false;
+            isInRange = false;
+            globoTextE.SetActive(false);
+            
+        }
+    }
+
+
+    private void CheckOrderCompletion()
+    {
+        if (currentOrder != null)
+        {
+            bool orderCompleted = true;
+            int totalFruitsNeeded = 0;
+
+            // Calcular el total de frutas necesarias según la orden actual
+            for (int i = 0; i < currentOrder.fruits.Count; i++)
+            {
+                totalFruitsNeeded += currentOrder.quantities[i];
+            }
+
+            // Realizar la operación matemática dependiendo del símbolo de la orden
+            int totalCollectedFruits = 0;
+            for (int i = 0; i < currentOrder.fruits.Count; i++)
+            {
+                string fruitTag = currentOrder.fruits[i].name == "Apple" ? "ManzanasP1" : "ManzanasP2";
+                int collectedFruit = PlayerPrefs.GetInt(fruitTag, 0);
+                totalCollectedFruits += collectedFruit;
+            }
+
+            // Iterar sobre cada operación en la lista
+            for (int i = 0; i < currentOrder.operations.Count; i++)
+            {
+                // Verificar si el total recolectado coincide con el total necesario según la operación
+                if (currentOrder.operations[i] == "+")
+                {
+                    orderCompleted &= totalCollectedFruits == totalFruitsNeeded;
+                }
+                else if (currentOrder.operations[i] == "-")
+                {
+                    orderCompleted &= totalCollectedFruits == Mathf.Abs(totalFruitsNeeded);
+                }
+            }
+
+            if (orderCompleted)
+            {
+                // La orden se ha completado correctamente
+                Debug.Log("¡Orden completada correctamente!");
+            }
+            else
+            {
+                // La orden aún no se ha completado
+                Debug.Log("¡Aún falta recoger más frutas!");
+            }
+        }
+    }
+
+
+
+
 
 }

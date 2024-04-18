@@ -8,6 +8,7 @@ public class Order
     
     public List<Sprite> fruits;
     public List<int> quantities;
+    public List<string> operations;
 }
 
 public class FruitOrderManager : MonoBehaviour

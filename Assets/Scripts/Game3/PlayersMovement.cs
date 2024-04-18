@@ -11,12 +11,21 @@ public class PlayersMovement : MonoBehaviour
     private bool jumpRequested = false;
     public bool mirandoDerecha = true;
 
+
+
     public int numManzanas;
     public int numPlatanus;
 
+    private void Awake()
+    {
+        
+
+        
+    }
 
     private void Start()
     {
+        GameObject gameObject = this.gameObject;
         numManzanas = 0;
         numPlatanus = 0;
         PlayerPrefs.SetInt("Manzanas", numManzanas);
@@ -31,10 +40,12 @@ public class PlayersMovement : MonoBehaviour
             if (playerController.playerTag == "Player1")
             {
                 index = 1;
+                gameObject.tag = "Player1";
             }
             else if (playerController.playerTag == "Player2")
             {
                 index = 2;
+                gameObject.tag = "Player2";
                 mirandoDerecha = false;
             }
 
@@ -126,9 +137,14 @@ public class PlayersMovement : MonoBehaviour
             if (collision.gameObject.tag == "Apple" && index ==1)
             {
                 numManzanas += 1;
-                PlayerPrefs.SetInt("Manzanas", numManzanas);
+                PlayerPrefs.SetInt("ManzanasP1", numManzanas);
             }
-                
+
+            else if (collision.gameObject.tag == "Apple" && index == 2)
+            {
+                numManzanas += 1;
+                PlayerPrefs.SetInt("ManzanasP2", numManzanas);
+            }
         }
     }
 
