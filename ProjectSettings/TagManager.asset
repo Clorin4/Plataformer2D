@@ -50,6 +50,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
-    uniqueID: 3679207789
+  - name: fondo
+    uniqueID: 1320065947
     locked: 0
