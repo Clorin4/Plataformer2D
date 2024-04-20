@@ -176,11 +176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -3543087869833874225}
   speed: 5
-  jumpForce: 100
+  jumpForce: 10
+  index: 0
   playerController: {fileID: -2526144885612934719}
   mirandoDerecha: 1
-  numManzanas: 0
-  numPlatanus: 0
 --- !u!1 &7499955766421991613
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,4 +251,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d3a511ecad49240a217c22515a9d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guded: 0

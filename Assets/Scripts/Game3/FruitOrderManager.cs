@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Order
 {
-    
+    public List<string> fruitNames;
     public List<Sprite> fruits;
     public List<int> quantities;
     public List<string> operations;

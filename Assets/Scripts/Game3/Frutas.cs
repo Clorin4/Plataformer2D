@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Frutas : MonoBehaviour
 {
-    public string fruitType; 
+    public string fruitType;
+    private FruitSpawner fruitSpawner;
+
+    private void Start()
+    {
+        fruitSpawner = FindObjectOfType<FruitSpawner>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,11 +24,16 @@ public class Frutas : MonoBehaviour
             numFruits++;
             PlayerPrefs.SetInt(fruitType + playerTag, numFruits);
 
-            Debug.Log(fruitType + numFruits);
+            Debug.Log(fruitType + ": " + numFruits);
+
+            // Llamar al método FruitCollected del FruitSpawner
+            if (fruitSpawner != null)
+            {
+                fruitSpawner.FruitCollected(fruitType);
+            }
 
             // Destruir la fruta
             Destroy(gameObject);
         }
     }
-
 }

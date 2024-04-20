@@ -13,10 +13,6 @@ public class PlayersMovement : MonoBehaviour
 
     private void Start()
     {
-        GameObject gameObject = this.gameObject;
-        
-        
-
         gameChoice = PlayerPrefs.GetInt("gameIndex");
         rb = GetComponent<Rigidbody2D>();
 
@@ -33,29 +29,30 @@ public class PlayersMovement : MonoBehaviour
                 gameObject.tag = "Player2";
                 mirandoDerecha = false;
             }
-
-            Debug.Log(index);
         }
         else
         {
             Debug.LogWarning("No se encontró ningún objeto PlayerAnimatorController en la escena.");
         }
+
+        rb.gravityScale = 2f; // Ajusta este valor según lo que funcione mejor para tu juego
+        // Aumenta el Drag para suavizar el movimiento en el aire
+        rb.drag = 1f;
     }
-
-
 
     private void Update()
     {
         if (gameChoice == 3)
         {
+            Animaciones();
+
             // Detectar la entrada del jugador y controlar el movimiento
             float moveHorizontal = Input.GetAxis("Horizontal" + index);
             float moveVertical = Input.GetAxis("Vertical" + index);
 
-            
             // Calcular la dirección del movimiento
             Vector2 movement = new Vector2(moveHorizontal, 0).normalized;
-            rb.velocity = movement * speed;
+            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y); // Mantener la velocidad vertical actual
 
             if (moveHorizontal > 0 && !mirandoDerecha)
             {
@@ -66,30 +63,8 @@ public class PlayersMovement : MonoBehaviour
                 Girar();
             }
 
-            if(Input.GetKeyDown(KeyCode.D) && index == 1 || Input.GetKeyDown(KeyCode.A) && index == 1)
-            {
-                
-                playerController.StartRunningAnimation2();
-            }
-            else if (Input.GetKeyUp(KeyCode.D) && index == 1 || Input.GetKeyUp(KeyCode.A) && index == 1)
-            {
-                rb.velocity = movement * 0;
-                playerController.StopRunningAnimation();
-                //Debug.Log("TIESO");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && index == 2 || Input.GetKeyDown(KeyCode.LeftArrow) && index == 2)
-            {
-                playerController.StartRunningAnimation2();
-            }
-            else if (Input.GetKeyUp(KeyCode.RightArrow) && index == 2 || Input.GetKeyUp(KeyCode.LeftArrow) && index == 2)
-            {
-                playerController.StopRunningAnimation();
-                //Debug.Log("TIESO");
-            }
-
-            //SALTOO
-            if ((Input.GetKeyDown(KeyCode.W) && index == 1 && IsGrounded.isGrounded) || (Input.GetKeyDown(KeyCode.UpArrow) && index == 2 && IsGrounded.isGrounded))
+            // Verificar si se presiona la tecla de salto correspondiente al jugador y si está en el suelo
+            if ((Input.GetKeyDown(KeyCode.W) && index == 1 || Input.GetKeyDown(KeyCode.UpArrow) && index == 2) && IsGrounded.isGrounded)
             {
                 jumpRequested = true;
             }
@@ -103,17 +78,36 @@ public class PlayersMovement : MonoBehaviour
         {
             // Aplicar una fuerza de salto al Rigidbody2D
             playerController.StartJumpingAnimation();
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            Debug.Log("SALTOO");
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Salto suave en la velocidad vertical
             jumpRequested = false;
         }
     }
+
     private void Girar()
     {
-
         mirandoDerecha = !mirandoDerecha;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
     }
 
+
+    private void Animaciones()
+    {
+        if (Input.GetKey(KeyCode.D) && index == 1 || Input.GetKey(KeyCode.A) && index == 1)
+        {
+            playerController.StartRunningAnimation2();
+        }
+        else if (Input.GetKeyUp(KeyCode.D) && index == 1 || Input.GetKeyUp(KeyCode.A) && index == 1)
+        {
+            playerController.StopRunningAnimation();
+        }
+        else if (Input.GetKey(KeyCode.RightArrow) && index == 2 || Input.GetKey(KeyCode.LeftArrow) && index == 2)
+        {
+            playerController.StartRunningAnimation2();
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow) && index == 2 || Input.GetKeyUp(KeyCode.LeftArrow) && index == 2)
+        {
+            playerController.StopRunningAnimation();
+        }
+    }
 
 }

@@ -1,31 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IsGrounded : MonoBehaviour
 {
     public static bool isGrounded;
-    public bool guded;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "NPC1"
-            || collision.gameObject.tag == "NPC2" || collision.gameObject.tag == "NPC3")
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2"))
         {
             isGrounded = true;
-            Debug.Log("SUELOOO");
         }
-        
     }
 
-    private void Update()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        guded = isGrounded;
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2"))
+        {
+            isGrounded = true;
+        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isGrounded = false;
-        Debug.Log("FUERAAAA");
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2"))
+        {
+            isGrounded = false;
+        }
     }
-
 }

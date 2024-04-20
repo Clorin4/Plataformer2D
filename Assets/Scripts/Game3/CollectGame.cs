@@ -24,10 +24,11 @@ public class CollectGame : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public float interactionRadius = 3f;
-    private bool isInRange = false; // Indica si el jugador está en rango de interacción.
+    private bool isInRange = false; 
     private bool isInteracting = false;
     private bool isOnClickedE = false;
     public GameObject globoTextE;
+    public GameObject globoTextShift;
 
     public string selectedDifficulty;
 
@@ -57,8 +58,9 @@ public class CollectGame : MonoBehaviour
 
         canvasPedido.SetActive(false);
         globoTextE.SetActive(false);
+        globoTextShift.SetActive(false);
 
-        
+
     }
 
     public void SaberDificultad()
@@ -172,7 +174,7 @@ public class CollectGame : MonoBehaviour
 
 
         // Comprueba si el jugador está dentro del radio de interacción.
-        if (distance1 <= interactionRadius || distance2 <= interactionRadius)
+        if (distance1 <= interactionRadius)
         {
             isInRange = true;
 
@@ -185,7 +187,8 @@ public class CollectGame : MonoBehaviour
             {
                 globoTextE.SetActive(false);
                 isOnClickedE = true;
-                //CheckOrderCompletion();
+                CheckOrderCompletion();
+                Debug.Log("CHECAMO P1");
             }
 
         }
@@ -197,10 +200,40 @@ public class CollectGame : MonoBehaviour
         }
         else
         {
+            isInRange = false;
+            isOnClickedE = false;
+            globoTextE.SetActive(false);
+        }
+
+        if (distance2 <= interactionRadius)
+        {
+            isInRange = true;
+
+            if (!isOnClickedE)
+            {
+                globoTextShift.SetActive(true);
+            }
+
+            if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift))
+            {
+                globoTextShift.SetActive(false);
+                isOnClickedE = true;
+                CheckOrderCompletion();
+                Debug.Log("CHECAMO P2");
+            }
+
+        }
+        else if (!isInRange == true && isInteracting == true)
+        {
+            isOnClickedE = false;
+            globoTextShift.SetActive(false);
+            isInteracting = false;
+        }
+        else
+        {
             isOnClickedE = false;
             isInRange = false;
-            globoTextE.SetActive(false);
-            
+            globoTextShift.SetActive(false);
         }
     }
 
@@ -210,49 +243,45 @@ public class CollectGame : MonoBehaviour
         if (currentOrder != null)
         {
             bool orderCompleted = true;
-            int totalFruitsNeeded = 0;
 
-            // Calcular el total de frutas necesarias según la orden actual
-            for (int i = 0; i < currentOrder.fruits.Count; i++)
+            // Iterar sobre cada fruta en la orden actual
+            for (int i = 0; i < currentOrder.fruitNames.Count; i++)
             {
-                totalFruitsNeeded += currentOrder.quantities[i];
-            }
+                string fruitName = currentOrder.fruitNames[i];
+                string playerTag = fruitName == "Apple" ? "Player1" : "Player2";
+                int collectedFruit = PlayerPrefs.GetInt(fruitName + playerTag, 0);
 
-            // Realizar la operación matemática dependiendo del símbolo de la orden
-            int totalCollectedFruits = 0;
-            for (int i = 0; i < currentOrder.fruits.Count; i++)
-            {
-                string fruitTag = currentOrder.fruits[i].name == "Apple" ? "ManzanasP1" : "ManzanasP2";
-                int collectedFruit = PlayerPrefs.GetInt(fruitTag, 0);
-                totalCollectedFruits += collectedFruit;
-            }
-
-            // Iterar sobre cada operación en la lista
-            for (int i = 0; i < currentOrder.operations.Count; i++)
-            {
-                // Verificar si el total recolectado coincide con el total necesario según la operación
-                if (currentOrder.operations[i] == "+")
+                // Realizar la operación matemática correspondiente
+                switch (currentOrder.operations[i])
                 {
-                    orderCompleted &= totalCollectedFruits == totalFruitsNeeded;
-                }
-                else if (currentOrder.operations[i] == "-")
-                {
-                    orderCompleted &= totalCollectedFruits == Mathf.Abs(totalFruitsNeeded);
+                    case "+":
+                        orderCompleted &= collectedFruit >= currentOrder.quantities[i];
+                        break;
+                    case "-":
+                        orderCompleted &= collectedFruit <= currentOrder.quantities[i];
+                        break;
+                    case "x":
+                        orderCompleted &= collectedFruit == currentOrder.quantities[i];
+                        break;
+                    default:
+                        Debug.LogError("Unknown operation: " + currentOrder.operations[i]);
+                        break;
                 }
             }
 
+            // Mostrar el resultado de la verificación
             if (orderCompleted)
             {
-                // La orden se ha completado correctamente
                 Debug.Log("¡Orden completada correctamente!");
             }
             else
             {
-                // La orden aún no se ha completado
                 Debug.Log("¡Aún falta recoger más frutas!");
             }
         }
     }
+
+
 
 
 
