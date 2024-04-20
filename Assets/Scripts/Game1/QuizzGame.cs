@@ -31,6 +31,7 @@ public class QuizzGame : MonoBehaviour
     public GameObject panelQuestion; // El panel que contiene la pregunta y los botones
     public float panelScaleDuration = 1.0f;
 
+    public Canvas canvasMaster;
     public Canvas canvasWinners;
     public GameObject panelP1Winner;
     public GameObject panelP2Winner;
@@ -607,6 +608,7 @@ public class QuizzGame : MonoBehaviour
                     Debug.Log("GANA JUGADOR 1");
                     canvasWinners.gameObject.SetActive(true);
                     panelP1Winner.SetActive(true);
+                    canvasMaster.gameObject.SetActive(false);
 
                     PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
                     foreach (var controller in controllers)

@@ -34,7 +34,13 @@ public class CollectGame : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerPrefs.SetInt("ManzanasPlayer1", 0);
+        PlayerPrefs.SetInt("ManzanasPlayer2", 0);
+        PlayerPrefs.SetInt("NaranjasPlayer1", 0);
+        PlayerPrefs.SetInt("NaranjasPlayer2", 0);
+        PlayerPrefs.SetInt("PlatanosPlayer1", 0);
+        PlayerPrefs.SetInt("PlatanosPlayer2", 0);
+
         TurnOffVariables();
         SaberDificultad();
         

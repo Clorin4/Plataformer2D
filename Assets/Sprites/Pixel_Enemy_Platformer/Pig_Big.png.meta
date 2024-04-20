@@ -468,10 +468,10 @@ TextureImporter:
       name: Pig_Big_16
       rect:
         serializedVersion: 2
-        x: 17
+        x: 15
         y: 0
         width: 37
-        height: 35
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -489,10 +489,10 @@ TextureImporter:
       name: Pig_Big_17
       rect:
         serializedVersion: 2
-        x: 81
+        x: 82
         y: 0
         width: 37
-        height: 34
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -510,7 +510,7 @@ TextureImporter:
       name: Pig_Big_18
       rect:
         serializedVersion: 2
-        x: 148
+        x: 139
         y: 0
         width: 37
         height: 40

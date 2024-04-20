@@ -5,32 +5,17 @@ public class PlayersMovement : MonoBehaviour
     public Rigidbody2D rb;
     public float speed = 5f;
     public float jumpForce = 5f; // Fuerza de salto
-    private int index;
+    public int index;
     public PlayerAnimatorController playerController;
     int gameChoice;
     private bool jumpRequested = false;
     public bool mirandoDerecha = true;
 
-
-
-    public int numManzanas;
-    public int numPlatanus;
-
-    private void Awake()
-    {
-        
-
-        
-    }
-
     private void Start()
     {
         GameObject gameObject = this.gameObject;
-        numManzanas = 0;
-        numPlatanus = 0;
-        PlayerPrefs.SetInt("Manzanas", numManzanas);
-        PlayerPrefs.SetInt("Platanos", numPlatanus);
-        Debug.Log(numManzanas);
+        
+        
 
         gameChoice = PlayerPrefs.GetInt("gameIndex");
         rb = GetComponent<Rigidbody2D>();
@@ -128,24 +113,6 @@ public class PlayersMovement : MonoBehaviour
 
         mirandoDerecha = !mirandoDerecha;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(gameChoice == 3)
-        {
-            if (collision.gameObject.tag == "Apple" && index ==1)
-            {
-                numManzanas += 1;
-                PlayerPrefs.SetInt("ManzanasP1", numManzanas);
-            }
-
-            else if (collision.gameObject.tag == "Apple" && index == 2)
-            {
-                numManzanas += 1;
-                PlayerPrefs.SetInt("ManzanasP2", numManzanas);
-            }
-        }
     }
 
 

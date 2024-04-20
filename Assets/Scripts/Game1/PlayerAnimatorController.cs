@@ -56,7 +56,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void StartVictoryAnimation()
     {
-        //animator.SetBool("Ganador", true);
+        animator.SetBool("Ganador", true);
     }
 
     public void StartLoseAnimation()
