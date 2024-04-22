@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &83461562
 Transform:
   m_ObjectHideFlags: 0
@@ -942,6 +942,7 @@ MonoBehaviour:
   - {fileID: 264774927}
   operationTexts:
   - {fileID: 1150321347}
+  - {fileID: 1150321347}
   canvasPedido: {fileID: 932129556}
   player1: {fileID: 0}
   player2: {fileID: 0}
@@ -1246,7 +1247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807806688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.30420816, y: 0.60324633, z: -30.582302}
+  m_LocalPosition: {x: 0.30420816, y: -0.9, z: -30.582302}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2654,40 +2655,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   easyOrders:
-  - fruitNames: []
+  - fruitNames:
+    - Manzanas
+    - Manzanas
     fruits:
     - {fileID: -919510476, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
     - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    quantities: 0100000001000000
+    quantities: 0200000003000000
     operations:
     - +
-  - fruitNames: []
+    - +
+  - fruitNames:
+    - Platanos
+    - Platanos
     fruits:
-    - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
     - {fileID: -919510476, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    quantities: 0b0000005c110000
+    - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
+    quantities: 0300000002000000
     operations:
     - +
-  - fruitNames: []
+    - +
+  - fruitNames:
+    - Manzanas
+    - Platanos
     fruits:
     - {fileID: -919510476, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
     - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    quantities: 5701000003000000
+    quantities: 0200000002000000
     operations:
     - +
-  - fruitNames: []
-    fruits:
-    - {fileID: -919510476, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    quantities: 1f0200002b000000
-    operations:
-    - +
-  - fruitNames: []
-    fruits:
-    - {fileID: -919510476, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    - {fileID: 838846257, guid: 1c15f9c134b98c24ea1fbc3304415a91, type: 3}
-    quantities: 1f0200002b000000
-    operations:
     - +
   normalOrders:
   - fruitNames: []

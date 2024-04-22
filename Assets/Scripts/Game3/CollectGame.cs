@@ -24,7 +24,7 @@ public class CollectGame : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public float interactionRadius = 3f;
-    private bool isInRange = false; 
+    private bool isInRange = false;
     private bool isInteracting = false;
     private bool isOnClickedE = false;
     public GameObject globoTextE;
@@ -44,9 +44,9 @@ public class CollectGame : MonoBehaviour
 
         TurnOffVariables();
         SaberDificultad();
-        
+
         StartCoroutine(Countdown());
-        
+
     }
 
     public void TurnOffVariables()
@@ -66,7 +66,7 @@ public class CollectGame : MonoBehaviour
     public void SaberDificultad()
     {
         selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
-        
+
     }
 
     public void ShowOrder(string difficulty)
@@ -163,7 +163,7 @@ public class CollectGame : MonoBehaviour
 
     public void StartGame()
     {
-        
+
     }
 
 
@@ -236,172 +236,174 @@ public class CollectGame : MonoBehaviour
             globoTextShift.SetActive(false);
         }
     }
-
-
     private void CheckOrderCompletion()
     {
         if (currentOrder != null)
         {
-            // Obtener la longitud mínima de las tres listas
-            int minCount = Mathf.Min(currentOrder.fruitNames.Count, currentOrder.quantities.Count, currentOrder.operations.Count);
+            // Obtener la longitud máxima de las tres listas
+            int maxCount = Mathf.Max(currentOrder.fruitNames.Count, currentOrder.quantities.Count, currentOrder.operations.Count);
+            Debug.Log(maxCount);
 
             // Verificar para cada jugador por separado
             bool orderCompletedPlayer1 = true;
             bool orderCompletedPlayer2 = true;
 
             // Obtener las frutas recolectadas por cada jugador
-            int collectedApplesPlayer1 = PlayerPrefs.GetInt("ManzanasPlayer1", 0);
-            int collectedApplesPlayer2 = PlayerPrefs.GetInt("ManzanasPlayer2", 0);
-            int collectedOrangesPlayer1 = PlayerPrefs.GetInt("NaranjasPlayer1", 0);
-            int collectedOrangesPlayer2 = PlayerPrefs.GetInt("NaranjasPlayer2", 0);
-            int collectedBananasPlayer1 = PlayerPrefs.GetInt("PlatanosPlayer1", 0);
-            int collectedBananasPlayer2 = PlayerPrefs.GetInt("PlatanosPlayer2", 0);
+            Dictionary<string, int> collectedFruitsPlayer1 = new Dictionary<string, int>
+        {
+            { "Manzanas", PlayerPrefs.GetInt("ManzanasPlayer1", 0) },
+            { "Naranjas", PlayerPrefs.GetInt("NaranjasPlayer1", 0) },
+            { "Platanos", PlayerPrefs.GetInt("PlatanosPlayer1", 0) }
+        };
 
-            // Iterar sobre la longitud mínima de las listas
-            for (int i = 0; i < minCount; i++)
+            Dictionary<string, int> collectedFruitsPlayer2 = new Dictionary<string, int>
+        {
+            { "Manzanas", PlayerPrefs.GetInt("ManzanasPlayer2", 0) },
+            { "Naranjas", PlayerPrefs.GetInt("NaranjasPlayer2", 0) },
+            { "Platanos", PlayerPrefs.GetInt("PlatanosPlayer2", 0) }
+        };
+
+            // Variables para contar las frutas de la orden
+            Dictionary<string, int> totalFruitsPlayer1 = new Dictionary<string, int>
+        {
+            { "Manzanas", 0 },
+            { "Naranjas", 0 },
+            { "Platanos", 0 }
+        };
+
+            Dictionary<string, int> totalFruitsPlayer2 = new Dictionary<string, int>
+        {
+            { "Manzanas", 0 },
+            { "Naranjas", 0 },
+            { "Platanos", 0 }
+        };
+
+            // Iterar sobre la longitud máxima de las listas
+            for (int i = 0; i < maxCount; i++)
             {
-                string fruitName = currentOrder.fruitNames[i];
-                int quantityNeeded = currentOrder.quantities[i];
-                string operation = currentOrder.operations[i];
+                // Obtener la fruta, cantidad y operación en la posición i
+                string fruitName = i < currentOrder.fruitNames.Count ? currentOrder.fruitNames[i] : "";
+                int quantityNeeded = i < currentOrder.quantities.Count ? currentOrder.quantities[i] : 0;
+                string operation = i < currentOrder.operations.Count ? currentOrder.operations[i] : "";
 
-                // Verificar para el Player1
-                if (fruitName == "Manzanas")
+                // Realizar la operación matemática correspondiente
+                if (i == 0)
                 {
-                    int collectedApples = PlayerPrefs.GetInt("ManzanasPlayer1", 0);
-                    switch (operation)
-                    {
-                        case "+":
-                            orderCompletedPlayer1 &= collectedApples >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer1 &= collectedApples <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer1 &= collectedApples == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
-                    }
+                    // Si es el primer elemento o no es una suma, simplemente asigna la cantidad necesaria
+                    totalFruitsPlayer1[fruitName] = quantityNeeded;
+                    totalFruitsPlayer2[fruitName] = quantityNeeded;
+                    Debug.Log("SE OCUPAAAAN " + quantityNeeded);
                 }
-                else if (fruitName == "Naranjas")
+                else
                 {
-                    int collectedOranges = PlayerPrefs.GetInt("NaranjasPlayer1", 0);
-                    switch (operation)
+                    Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    // Si es una suma y no es el primer elemento
+                    if (currentOrder.fruitNames[i - 1] == fruitName)
                     {
-                        case "+":
-                            orderCompletedPlayer1 &= collectedOranges >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer1 &= collectedOranges <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer1 &= collectedOranges == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
-                    }
-                }
-                else if (fruitName == "Platanos")
-                {
-                    int collectedBananas = PlayerPrefs.GetInt("PlatanosPlayer1", 0);
-                    switch (operation)
-                    {
-                        case "+":
-                            orderCompletedPlayer1 &= collectedBananas >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer1 &= collectedBananas <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer1 &= collectedBananas == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
-                    }
-                }
+                        Debug.Log(operation);
 
-                // Verificar para el Player2
-                if (fruitName == "Manzanas")
-                {
-                    int collectedApples = PlayerPrefs.GetInt("ManzanasPlayer2", 0);
-                    switch (operation)
+                        // Realiza la operación correspondiente
+                        switch (operation)
+                        {
+
+                            case "+":
+                                totalFruitsPlayer1[fruitName] += quantityNeeded;
+                                totalFruitsPlayer2[fruitName] += quantityNeeded;
+                                Debug.Log("Jugador 1: Se sumaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer1[fruitName]);
+                                Debug.Log("Jugador 2: Se sumaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer2[fruitName]);
+                                break;
+                            case "-":
+                                totalFruitsPlayer1[fruitName] -= quantityNeeded;
+                                totalFruitsPlayer2[fruitName] -= quantityNeeded;
+                                Debug.Log("Jugador 1: Se restaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer1[fruitName]);
+                                Debug.Log("Jugador 2: Se restaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer2[fruitName]);
+                                break;
+                            case "x":
+                                totalFruitsPlayer1[fruitName] *= quantityNeeded;
+                                totalFruitsPlayer2[fruitName] *= quantityNeeded;
+                                Debug.Log("Jugador 1: Se multiplicaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer1[fruitName]);
+                                Debug.Log("Jugador 2: Se multiplicaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer2[fruitName]);
+                                break;
+                            default:
+                                Debug.LogError("Unknown operation: " + operation);
+                                orderCompletedPlayer1 = false; // Marcar como no completado
+                                orderCompletedPlayer2 = false; // Marcar como no completado
+                                break;
+                        }
+                    }
+                    else
                     {
-                        case "+":
-                            orderCompletedPlayer2 &= collectedApples >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer2 &= collectedApples <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer2 &= collectedApples == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
+                        // Si la fruta es diferente a la anterior, simplemente asigna la cantidad necesaria
+                        totalFruitsPlayer1[fruitName] = quantityNeeded;
+                        totalFruitsPlayer2[fruitName] = quantityNeeded;
+
+                        Debug.Log("Jugador 1: Se necesitan " + quantityNeeded + " " + fruitName + ".");
+                        Debug.Log("Jugador 2: Se necesitan " + quantityNeeded + " " + fruitName + ".");
                     }
                 }
-                else if (fruitName == "Naranjas")
+            }
+
+            // Verificar para el Player2
+            foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer2)
+            {
+                string fruitName = kvp.Key;
+                int totalQuantity = kvp.Value;
+
+                // Verificar si el jugador tiene suficientes frutas recolectadas
+                if (collectedFruitsPlayer2.ContainsKey(fruitName))
                 {
-                    int collectedOranges = PlayerPrefs.GetInt("NaranjasPlayer2", 0);
-                    switch (operation)
-                    {
-                        case "+":
-                            orderCompletedPlayer2 &= collectedOranges >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer2 &= collectedOranges <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer2 &= collectedOranges == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
-                    }
+                    orderCompletedPlayer2 &= collectedFruitsPlayer2[fruitName] >= totalQuantity;
+                    Debug.Log("Jugador 2: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer2[fruitName]) + " " + fruitName + " adicionales.");
+                    if (!orderCompletedPlayer2) break; // Salir del bucle si ya no se completó la orden
                 }
-                else if (fruitName == "Platanos")
+                else
                 {
-                    int collectedBananas = PlayerPrefs.GetInt("PlatanosPlayer2", 0);
-                    switch (operation)
-                    {
-                        case "+":
-                            orderCompletedPlayer2 &= collectedBananas >= quantityNeeded;
-                            break;
-                        case "-":
-                            orderCompletedPlayer2 &= collectedBananas <= quantityNeeded;
-                            break;
-                        case "x":
-                            orderCompletedPlayer2 &= collectedBananas == quantityNeeded;
-                            break;
-                        default:
-                            Debug.LogError("Unknown operation: " + operation);
-                            break;
-                    }
+                    orderCompletedPlayer2 = false; // La fruta necesaria no está en la lista de recolección del jugador
+                    break; // Salir del bucle si no se encuentra la fruta
+                }
+            }
+
+            // Verificar para el Player1
+            foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer1)
+            {
+                string fruitName = kvp.Key;
+                int totalQuantity = kvp.Value;
+
+                // Verificar si el jugador tiene suficientes frutas recolectadas
+                if (collectedFruitsPlayer1.ContainsKey(fruitName))
+                {
+                    orderCompletedPlayer1 &= collectedFruitsPlayer1[fruitName] >= totalQuantity;
+                    Debug.Log("Jugador 1: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer1[fruitName]) + " " + fruitName + " adicionales.");
+                    if (!orderCompletedPlayer1) break; // Salir del bucle si ya no se completó la orden
+                }
+                else
+                {
+                    orderCompletedPlayer1 = false; // La fruta necesaria no está en la lista de recolección del jugador
+                    break; // Salir del bucle si no se encuentra la fruta
                 }
             }
 
             // Mostrar el resultado de la verificación para cada jugador
-            if (orderCompletedPlayer1 && orderCompletedPlayer2)
-            {
-                Debug.Log("¡Ambos jugadores completaron la orden correctamente!");
-            }
-            else if (orderCompletedPlayer1)
+            if (orderCompletedPlayer1)
             {
                 Debug.Log("¡El jugador 1 completó la orden correctamente!");
             }
-            else if (orderCompletedPlayer2)
+            else
+            {
+                Debug.Log("¡El jugador 1 aún necesita recolectar más frutas!");
+            }
+
+            if (orderCompletedPlayer2)
             {
                 Debug.Log("¡El jugador 2 completó la orden correctamente!");
             }
             else
             {
-                Debug.Log("¡Aún falta recoger más frutas!");
+                Debug.Log("¡El jugador 2 aún necesita recolectar más frutas!");
             }
         }
     }
+
 
 
 }
