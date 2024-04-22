@@ -24,7 +24,7 @@ public class Frutas : MonoBehaviour
             numFruits++;
             PlayerPrefs.SetInt(fruitType + playerTag, numFruits);
 
-            Debug.Log(fruitType + ": " + numFruits);
+            Debug.Log(playerTag + " " +fruitType + ": " + numFruits);
 
             // Llamar al método FruitCollected del FruitSpawner
             if (fruitSpawner != null)

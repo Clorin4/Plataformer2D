@@ -11,10 +11,13 @@ public class PlayersMovement : MonoBehaviour
     private bool jumpRequested = false;
     public bool mirandoDerecha = true;
 
+    private IsGrounded isGroundedScript;
+
     private void Start()
     {
         gameChoice = PlayerPrefs.GetInt("gameIndex");
         rb = GetComponent<Rigidbody2D>();
+        isGroundedScript = GetComponentInChildren<IsGrounded>(); // Obtener la referencia al script IsGrounded
 
         if (playerController != null)
         {
@@ -64,7 +67,7 @@ public class PlayersMovement : MonoBehaviour
             }
 
             // Verificar si se presiona la tecla de salto correspondiente al jugador y si está en el suelo
-            if ((Input.GetKeyDown(KeyCode.W) && index == 1 || Input.GetKeyDown(KeyCode.UpArrow) && index == 2) && IsGrounded.isGrounded)
+            if ((Input.GetKeyDown(KeyCode.W) && index == 1 || Input.GetKeyDown(KeyCode.UpArrow) && index == 2) && isGroundedScript.isGrounded)
             {
                 jumpRequested = true;
             }
@@ -74,7 +77,7 @@ public class PlayersMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Verificar si se cumplen las condiciones para el salto y el jugador está en el suelo
-        if (jumpRequested && IsGrounded.isGrounded)
+        if (jumpRequested && isGroundedScript.isGrounded)
         {
             // Aplicar una fuerza de salto al Rigidbody2D
             playerController.StartJumpingAnimation();

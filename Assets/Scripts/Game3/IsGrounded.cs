@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IsGrounded : MonoBehaviour
 {
-    public static bool isGrounded;
+    public bool isGrounded;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
