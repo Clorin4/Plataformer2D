@@ -108,7 +108,7 @@ public class CollectGame : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForSeconds(.001f);
         player1 = GameObject.FindGameObjectWithTag("Player1").transform;
         player2 = GameObject.FindGameObjectWithTag("Player2").transform;
 
@@ -352,8 +352,18 @@ public class CollectGame : MonoBehaviour
                 // Verificar si el jugador tiene suficientes frutas recolectadas
                 if (collectedFruitsPlayer2.ContainsKey(fruitName))
                 {
-                    orderCompletedPlayer2 &= collectedFruitsPlayer2[fruitName] >= totalQuantity;
-                    Debug.Log("Jugador 2: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer2[fruitName]) + " " + fruitName + " adicionales.");
+                    // Verificar si el jugador tiene más frutas de las necesarias
+                    if (collectedFruitsPlayer2[fruitName] > totalQuantity)
+                    {
+                        orderCompletedPlayer2 = false; // Marcar como no completado
+                        Debug.Log("Jugador 2: Tiene " + (collectedFruitsPlayer2[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                    }
+                    else
+                    {
+                        orderCompletedPlayer2 &= collectedFruitsPlayer2[fruitName] >= totalQuantity;
+                        Debug.Log("Jugador 2: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer2[fruitName]) + " " + fruitName + " adicionales.");
+                    }
+
                     if (!orderCompletedPlayer2) break; // Salir del bucle si ya no se completó la orden
                 }
                 else
@@ -372,8 +382,18 @@ public class CollectGame : MonoBehaviour
                 // Verificar si el jugador tiene suficientes frutas recolectadas
                 if (collectedFruitsPlayer1.ContainsKey(fruitName))
                 {
-                    orderCompletedPlayer1 &= collectedFruitsPlayer1[fruitName] >= totalQuantity;
-                    Debug.Log("Jugador 1: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer1[fruitName]) + " " + fruitName + " adicionales.");
+                    // Verificar si el jugador tiene más frutas de las necesarias
+                    if (collectedFruitsPlayer1[fruitName] > totalQuantity)
+                    {
+                        orderCompletedPlayer1 = false; // Marcar como no completado
+                        Debug.Log("Jugador 1: Tiene " + (collectedFruitsPlayer1[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                    }
+                    else
+                    {
+                        orderCompletedPlayer1 &= collectedFruitsPlayer1[fruitName] >= totalQuantity;
+                        Debug.Log("Jugador 1: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer1[fruitName]) + " " + fruitName + " adicionales.");
+                    }
+
                     if (!orderCompletedPlayer1) break; // Salir del bucle si ya no se completó la orden
                 }
                 else
@@ -403,6 +423,7 @@ public class CollectGame : MonoBehaviour
             }
         }
     }
+
 
 
 
