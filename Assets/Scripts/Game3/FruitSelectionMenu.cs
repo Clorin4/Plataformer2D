@@ -18,10 +18,21 @@ public class FruitSelectionMenu : MonoBehaviour
 
     public void ShowMenu(bool isPlayer1)
     {
-        gameObject.SetActive(true);
-        UpdateFruitQuantities(isPlayer1);
-        selectedButtonIndex = 0;
-        MoveSelection(0);
+        if (gameObject.activeSelf) // Si el menú ya está activo
+        {
+            if ((isPlayer1 && Input.GetKeyDown(KeyCode.E)) || (!isPlayer1 && Input.GetKeyDown(KeyCode.RightShift)))
+            {
+                HideMenu(); // Oculta el menú
+                return;
+            }
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            UpdateFruitQuantities(isPlayer1);
+            selectedButtonIndex = 0;
+            MoveSelection(0);
+        }
     }
 
     public void HideMenu()
