@@ -7,16 +7,17 @@ public class BoteFrutas : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public float interactionRadius = 3f;
-    private bool isInRangeP1 = false; // Indica si el jugador 1 está cerca
-    private bool isInRangeP2 = false; // Indica si el jugador 2 está cerca
+    private bool isPlayer1Near = false; // Indica si el jugador 1 está cerca
+    private bool isPlayer2Near = false; // Indica si el jugador 2 está cerca
     private bool isInteracting = false;
-    private bool isOnClickedE = false;
+    //private bool isOnClickedE = false;
     public GameObject fruitSelectionMenu;
     public GameObject globoTextE;
     public GameObject globoTextShift;
 
     private void Start()
     {
+        //isOnClickedE = false;
         StartCoroutine(BuscarPlayers());
     }
 
@@ -31,100 +32,39 @@ public class BoteFrutas : MonoBehaviour
     {
         FuncBuscarPlayers();
 
-        if (isInRangeP1 && !isInteracting && !isInRangeP2)
+        if (isPlayer1Near && !isInteracting && !isPlayer2Near)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                isOnClickedE = true;
+                //isOnClickedE = true;
                 isInteracting = true;
-                fruitSelectionMenu.SetActive(true); // Activa el menú de selección de frutas
+                fruitSelectionMenu.GetComponent<FruitSelectionMenu>().ShowMenu(true);
             }
         }
 
-        if (isInRangeP2 && !isInteracting && !isInRangeP1)
+        if (isPlayer2Near && !isInteracting && !isPlayer1Near)
         {
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
-                isOnClickedE = true;
+                //isOnClickedE = false; // Player 2 no usa la tecla E
                 isInteracting = true;
-                fruitSelectionMenu.SetActive(true); // Activa el menú de selección de frutas
+                fruitSelectionMenu.GetComponent<FruitSelectionMenu>().ShowMenu(false);
             }
         }
 
         if (isInteracting)
         {
-            if (Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.D))
+            if ((isPlayer1Near && Input.GetKeyDown(KeyCode.S)) || (isPlayer2Near && Input.GetKeyDown(KeyCode.DownArrow)))
             {
-                if (isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().MoveSelection(-1);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.D) && !Input.GetKeyDown(KeyCode.A))
-            {
-                if (isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().MoveSelection(1);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && !Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                if (!isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().MoveSelection(-1);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && !Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                if (!isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().MoveSelection(1);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if (isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
-                    fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
-                    isInteracting = false;
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && !Input.GetKeyDown(KeyCode.S))
-            {
-                if (!isOnClickedE)
-                {
-                    fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
-                    fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
-                    isInteracting = false;
-                }
+                fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
+                fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
+                isInteracting = false;
             }
         }
 
         // Gestión de los globos de texto
-        if (isInRangeP1 && !isInteracting)
-        {
-            if (!isOnClickedE)
-            {
-                globoTextE.SetActive(true);
-            }
-        }
-        else
-        {
-            globoTextE.SetActive(false);
-        }
-
-        if (isInRangeP2 && !isInteracting)
-        {
-            if (!isOnClickedE)
-            {
-                globoTextShift.SetActive(true);
-            }
-        }
-        else
-        {
-            globoTextShift.SetActive(false);
-        }
+        globoTextE.SetActive(isPlayer1Near && !isInteracting);
+        globoTextShift.SetActive(isPlayer2Near && !isInteracting);
     }
 
     public void FuncBuscarPlayers()
@@ -133,23 +73,9 @@ public class BoteFrutas : MonoBehaviour
         float distance2 = Vector3.Distance(transform.position, player2.position);
 
         // Comprueba si el jugador 1 está dentro del radio de interacción.
-        if (distance1 <= interactionRadius)
-        {
-            isInRangeP1 = true;
-        }
-        else
-        {
-            isInRangeP1 = false;
-        }
+        isPlayer1Near = distance1 <= interactionRadius;
 
         // Comprueba si el jugador 2 está dentro del radio de interacción.
-        if (distance2 <= interactionRadius)
-        {
-            isInRangeP2 = true;
-        }
-        else
-        {
-            isInRangeP2 = false;
-        }
+        isPlayer2Near = distance2 <= interactionRadius;
     }
 }

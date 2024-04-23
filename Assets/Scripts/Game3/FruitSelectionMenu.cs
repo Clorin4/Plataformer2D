@@ -2,60 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FruitSelectionMenu : MonoBehaviour
 {
     public Button[] fruitButtons; // Botones de frutas (en orden: manzanas, plátanos, naranjas)
-    public Text[] fruitQuantities; // Textos para las cantidades de frutas
-    public GameObject cancelButton; // Botón de cancelar
+    public TextMeshProUGUI[] fruitQuantities; // Textos para las cantidades de frutas
     private int selectedButtonIndex = 0;
+    private string[] fruitNames = { "Manzanas", "Platanos", "Naranjas" }; // Nombres de las frutas en orden
 
     private void Start()
     {
-        cancelButton.SetActive(false);
+        HideMenu();
     }
 
-    public void ShowMenu(Dictionary<string, int> collectedFruits)
+    public void ShowMenu(bool isPlayer1)
     {
-        // Muestra los botones de frutas y el botón de cancelar
-        for (int i = 0; i < fruitButtons.Length; i++)
-        {
-            fruitButtons[i].gameObject.SetActive(true);
-            string fruitName = fruitButtons[i].gameObject.name; // Nombre del botón (asumimos que es igual al nombre de la fruta)
-            if (collectedFruits.ContainsKey(fruitName))
-            {
-                fruitQuantities[i].text = collectedFruits[fruitName].ToString(); // Ajusta el texto del botón a la cantidad de frutas
-                fruitButtons[i].interactable = true; // Hacer el botón interactivo
-            }
-            else
-            {
-                fruitQuantities[i].text = "0"; // Si no hay ninguna fruta de este tipo, muestra 0
-                fruitButtons[i].interactable = false; // Hacer el botón no interactivo
-            }
-        }
-        cancelButton.SetActive(true);
+        gameObject.SetActive(true);
+        UpdateFruitQuantities(isPlayer1);
+        selectedButtonIndex = 0;
+        MoveSelection(0);
     }
 
     public void HideMenu()
     {
-        // Oculta todos los botones al cerrar
-        foreach (var button in fruitButtons)
-        {
-            button.gameObject.SetActive(false);
-        }
-        cancelButton.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void MoveSelection(int direction)
     {
-        // Mueve la selección hacia la izquierda (-1) o la derecha (1)
         selectedButtonIndex = (selectedButtonIndex + direction) % fruitButtons.Length;
         if (selectedButtonIndex < 0)
         {
             selectedButtonIndex += fruitButtons.Length;
         }
 
-        // Resalta el botón seleccionado
         for (int i = 0; i < fruitButtons.Length; i++)
         {
             fruitButtons[i].image.color = (i == selectedButtonIndex) ? Color.yellow : Color.white;
@@ -64,8 +45,45 @@ public class FruitSelectionMenu : MonoBehaviour
 
     public void SelectFruit()
     {
-        // Lógica para seleccionar la fruta (puedes agregarla según sea necesario)
-        Debug.Log("Fruit selected: " + fruitButtons[selectedButtonIndex].name);
-        Debug.Log("OLA");
+        string fruitName = fruitNames[selectedButtonIndex];
+        Debug.Log("Fruit selected: " + fruitName);
+        // Aquí puedes implementar la lógica para manejar la selección de la fruta
+        // Por ejemplo, incrementar la cantidad de frutas seleccionadas
+    }
+
+    public void UpdateFruitQuantities(bool isPlayer1)
+    {
+        for (int i = 0; i < fruitQuantities.Length; i++)
+        {
+            int fruitQuantity = 0;
+            if (isPlayer1)
+            {
+                fruitQuantity = PlayerPrefs.GetInt(fruitNames[i] + "Player1");
+            }
+            else
+            {
+                fruitQuantity = PlayerPrefs.GetInt(fruitNames[i] + "Player2");
+            }
+            fruitQuantities[i].text = fruitQuantity.ToString();
+        }
+    }
+
+    private void Update()
+    {
+        if (gameObject.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                MoveSelection(-1); // Mueve la selección a la izquierda
+            }
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                MoveSelection(1); // Mueve la selección a la derecha
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                SelectFruit(); // Selecciona la fruta
+            }
+        }
     }
 }
