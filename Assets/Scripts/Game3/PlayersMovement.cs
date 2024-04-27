@@ -53,25 +53,33 @@ public class PlayersMovement : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal" + index);
             float moveVertical = Input.GetAxis("Vertical" + index);
 
-            // Calcular la dirección del movimiento
-            Vector2 movement = new Vector2(moveHorizontal, 0).normalized;
-            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y); // Mantener la velocidad vertical actual
+            // Verificar si el jugador puede moverse
+            bool canMove = (index == 1 && PlayerPrefs.GetInt("CanMovePlayer1") == 1) ||
+                           (index == 2 && PlayerPrefs.GetInt("CanMovePlayer2") == 1);
 
-            if (moveHorizontal > 0 && !mirandoDerecha)
+            // Si el jugador puede moverse, calcular la dirección del movimiento
+            if (canMove)
             {
-                Girar();
-            }
-            else if (moveHorizontal < 0 && mirandoDerecha)
-            {
-                Girar();
+                Vector2 movement = new Vector2(moveHorizontal, 0).normalized;
+                rb.velocity = new Vector2(movement.x * speed, rb.velocity.y); // Mantener la velocidad vertical actual
+
+                if (moveHorizontal > 0 && !mirandoDerecha)
+                {
+                    Girar();
+                }
+                else if (moveHorizontal < 0 && mirandoDerecha)
+                {
+                    Girar();
+                }
             }
 
             // Verificar si se presiona la tecla de salto correspondiente al jugador y si está en el suelo
-            if ((Input.GetKeyDown(KeyCode.W) && index == 1 || Input.GetKeyDown(KeyCode.UpArrow) && index == 2) && isGroundedScript.isGrounded)
+            if (canMove && ((Input.GetKeyDown(KeyCode.W) && index == 1) || (Input.GetKeyDown(KeyCode.UpArrow) && index == 2)) && isGroundedScript.isGrounded)
             {
                 jumpRequested = true;
             }
         }
+
     }
 
     private void FixedUpdate()

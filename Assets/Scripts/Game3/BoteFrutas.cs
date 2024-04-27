@@ -20,6 +20,8 @@ public class BoteFrutas : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetInt("CanMovePlayer1", 1);
+        PlayerPrefs.SetInt("CanMovePlayer2", 1);
         StartCoroutine(BuscarPlayers());
     }
 
@@ -39,6 +41,8 @@ public class BoteFrutas : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
+                PlayerPrefs.SetInt("CanMovePlayer1", 0);
                 isInteracting = true;
                 isPlayer1Interacting = true;
                 fruitSelectionMenu.GetComponent<FruitSelectionMenu>().ShowMenu(true);
@@ -50,6 +54,7 @@ public class BoteFrutas : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
+                PlayerPrefs.SetInt("CanMovePlayer2", 0);
                 isInteracting = true;
                 isPlayer2Interacting = true;
                 fruitSelectionMenu.GetComponent<FruitSelectionMenu>().ShowMenu(false);
@@ -61,6 +66,8 @@ public class BoteFrutas : MonoBehaviour
         {
             if ((isPlayer1Interacting && Input.GetKeyDown(KeyCode.S)) || (isPlayer2Interacting && Input.GetKeyDown(KeyCode.DownArrow)))
             {
+                PlayerPrefs.SetInt("CanMovePlayer1", 1);
+                PlayerPrefs.SetInt("CanMovePlayer2", 1);
                 fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
                 fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
                 isInteracting = false;

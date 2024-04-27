@@ -41,6 +41,7 @@ public class CollectGame : MonoBehaviour
         PlayerPrefs.SetInt("NaranjasPlayer2", 0);
         PlayerPrefs.SetInt("PlatanosPlayer1", 0);
         PlayerPrefs.SetInt("PlatanosPlayer2", 0);
+        
 
         TurnOffVariables();
         SaberDificultad();

@@ -7,9 +7,10 @@ using TMPro;
 public class FruitSelectionMenu : MonoBehaviour
 {
     public Button[] fruitButtons; // Botones de frutas (en orden: manzanas, plátanos, naranjas)
+    public Button cancelButton; // Botón de cancelar
     public TextMeshProUGUI[] fruitQuantities; // Textos para las cantidades de frutas
     private int selectedButtonIndex = 0;
-    private string[] fruitNames = { "Manzanas", "Platanos", "Naranjas" }; // Nombres de las frutas en orden
+    private string[] fruitNames = { "Manzanas", "Platanos", "Naranjas", "Cancelar" }; // Nombres de las frutas en orden
 
     private void Start()
     {
@@ -25,9 +26,11 @@ public class FruitSelectionMenu : MonoBehaviour
                 HideMenu(); // Oculta el menú
                 return;
             }
+            
         }
         else
         {
+            Debug.Log("DBNHUJDBFWE");
             gameObject.SetActive(true);
             UpdateFruitQuantities(isPlayer1);
             selectedButtonIndex = 0;
@@ -58,8 +61,26 @@ public class FruitSelectionMenu : MonoBehaviour
     {
         string fruitName = fruitNames[selectedButtonIndex];
         Debug.Log("Fruit selected: " + fruitName);
-        // Aquí puedes implementar la lógica para manejar la selección de la fruta
-        // Por ejemplo, incrementar la cantidad de frutas seleccionadas
+
+        // Si se selecciona "Cancelar", oculta el menú
+        if (selectedButtonIndex == fruitButtons.Length - 1)
+        {
+            HideMenu();
+            return;
+        }
+
+        // Reducir en 1 la cantidad de frutas seleccionadas del jugador activo
+        if (PlayerPrefs.GetInt("CanMovePlayer1") == 1)
+        {
+            PlayerPrefs.SetInt(fruitName + "Player1", Mathf.Max(0, PlayerPrefs.GetInt(fruitName + "Player1") - 1));
+        }
+        else
+        {
+            PlayerPrefs.SetInt(fruitName + "Player2", Mathf.Max(0, PlayerPrefs.GetInt(fruitName + "Player2") - 1));
+        }
+
+        // Actualizar las cantidades de frutas en el menú
+        UpdateFruitQuantities(PlayerPrefs.GetInt("CanMovePlayer1") == 1);
     }
 
     public void UpdateFruitQuantities(bool isPlayer1)
