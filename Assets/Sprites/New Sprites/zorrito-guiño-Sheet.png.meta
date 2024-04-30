@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -127,7 +127,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_0"
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b2bbc3531dc234a997f385ce25ce44
+      internalID: 1757705806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_1"
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531874de9f16b6e4492b2a8f4fe9f610
+      internalID: -1399937160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_2"
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b46c12d8cf2855e4cb625970d97d4d03
+      internalID: -912355790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_3"
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58610cc2d17f7dc4b9abc4081ed2b9bb
+      internalID: 1684270506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_4"
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc5833f7b885e6447a1dd56a105987f2
+      internalID: -335142602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_5"
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee68ef652242ec49a312a9eef1a72fa
+      internalID: -1111511976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "zorrito-gui\xF1o-Sheet_6"
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 11
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63c55903271fb1a44ac31e6b07d8aa9a
+      internalID: 860191720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +285,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "zorrito-gui\xF1o-Sheet_0": 1757705806
+      "zorrito-gui\xF1o-Sheet_1": -1399937160
+      "zorrito-gui\xF1o-Sheet_2": -912355790
+      "zorrito-gui\xF1o-Sheet_3": 1684270506
+      "zorrito-gui\xF1o-Sheet_4": -335142602
+      "zorrito-gui\xF1o-Sheet_5": -1111511976
+      "zorrito-gui\xF1o-Sheet_6": 860191720
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
