@@ -64,15 +64,26 @@ public class BoteFrutas : MonoBehaviour
         // Si hay un jugador interactuando y presiona la tecla para seleccionar la fruta
         if (isInteracting)
         {
-            if ((isPlayer1Interacting && Input.GetKeyDown(KeyCode.S)) || (isPlayer2Interacting && Input.GetKeyDown(KeyCode.DownArrow)))
+            if (isPlayer1Interacting && Input.GetKeyDown(KeyCode.S))
             {
                 PlayerPrefs.SetInt("CanMovePlayer1", 1);
-                PlayerPrefs.SetInt("CanMovePlayer2", 1);
+                //PlayerPrefs.SetInt("CanMovePlayer2", 1);
                 fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
                 fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
                 isInteracting = false;
                 isPlayer1Interacting = false;
                 isPlayer2Interacting = false;
+            }
+            else if (isPlayer2Interacting && Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                PlayerPrefs.SetInt("CanMovePlayer2", 1);
+                //PlayerPrefs.SetInt("CanMovePlayer2", 1);
+                fruitSelectionMenu.GetComponent<FruitSelectionMenu>().SelectFruit();
+                fruitSelectionMenu.SetActive(false); // Desactiva el menú de selección de frutas
+                isInteracting = false;
+                isPlayer1Interacting = false;
+                isPlayer2Interacting = false;
+
             }
         }
 

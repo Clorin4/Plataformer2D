@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7042366096518837498}
   - component: {fileID: 1118868616941810014}
   - component: {fileID: -6772326116801580861}
+  - component: {fileID: 1958411368725988708}
   m_Layer: 0
   m_Name: Platano
   m_TagString: Untagged
@@ -125,3 +126,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.425, y: 0.575}
   m_EdgeRadius: 0
+--- !u!95 &1958411368725988708
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448414991809635201}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f8c6ba65078858e458ea3a565762c2ef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
