@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+//using DG.Tweening;
 
 public class CollectGame : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
@@ -21,24 +21,35 @@ public class CollectGame : MonoBehaviour
 
     public GameObject canvasPedido;
 
+    public TMP_Text textComponent;
+    public string fullText;
+    public float typingSpeed = 0.05f;
+    private int P1Correct = 0;
+    private int P2Correct = 0;  //0 nulo 1 incorrecto  2 correcto 
+
     public Transform player1;
     public Transform player2;
     public float interactionRadius = 3f;
     private bool isInRange = false;
     private bool isInteracting = false;
     private bool isOnClickedE = false;
+    public bool P1Checking = false;
+    public bool P2Checking = false;
     public GameObject globoTextE;
     public GameObject globoTextShift;
 
     public string selectedDifficulty;
+
+    public int ScoreP1 = 0;
+    public int ScoreP2 = 0;
 
 
     void Start()
     {
         TurnOffVariables();
         SaberDificultad();
-
-        StartCoroutine(Countdown());
+        
+        StartGame();
 
     }
 
@@ -60,6 +71,10 @@ public class CollectGame : MonoBehaviour
         globoTextE.SetActive(false);
         globoTextShift.SetActive(false);
 
+        P1Checking = false;
+        P2Checking = false;
+        P1Correct = 0;
+        P2Correct = 0;
 
     }
 
@@ -71,7 +86,7 @@ public class CollectGame : MonoBehaviour
 
     public void ShowOrder(string difficulty)
     {
-        canvasPedido.SetActive(true);
+        //canvasPedido.SetActive(true);
 
         FruitOrderManager fruitOrderManager = FindObjectOfType<FruitOrderManager>();
         if (fruitOrderManager != null)
@@ -102,9 +117,6 @@ public class CollectGame : MonoBehaviour
             Debug.LogWarning("No se encontró ningún objeto FruitOrderManager en la escena.");
         }
     }
-
-
-
 
     IEnumerator Countdown()
     {
@@ -139,10 +151,7 @@ public class CollectGame : MonoBehaviour
         ShowOrder(selectedDifficulty);
         canvasPedido.SetActive(true);
         iTween.ScaleFrom(canvasPedido, Vector3.zero, 1f); // Animar la escala del canvas desde cero a su tamaño normal en 1 segundo
-
-
-
-        StartGame();
+                                                          
     }
 
     IEnumerator ScaleSpriteTo(SpriteRenderer spriteRenderer, Vector3 startScale, Vector3 endScale, float duration)
@@ -160,14 +169,61 @@ public class CollectGame : MonoBehaviour
         spriteRenderer.transform.localScale = endScale;
     }
 
+    IEnumerator TypeText() //HACER TEXTO PARA EMPEZAR A PEDIR "QUIERO ESTAS FRUTAS"
+    {
+        textComponent.text = ""; // Inicializa el texto vacío
+
+        if (P1Correct == 2)
+        {
+            fullText = "PERFECTO JUGADOR 1";
+        }
+        else if (P1Correct == 1)
+        {
+            fullText = "CREO QUE ALGO ANDA MAL JUGADOR 1";
+            P1Correct = 0;
+            P2Correct = 0;
+        }
+        else if (P2Correct == 2)
+        {
+            fullText = "BIEN HECHO JUGADOR 2";
+        }
+        else if (P2Correct == 1)
+        {
+            fullText = "SEGUROO JUGADOR 2?";
+            P1Correct = 0;
+            P2Correct = 0;
+        }
+
+
+        // Recorre el texto letra por letra
+        foreach (char letter in fullText.ToCharArray())
+        {
+            textComponent.text += letter; // Agrega la letra al texto
+            yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
+        }
+
+        if(P1Correct == 2 || P2Correct == 2)
+        {
+            CheckScore();
+        }
+        
+    }
 
     public void StartGame()
     {
+        TurnOffVariables();
+        StartCoroutine(Countdown());
 
+        
     }
 
 
     private void Update()
+    {
+        CheckDistances();
+    }
+
+    private void CheckDistances()
     {
         float distance1 = Vector3.Distance(transform.position, player1.position);
         float distance2 = Vector3.Distance(transform.position, player2.position);
@@ -185,6 +241,7 @@ public class CollectGame : MonoBehaviour
 
             if (isInRange == true && Input.GetKeyDown(KeyCode.E))
             {
+                P1Checking = true;
                 globoTextE.SetActive(false);
                 isOnClickedE = true;
                 CheckOrderCompletion();
@@ -216,6 +273,7 @@ public class CollectGame : MonoBehaviour
 
             if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift))
             {
+                P2Checking = true;
                 globoTextShift.SetActive(false);
                 isOnClickedE = true;
                 CheckOrderCompletion();
@@ -236,6 +294,65 @@ public class CollectGame : MonoBehaviour
             globoTextShift.SetActive(false);
         }
     }
+
+    private void CheckScore()
+    {
+        bool GanaP1 = false;
+        bool GanaP2 = false;
+
+        if (ScoreP1 != 3 && ScoreP2 != 3)
+        {
+            StartGame();
+        }
+        else if (ScoreP1 == 3)
+        {
+            GanaP1 = true;
+        }
+        else if (ScoreP2 == 3)
+        {
+            GanaP2 = true;
+        }
+
+        if (GanaP1)
+        {
+            Debug.Log("GANA PLAYER 1111111");
+            PlayerPrefs.SetInt("CanMovePlayer1", 0);
+            PlayerPrefs.SetInt("CanMovePlayer2", 0);
+            PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+            foreach (var controller in controllers)
+            {
+                if (controller.playerTag == "Player1")
+                {
+                    controller.StartVictoryAnimation();
+                }
+                else if (controller.playerTag == "Player2")
+                {
+                    controller.StartLoseAnimation();
+                }
+            }
+        }
+
+        if (GanaP2)
+        {
+            Debug.Log("GANA PLAYER 2222222");
+            PlayerPrefs.SetInt("CanMovePlayer1", 0);
+            PlayerPrefs.SetInt("CanMovePlayer2", 0);
+            PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+            foreach (var controller in controllers)
+            {
+                if (controller.playerTag == "Player2")
+                {
+                    controller.StartVictoryAnimation();
+                }
+                else if (controller.playerTag == "Player1")
+                {
+                    controller.StartLoseAnimation();
+                }
+            }
+        }
+    }
+
+
     private void CheckOrderCompletion()
     {
         if (currentOrder != null)
@@ -292,7 +409,7 @@ public class CollectGame : MonoBehaviour
                     // Si es el primer elemento o no es una suma, simplemente asigna la cantidad necesaria
                     totalFruitsPlayer1[fruitName] = quantityNeeded;
                     totalFruitsPlayer2[fruitName] = quantityNeeded;
-                    Debug.Log("SE OCUPAAAAN " + quantityNeeded);
+                    //Debug.Log("SE OCUPAAAAN " + quantityNeeded);
                 }
                 else
                 {
@@ -324,6 +441,12 @@ public class CollectGame : MonoBehaviour
                                 Debug.Log("Jugador 1: Se multiplicaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer1[fruitName]);
                                 Debug.Log("Jugador 2: Se multiplicaron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer2[fruitName]);
                                 break;
+                            case "÷": //alt 246
+                                totalFruitsPlayer1[fruitName] /= quantityNeeded;
+                                totalFruitsPlayer2[fruitName] /= quantityNeeded;
+                                Debug.Log("Jugador 1: Se dividieron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer1[fruitName]);
+                                Debug.Log("Jugador 2: Se dividieron " + quantityNeeded + " " + fruitName + ". Total: " + totalFruitsPlayer2[fruitName]);
+                                break;
                             default:
                                 Debug.LogError("Unknown operation: " + operation);
                                 orderCompletedPlayer1 = false; // Marcar como no completado
@@ -343,88 +466,123 @@ public class CollectGame : MonoBehaviour
                 }
             }
 
-            // Verificar para el Player2
-            foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer2)
+            if (P2Checking)
             {
-                string fruitName = kvp.Key;
-                int totalQuantity = kvp.Value;
-
-                // Verificar si el jugador tiene suficientes frutas recolectadas
-                if (collectedFruitsPlayer2.ContainsKey(fruitName))
+                // Verificar para el Player2
+                foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer2)
                 {
-                    // Verificar si el jugador tiene más frutas de las necesarias
-                    if (collectedFruitsPlayer2[fruitName] > totalQuantity)
+                    string fruitName = kvp.Key;
+                    int totalQuantity = kvp.Value;
+
+                    // Verificar si el jugador tiene suficientes frutas recolectadas
+                    if (collectedFruitsPlayer2.ContainsKey(fruitName))
                     {
-                        orderCompletedPlayer2 = false; // Marcar como no completado
-                        Debug.Log("Jugador 2: Tiene " + (collectedFruitsPlayer2[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                        // Verificar si el jugador tiene más frutas de las necesarias
+                        if (collectedFruitsPlayer2[fruitName] > totalQuantity)
+                        {
+                            orderCompletedPlayer2 = false; // Marcar como no completado
+                            Debug.Log("Jugador 2: Tiene " + (collectedFruitsPlayer2[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                        }
+                        else
+                        {
+                            orderCompletedPlayer2 &= collectedFruitsPlayer2[fruitName] >= totalQuantity;
+                            Debug.Log("Jugador 2: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer2[fruitName]) + " " + fruitName + " adicionales.");
+                        }
+
+                        if (!orderCompletedPlayer2) break; // Salir del bucle si ya no se completó la orden
                     }
                     else
                     {
-                        orderCompletedPlayer2 &= collectedFruitsPlayer2[fruitName] >= totalQuantity;
-                        Debug.Log("Jugador 2: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer2[fruitName]) + " " + fruitName + " adicionales.");
+                        orderCompletedPlayer2 = false; // La fruta necesaria no está en la lista de recolección del jugador
+                        break; // Salir del bucle si no se encuentra la fruta
                     }
-
-                    if (!orderCompletedPlayer2) break; // Salir del bucle si ya no se completó la orden
-                }
-                else
-                {
-                    orderCompletedPlayer2 = false; // La fruta necesaria no está en la lista de recolección del jugador
-                    break; // Salir del bucle si no se encuentra la fruta
                 }
             }
-
-            // Verificar para el Player1
-            foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer1)
+            else
             {
-                string fruitName = kvp.Key;
-                int totalQuantity = kvp.Value;
+                orderCompletedPlayer2 = false;
+            }
 
-                // Verificar si el jugador tiene suficientes frutas recolectadas
-                if (collectedFruitsPlayer1.ContainsKey(fruitName))
+            if (P1Checking)
+            {
+                // Verificar para el Player1
+                foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer1)
                 {
-                    // Verificar si el jugador tiene más frutas de las necesarias
-                    if (collectedFruitsPlayer1[fruitName] > totalQuantity)
+                    string fruitName = kvp.Key;
+                    int totalQuantity = kvp.Value;
+
+                    // Verificar si el jugador tiene suficientes frutas recolectadas
+                    if (collectedFruitsPlayer1.ContainsKey(fruitName))
                     {
-                        orderCompletedPlayer1 = false; // Marcar como no completado
-                        Debug.Log("Jugador 1: Tiene " + (collectedFruitsPlayer1[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                        // Verificar si el jugador tiene más frutas de las necesarias
+                        if (collectedFruitsPlayer1[fruitName] > totalQuantity)
+                        {
+                            orderCompletedPlayer1 = false; // Marcar como no completado
+                            Debug.Log("Jugador 1: Tiene " + (collectedFruitsPlayer1[fruitName] - totalQuantity) + " " + fruitName + " de más.");
+                        }
+                        else
+                        {
+                            orderCompletedPlayer1 &= collectedFruitsPlayer1[fruitName] >= totalQuantity;
+                            Debug.Log("Jugador 1: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer1[fruitName]) + " " + fruitName + " adicionales.");
+                        }
+
+                        if (!orderCompletedPlayer1) break; // Salir del bucle si ya no se completó la orden
                     }
                     else
                     {
-                        orderCompletedPlayer1 &= collectedFruitsPlayer1[fruitName] >= totalQuantity;
-                        Debug.Log("Jugador 1: Se necesitan " + Mathf.Max(0, totalQuantity - collectedFruitsPlayer1[fruitName]) + " " + fruitName + " adicionales.");
+                        orderCompletedPlayer1 = false; // La fruta necesaria no está en la lista de recolección del jugador
+                        break; // Salir del bucle si no se encuentra la fruta
                     }
+                }
+                
+            }
+            else
+            {
+                orderCompletedPlayer1 = false;
+            }
 
-                    if (!orderCompletedPlayer1) break; // Salir del bucle si ya no se completó la orden
+
+            //MOSTRAR GLOBOS DE TEXTO Y TEXTO
+            if (P1Checking)
+            {
+                if (orderCompletedPlayer1)
+                {
+                    P1Correct = 2;
+                    ScoreP1 += 1;
+                    Debug.Log(ScoreP1);
+                    Debug.Log("¡El jugador 1 completó la orden correctamente!");
+                    StartCoroutine(TypeText());
+                    //CheckScore();
                 }
                 else
                 {
-                    orderCompletedPlayer1 = false; // La fruta necesaria no está en la lista de recolección del jugador
-                    break; // Salir del bucle si no se encuentra la fruta
+                    P1Correct = 1;
+                    StartCoroutine(TypeText());
+                    //CheckScore();
+                    Debug.Log("¡El jugador 1 aún necesita recolectar más frutas!");
                 }
             }
 
-            // Mostrar el resultado de la verificación para cada jugador
-            if (orderCompletedPlayer1)
+            else if (P2Checking)
             {
-                Debug.Log("¡El jugador 1 completó la orden correctamente!");
-            }
-            else
-            {
-                Debug.Log("¡El jugador 1 aún necesita recolectar más frutas!");
-            }
-
-            if (orderCompletedPlayer2)
-            {
-                Debug.Log("¡El jugador 2 completó la orden correctamente!");
-            }
-            else
-            {
-                Debug.Log("¡El jugador 2 aún necesita recolectar más frutas!");
+                if (orderCompletedPlayer2)
+                {
+                    P2Correct = 2;
+                    ScoreP2 += 1;
+                    Debug.Log(ScoreP2);
+                    Debug.Log("¡El jugador 2 completó la orden correctamente!");
+                    StartCoroutine(TypeText());
+                    //CheckScore();
+                }
+                else
+                {
+                    P2Correct = 1;
+                    StartCoroutine(TypeText());
+                    //CheckScore();
+                    Debug.Log("¡El jugador 2 aún necesita recolectar más frutas!");
+                }
             }
         }
     }
-
-
-
 
 }
