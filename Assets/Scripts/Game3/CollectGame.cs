@@ -43,6 +43,8 @@ public class CollectGame : MonoBehaviour
     public int ScoreP1 = 0;
     public int ScoreP2 = 0;
 
+    public  bool isTyping = false;
+    private int checkState = 0;
 
     void Start()
     {
@@ -75,6 +77,7 @@ public class CollectGame : MonoBehaviour
         P2Checking = false;
         P1Correct = 0;
         P2Correct = 0;
+        checkState = 0;
 
     }
 
@@ -171,35 +174,71 @@ public class CollectGame : MonoBehaviour
 
     IEnumerator TypeText() //HACER TEXTO PARA EMPEZAR A PEDIR "QUIERO ESTAS FRUTAS"
     {
-        textComponent.text = ""; // Inicializa el texto vacío
+        
 
-        if (P1Correct == 2)
+        /*if (!isTyping)
         {
+            textComponent.text = "";
+        }*/
+        
+
+        if (P1Correct == 2 && !isTyping)
+        {
+            if(checkState != 1)
+            {
+                isTyping = false;
+                textComponent.text = "";
+            }
             fullText = "PERFECTO JUGADOR 1";
+            checkState = 1;
         }
-        else if (P1Correct == 1)
+        else if (P1Correct == 1 && !isTyping)
         {
+            if (checkState != 2)
+            {
+                isTyping = false;
+                textComponent.text = "";
+            }
             fullText = "CREO QUE ALGO ANDA MAL JUGADOR 1";
             P1Correct = 0;
             P2Correct = 0;
+            checkState = 2;
         }
-        else if (P2Correct == 2)
+        
+        if (P2Correct == 2 && !isTyping)
         {
+            if (checkState != 3)
+            {
+                isTyping = false;
+                textComponent.text = "";
+            }
             fullText = "BIEN HECHO JUGADOR 2";
+            checkState = 3;
         }
-        else if (P2Correct == 1)
+        else if (P2Correct == 1 && !isTyping)
         {
+            if (checkState != 4)
+            {
+                isTyping = false;
+                textComponent.text = "";
+            }
             fullText = "SEGUROO JUGADOR 2?";
             P1Correct = 0;
             P2Correct = 0;
+            checkState = 4;
         }
 
-
-        // Recorre el texto letra por letra
-        foreach (char letter in fullText.ToCharArray())
+        if (!isTyping)
         {
-            textComponent.text += letter; // Agrega la letra al texto
-            yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
+            isTyping = true;
+            foreach (char letter in fullText.ToCharArray())
+            {
+
+                textComponent.text += letter; // Agrega la letra al texto
+                yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
+
+            }
+            isTyping = false;
         }
 
         if(P1Correct == 2 || P2Correct == 2)
@@ -548,6 +587,7 @@ public class CollectGame : MonoBehaviour
                 if (orderCompletedPlayer1)
                 {
                     P1Correct = 2;
+                    P2Correct = 0;
                     ScoreP1 += 1;
                     Debug.Log(ScoreP1);
                     Debug.Log("¡El jugador 1 completó la orden correctamente!");
@@ -557,10 +597,12 @@ public class CollectGame : MonoBehaviour
                 else
                 {
                     P1Correct = 1;
+                    P2Correct = 0;
                     StartCoroutine(TypeText());
                     //CheckScore();
                     Debug.Log("¡El jugador 1 aún necesita recolectar más frutas!");
                 }
+                P1Checking = false;
             }
 
             else if (P2Checking)
@@ -568,6 +610,7 @@ public class CollectGame : MonoBehaviour
                 if (orderCompletedPlayer2)
                 {
                     P2Correct = 2;
+                    P1Correct = 0;
                     ScoreP2 += 1;
                     Debug.Log(ScoreP2);
                     Debug.Log("¡El jugador 2 completó la orden correctamente!");
@@ -577,10 +620,12 @@ public class CollectGame : MonoBehaviour
                 else
                 {
                     P2Correct = 1;
+                    P1Correct = 0;
                     StartCoroutine(TypeText());
                     //CheckScore();
                     Debug.Log("¡El jugador 2 aún necesita recolectar más frutas!");
                 }
+                P2Checking = false;
             }
         }
     }
