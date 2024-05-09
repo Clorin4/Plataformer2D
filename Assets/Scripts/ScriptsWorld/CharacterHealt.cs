@@ -34,7 +34,7 @@ public class CharacterHealt : MonoBehaviour
         //currentHealth = loadHealth;
         //currentHealth = maxHealth;
 
-        Debug.Log("SISISISII " + currentHealth);
+        //Debug.Log("SISISISII " + currentHealth);
         
         movimientojugador = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();

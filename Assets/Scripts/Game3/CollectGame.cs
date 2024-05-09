@@ -174,8 +174,8 @@ public class CollectGame : MonoBehaviour
 
     IEnumerator TypeText() //HACER TEXTO PARA EMPEZAR A PEDIR "QUIERO ESTAS FRUTAS"
     {
-        
 
+        int lastState = 0;
         /*if (!isTyping)
         {
             textComponent.text = "";
@@ -184,21 +184,11 @@ public class CollectGame : MonoBehaviour
 
         if (P1Correct == 2 && !isTyping)
         {
-            if(checkState != 1)
-            {
-                isTyping = false;
-                textComponent.text = "";
-            }
             fullText = "PERFECTO JUGADOR 1";
             checkState = 1;
         }
         else if (P1Correct == 1 && !isTyping)
         {
-            if (checkState != 2)
-            {
-                isTyping = false;
-                textComponent.text = "";
-            }
             fullText = "CREO QUE ALGO ANDA MAL JUGADOR 1";
             P1Correct = 0;
             P2Correct = 0;
@@ -207,29 +197,27 @@ public class CollectGame : MonoBehaviour
         
         if (P2Correct == 2 && !isTyping)
         {
-            if (checkState != 3)
-            {
-                isTyping = false;
-                textComponent.text = "";
-            }
             fullText = "BIEN HECHO JUGADOR 2";
             checkState = 3;
         }
         else if (P2Correct == 1 && !isTyping)
         {
-            if (checkState != 4)
-            {
-                isTyping = false;
-                textComponent.text = "";
-            }
             fullText = "SEGUROO JUGADOR 2?";
             P1Correct = 0;
             P2Correct = 0;
             checkState = 4;
         }
 
+        if(lastState != checkState)
+        {
+            textComponent.text = "";
+            //isTyping = false;
+
+        }
+
         if (!isTyping)
         {
+            lastState = checkState;
             isTyping = true;
             foreach (char letter in fullText.ToCharArray())
             {
@@ -239,6 +227,7 @@ public class CollectGame : MonoBehaviour
 
             }
             isTyping = false;
+            
         }
 
         if(P1Correct == 2 || P2Correct == 2)

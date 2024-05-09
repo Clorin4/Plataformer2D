@@ -79,8 +79,8 @@ public class SafeData : MonoBehaviour
     {
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetInt("Health", health);
-        Debug.Log("BAI PUNTOS " + score);
-        Debug.Log("TOMA MANGO " + health);
+        //Debug.Log("BAI PUNTOS " + score);
+        //Debug.Log("TOMA MANGO " + health);
     }
 
 }
