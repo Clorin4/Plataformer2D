@@ -907,8 +907,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 477910669}
-        m_TargetAssemblyTypeName: QuizzGame, Assembly-CSharp
+      - m_Target: {fileID: 477910670}
+        m_TargetAssemblyTypeName: QGSP, Assembly-CSharp
         m_MethodName: ButtonStart
         m_Mode: 1
         m_Arguments:
@@ -2361,7 +2361,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 477910668}
-  - component: {fileID: 477910669}
   - component: {fileID: 477910670}
   m_Layer: 0
   m_Name: QuizzManager
@@ -2387,7 +2386,7 @@ Transform:
   m_Father: {fileID: 1629114483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &477910669
+--- !u!114 &477910670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2396,12 +2395,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 477910667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bc4854fb74b424ba7e80a166eaeb8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e45843ca9bb9534db8894cd619e0661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 1966129900}
-  - {fileID: 2033535980}
   P1Hearts:
   - {fileID: 70720398}
   - {fileID: 283165086}
@@ -2413,41 +2411,8 @@ MonoBehaviour:
   - {fileID: 367332968}
   - {fileID: 620501498}
   - {fileID: 50127481}
-  P2Hearts:
-  - {fileID: 1167514862}
-  - {fileID: 1373172140}
-  - {fileID: 581795565}
-  - {fileID: 5175688}
-  - {fileID: 1942762691}
-  - {fileID: 442918920}
-  - {fileID: 504979871}
-  - {fileID: 610666383}
-  - {fileID: 962153465}
-  - {fileID: 282481394}
   arrindex1: 9
   arrindex2: 9
-  P1HalfHearts:
-  - {fileID: 647388293}
-  - {fileID: 1607122325}
-  - {fileID: 812839576}
-  - {fileID: 518858736}
-  - {fileID: 1054404534}
-  - {fileID: 1893983885}
-  - {fileID: 1972074322}
-  - {fileID: 520610375}
-  - {fileID: 1890048597}
-  - {fileID: 1845297676}
-  P2HalfHearts:
-  - {fileID: 274232306}
-  - {fileID: 1528633603}
-  - {fileID: 221748150}
-  - {fileID: 1020539508}
-  - {fileID: 1874854399}
-  - {fileID: 1744040716}
-  - {fileID: 1450768106}
-  - {fileID: 523929244}
-  - {fileID: 2031480099}
-  - {fileID: 17173150}
   sprite3Renderer: {fileID: 1855751445}
   sprite2Renderer: {fileID: 900118242}
   sprite1Renderer: {fileID: 1481492950}
@@ -2479,95 +2444,6 @@ MonoBehaviour:
   - {fileID: 278750997}
   - {fileID: 1749009757}
   - {fileID: 38523904}
-  player1Health: 100
-  player2Health: 100
---- !u!114 &477910670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477910667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e45843ca9bb9534db8894cd619e0661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1966129900}
-  P1Hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  P2Hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  arrindex1: 9
-  arrindex2: 9
-  P1HalfHearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  P2HalfHearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  sprite3Renderer: {fileID: 1855751445}
-  sprite2Renderer: {fileID: 900118242}
-  sprite1Renderer: {fileID: 1481492950}
-  spriteAdelanteRenderer: {fileID: 1169618057}
-  apuntador1: {fileID: 900012591}
-  apuntador2: {fileID: 1893236012}
-  Reloj: {fileID: 1936272742}
-  panelQuestion: {fileID: 1912975674}
-  panelScaleDuration: 1
-  canvasMaster: {fileID: 0}
-  canvasWinners: {fileID: 0}
-  panelP1Winner: {fileID: 0}
-  panelP2Winner: {fileID: 0}
-  panelEmpate: {fileID: 0}
-  howToPlay: {fileID: 0}
-  J1Responde: 0
-  J2Responde: 0
-  venganza: 0
-  teclaD: {fileID: 866357433}
-  teclaK: {fileID: 972970559}
-  questionManager: {fileID: 0}
-  currentQuestion:
-    questionText: 
-    options: []
-    correctAnswerIndex: 0
-  questionText: {fileID: 0}
-  answerButtons: []
   player1Health: 100
   player2Health: 100
 --- !u!1 &504979871
@@ -6914,7 +6790,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 477910669}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuizzGame, Assembly-CSharp
         m_MethodName: Salir
         m_Mode: 1
@@ -7172,7 +7048,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 477910669}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuizzGame, Assembly-CSharp
         m_MethodName: Salir
         m_Mode: 1

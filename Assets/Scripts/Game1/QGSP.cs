@@ -13,11 +13,11 @@ public class QGSP : MonoBehaviour
     public Transform[] spawnPoints;
 
     public GameObject[] P1Hearts = new GameObject[10];
-    public GameObject[] P2Hearts = new GameObject[10];
+    //public GameObject[] P2Hearts = new GameObject[10];
     public int arrindex1 = 9;
     public int arrindex2 = 9;
-    public GameObject[] P1HalfHearts = new GameObject[10];
-    public GameObject[] P2HalfHearts = new GameObject[10];
+    //public GameObject[] P1HalfHearts = new GameObject[10];
+    //public GameObject[] P2HalfHearts = new GameObject[10];
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
@@ -95,9 +95,9 @@ public class QGSP : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             P1Hearts[i].SetActive(true);
-            P2Hearts[i].SetActive(true);
-            P1HalfHearts[i].SetActive(false);
-            P2HalfHearts[i].SetActive(false);
+            //P2Hearts[i].SetActive(true);
+            //P1HalfHearts[i].SetActive(false);
+            //P2HalfHearts[i].SetActive(false);
         }
 
         apuntador1.SetActive(false);
@@ -652,88 +652,7 @@ public class QGSP : MonoBehaviour
                 }
                 while (J1Dañado);
             }
-            else if (J2Dañado && !dañoPaDos)
-            {
-                int j = arrindex2;
-                do
-                {
-                    J2Dañado = false;
-                    P2Hearts[j].SetActive(false);
-                    arrindex2--;
-                }
-                while (J2Dañado);
-            }
-            else if (dañoPaDos)
-            {
-                int i = arrindex1;
-                int j = arrindex2;
-                do
-                {
-                    halfHeart = true;
-
-                    P2Hearts[j].SetActive(false);
-                    P2HalfHearts[j].SetActive(true);
-                    arrindex2--;
-
-                    P1Hearts[i].SetActive(false);
-                    P1HalfHearts[i].SetActive(true);
-                    arrindex1--;
-
-                    dañoPaDos = false;
-                }
-                while (dañoPaDos);
-            }
-        }
-
-        else if (halfHeart)
-        {
-            if (J1Dañado && !dañoPaDos)
-            {
-                int i = arrindex1;
-                int aux = i + 1;
-                do
-                {
-                    J1Dañado = false;
-                    P1Hearts[i].SetActive(false);
-                    P1HalfHearts[aux].SetActive(false);
-                    P1HalfHearts[i].SetActive(true);
-                    arrindex1--;
-                }
-                while (J1Dañado);
-            }
-            else if (J2Dañado && !dañoPaDos)
-            {
-                int j = arrindex2;
-                int aux = j + 1;
-                do
-                {
-                    J2Dañado = false;
-                    P2Hearts[j].SetActive(false);
-                    P2HalfHearts[aux].SetActive(false);
-                    P2HalfHearts[j].SetActive(true);
-                    arrindex2--;
-                }
-                while (J2Dañado);
-            }
-            else if (dañoPaDos)
-            {
-                int i = arrindex1;
-                int aux = i + 1;
-                int j = arrindex2;
-                int aux2 = j + 1;
-                do
-                {
-                    halfHeart = false;
-
-                    P1HalfHearts[aux].SetActive(false);
-                    //arrindex1--;
-                    P2HalfHearts[aux2].SetActive(false);
-                    //arrindex2--;
-                    dañoPaDos = false;
-                }
-                while (dañoPaDos);
-            }
-        }
+        }    
 
     }
 
