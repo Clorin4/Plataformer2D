@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Question
+public class Questionn
 {
     public string questionText; // El texto de la pregunta
     public string[] options; // Las opciones de respuesta

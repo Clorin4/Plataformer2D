@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HazaScene4.unity
     guid: 560b3ea074b991049b313e08220010d9
+  - enabled: 1
+    path: Assets/Scenes/QuizGameSP.unity
+    guid: 73a6c00190b95d64b990efcdbf3f41be
   m_configObjects: {}

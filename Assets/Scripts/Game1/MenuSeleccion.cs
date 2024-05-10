@@ -180,12 +180,18 @@ public class MenuSeleccion : MonoBehaviour
     void LoadGameScene()
     {
         int gameChoice = PlayerPrefs.GetInt("gameIndex");
+        int gameMode = PlayerPrefs.GetInt("GameMode");
 
         // Redirigir al juego específico según la elección del jugador
         switch (gameChoice)
         {
             case 1:
-                SceneManager.LoadScene(3);
+                if(gameMode == 1)
+                {
+                    SceneManager.LoadScene(7);
+                }
+                else
+                    SceneManager.LoadScene(3);
                 break;
             case 2:
                 SceneManager.LoadScene(4);

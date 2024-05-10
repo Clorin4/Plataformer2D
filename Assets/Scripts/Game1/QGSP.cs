@@ -13,11 +13,10 @@ public class QGSP : MonoBehaviour
     public Transform[] spawnPoints;
 
     public GameObject[] P1Hearts = new GameObject[10];
-    //public GameObject[] P2Hearts = new GameObject[10];
+    
     public int arrindex1 = 9;
     public int arrindex2 = 9;
-    //public GameObject[] P1HalfHearts = new GameObject[10];
-    //public GameObject[] P2HalfHearts = new GameObject[10];
+    
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
@@ -25,7 +24,7 @@ public class QGSP : MonoBehaviour
     public SpriteRenderer spriteAdelanteRenderer;
 
     public GameObject apuntador1;
-    public GameObject apuntador2;
+    
 
     public GameObject Reloj;
 
@@ -35,27 +34,23 @@ public class QGSP : MonoBehaviour
     public Canvas canvasMaster;
     public Canvas canvasWinners;
     public GameObject panelP1Winner;
-    public GameObject panelP2Winner;
-    public GameObject panelEmpate;
+    
 
     public Canvas howToPlay;
 
     public bool J1Responde;
-    public bool J2Responde;
-    public bool venganza;
+    
 
     private bool J1Dañado;
-    private bool J2Dañado;
-    private bool dañoPaDos;
+    
     private bool halfHeart;
 
-    private bool player1Pressed;
-    private bool player2Pressed;
-    private bool countDownStarted;
+    
+    
+    //private bool countDownStarted;
     private bool secondCountDownStarted;
 
-    public GameObject teclaD;
-    public GameObject teclaK;
+    
 
     public QuestionManager questionManager;
     public Question currentQuestion;
@@ -65,7 +60,7 @@ public class QGSP : MonoBehaviour
     int correctButtonIndex = -1;
 
     public int player1Health = 100;
-    public int player2Health = 100;
+    
 
 
     #endregion
@@ -89,19 +84,16 @@ public class QGSP : MonoBehaviour
         panelQuestion.SetActive(false);
         canvasWinners.gameObject.SetActive(false);
         panelP1Winner.SetActive(false);
-        panelP2Winner.SetActive(false);
-        panelEmpate.SetActive(false);
+        
 
         for (int i = 0; i < 10; i++)
         {
             P1Hearts[i].SetActive(true);
-            //P2Hearts[i].SetActive(true);
-            //P1HalfHearts[i].SetActive(false);
-            //P2HalfHearts[i].SetActive(false);
+            
         }
 
         apuntador1.SetActive(false);
-        apuntador2.SetActive(false);
+        
 
         sprite3Renderer.gameObject.SetActive(false);
         sprite2Renderer.gameObject.SetActive(false);
@@ -109,16 +101,13 @@ public class QGSP : MonoBehaviour
         spriteAdelanteRenderer.gameObject.SetActive(false);
 
         J1Responde = false;
-        J2Responde = false;
-        venganza = false;
+        
 
         J1Dañado = false;
-        J2Dañado = false;
-        dañoPaDos = false;
+        
         halfHeart = false;
 
-        teclaD.SetActive(false);
-        teclaK.SetActive(false);
+        
 
     }
 
@@ -211,8 +200,8 @@ public class QGSP : MonoBehaviour
 
     IEnumerator DetectKeyPress()
     {
-        Reloj.SetActive(true);
-        player1Pressed = true;
+        
+        
 
         yield return new WaitForSeconds(4f);
 
@@ -224,7 +213,7 @@ public class QGSP : MonoBehaviour
 
     void DetermineWinner() //definir banderas de jugadores
     {
-        //EnableArrows();
+        Reloj.SetActive(true);
 
         J1Responde = true;
         EnableAnswerButtons();
@@ -232,20 +221,7 @@ public class QGSP : MonoBehaviour
         
     }
 
-    void EnableArrows()
-    {
-        if (player1Pressed)
-        {
-            apuntador1.SetActive(true);
-            apuntador2.SetActive(false);
-        }
-        else if (player2Pressed)
-        {
-            apuntador2.SetActive(true);
-            apuntador1.SetActive(false);
-        }
-
-    }
+    
 
     IEnumerator ShowQuestionPanel()
     {
@@ -320,9 +296,8 @@ public class QGSP : MonoBehaviour
 
             if (countdownTimer <= 0f)
             {
-                player1Health -= 5;
-                player2Health -= 5;
-                dañoPaDos = true;
+                player1Health -= 10;
+                J1Dañado = true;
                 Reloj.SetActive(false);
                 Daños();
             }
@@ -352,55 +327,29 @@ public class QGSP : MonoBehaviour
 
         if (J1Responde)
         {
-            J2Dañado = true;
-            player2Health -= 10;
-            //DAÑO AL 2
+            //GANA PUNTO O X
             Debug.Log("RESPONDE BIEN EL 1");
         }
-        else if (J2Responde)
-        {
-            J1Dañado = true;
-            player1Health -= 10;
-            //DAÑO AL 1
-            Debug.Log("RESPONDE BIEN EL 2");
-        }
+        
     }
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
     {
         secondCountDownStarted = true;
-        //ChangeButtonColor(false);
+        ChangeButtonColor(false);
+        Reloj.SetActive(false);
 
-        if (J1Responde && !venganza)
+        if (J1Responde)
         {
-            player1Pressed = false;
-            player2Pressed = true;
+            
+            
             J1Responde = false;
-            venganza = true;
 
-            DetermineWinner();
+            J1Dañado = true;
+            //DetermineWinner();
             Debug.Log("RESPONDE MALL EL 1");
         }
-        else if (J2Responde && !venganza)
-        {
-            player2Pressed = false;
-            player1Pressed = true;
-            J2Responde = false;
-            venganza = true;
-
-            DetermineWinner();
-            Debug.Log("RESPONDE MAL EL 2");
-        }
-        else if (venganza)
-        {
-            player1Health -= 5;
-            player2Health -= 5;
-            Reloj.SetActive(false);
-            dañoPaDos = true;
-            Debug.Log("DAÑO PA LOS DOS");
-            Daños();
-        }
-
+        
     }
 
     void ChangeButtonColor(bool correctAnswer)
@@ -441,37 +390,16 @@ public class QGSP : MonoBehaviour
     {
         PlayerAnimatorController[] playerControllers = FindObjectsOfType<PlayerAnimatorController>();
 
-        if (player1Health > 0 && player2Health > 0)
+        if (player1Health > 0)
         {
 
 
             foreach (var playerController in playerControllers)
             {
-                if (dañoPaDos) // Verifica si dañoPaDos es verdadero para ejecutar la animación de daño en ambos jugadores
-                {
-                    playerController.StartDamageAnimation();
-                    Debug.Log("ANIMACION DE DAÑO A JUGADOR");
-                }
-                else
-                {
-                    if (playerController.playerTag == "Player1" && J1Dañado)
-                    {
-                        playerController.StartDamageAnimation();
-                        Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
-
-                        // Encuentra al jugador 2 y comienza la animación de ataque
-                        PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
-                        foreach (var controller in controllers)
-                        {
-                            if (controller.playerTag == "Player2")
-                            {
-                                controller.StartAttackAnimation();
-                                Debug.Log("ANIMACION DE ATAQUE A JUGADOR 2");
-                                break;
-                            }
-                        }
-                    }
-                    else if (playerController.playerTag == "Player2" && J2Dañado)
+                
+                
+                    
+                    if (playerController.playerTag == "Player2" && !J1Dañado)
                     {
                         playerController.StartDamageAnimation();
                         Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
@@ -488,6 +416,22 @@ public class QGSP : MonoBehaviour
                             }
                         }
                     }
+                else if (playerController.playerTag == "Player1" && J1Dañado)
+                {
+                    playerController.StartDamageAnimation();
+                    Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
+
+                    // Encuentra al jugador 1 y comienza la animación de ataque
+                    PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                    foreach (var controller in controllers)
+                    {
+                        if (controller.playerTag == "Player2")
+                        {
+                            controller.StartAttackAnimation();
+                            Debug.Log("ANIMACION DE ATAQUE A JUGADOR 2");
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -495,12 +439,12 @@ public class QGSP : MonoBehaviour
             ReiniciarJuego();
         }
 
-        else if (player1Health <= 0 && player2Health <= 0)
+        else if (player1Health <= 0)
         {
-            apuntador2.SetActive(false);
+            
             apuntador1.SetActive(false);
             canvasWinners.gameObject.SetActive(true);
-            panelEmpate.SetActive(true);
+            
 
             PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
             foreach (var controller in controllers)
@@ -519,7 +463,7 @@ public class QGSP : MonoBehaviour
 
         else
         {
-            apuntador2.SetActive(false);
+            
             apuntador1.SetActive(false);
 
             int indexJugador1 = PlayerPrefs.GetInt("Jugador1Index");
@@ -529,11 +473,11 @@ public class QGSP : MonoBehaviour
                 indexJugador2 >= 0 && indexJugador2 < GameManager.Instance.personajes.Count &&
                 spawnPoints.Length >= 2)
             {
-                if (player1Health <= 0) // Gana P2
+                if (player1Health <= 0) // PIERDE P1
                 {
                     Debug.Log("GANA JUGADOR 2");
                     canvasWinners.gameObject.SetActive(true);
-                    panelP2Winner.SetActive(true);
+                    
 
                     PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
                     foreach (var controller in controllers)
@@ -548,7 +492,7 @@ public class QGSP : MonoBehaviour
                         }
                     }
                 }
-                else if (player2Health <= 0) // Gana P1
+                /*else if (player2Health <= 0) // Gana P1
                 {
                     Debug.Log("GANA JUGADOR 1");
                     canvasWinners.gameObject.SetActive(true);
@@ -567,7 +511,7 @@ public class QGSP : MonoBehaviour
                             controller.StartLoseAnimation();
                         }
                     }
-                }
+                }*/
 
             }
         }
@@ -595,23 +539,21 @@ public class QGSP : MonoBehaviour
 
 
         apuntador1.SetActive(false);
-        apuntador2.SetActive(false);
+        
         Reloj.SetActive(false);
 
         panelQuestion.SetActive(false);
-        player1Pressed = false;
-        player2Pressed = false;
+        
+        
 
         J1Responde = false;
-        J2Responde = false;
-        venganza = false;
+        
 
         J1Dañado = false;
-        J2Dañado = false;
-        dañoPaDos = false;
+        
 
         Debug.Log("Vida del jugador 1: " + player1Health);
-        Debug.Log("Vida del jugador 2: " + player2Health);
+        
 
         // Llamar a la función que maneja el ciclo del juego desde el principio
         StartCoroutine(ShowNextQuestion());
@@ -641,7 +583,7 @@ public class QGSP : MonoBehaviour
     {
         if (!halfHeart)
         {
-            if (J1Dañado && !dañoPaDos)
+            if (J1Dañado)
             {
                 int i = arrindex1;
                 do
