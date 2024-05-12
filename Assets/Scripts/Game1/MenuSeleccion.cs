@@ -9,10 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuSeleccion : MonoBehaviour
 {
-    //public GameObject[] personajePrefabs; // Array de prefabs de los personajes.
+    public GameObject P2Items;
+    public GameObject stylesSP;
+    public GameObject stylesMP;
+
+    public GameObject[] buttons;
 
     public GameObject canvasPersonajes;
     public GameObject canvasDificultad;
+    public GameObject canvasGameModes;
 
     public RawImage introVideoRawImage;
     public VideoPlayer videoPlayer;
@@ -28,13 +33,20 @@ public class MenuSeleccion : MonoBehaviour
     private int[] index; // Arreglo de índices de selección para los dos jugadores.
 
     public GameObject quitButton;
+    bool ola = false;
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
+        if (PlayerPrefs.GetInt("GameMode") == 1)
+        {
+            P2Items.SetActive(false);
+        }
 
+        gameManager = GameManager.Instance;
+        
         canvasPersonajes.SetActive(true);
         canvasDificultad.SetActive(false);
+        canvasGameModes.SetActive(false);
         introVideoRawImage.gameObject.SetActive(false);
 
         index = new int[2]; // Inicializar arreglo de índices para los dos jugadores.
@@ -97,14 +109,72 @@ public class MenuSeleccion : MonoBehaviour
 
     public void ChangeNextCanvas()
     {
-        canvasPersonajes.SetActive(false);
-        canvasDificultad.SetActive(true);
+
+        if(!ola)
+        {
+            ola = true;
+            canvasPersonajes.SetActive(false);
+            canvasDificultad.SetActive(true);
+
+            if(PlayerPrefs.GetInt("gameIndex") != 1)
+            {
+                buttons[0].SetActive(false);
+                buttons[1].SetActive(true);
+            }
+
+        }
+        else
+        {
+            ola = false;
+            canvasPersonajes.SetActive(false);
+            canvasDificultad.SetActive(false);
+            canvasGameModes.SetActive(true);
+            
+            if (PlayerPrefs.GetInt("GameMode") == 2)
+            {
+                stylesMP.SetActive(true);
+                stylesSP.SetActive(false);
+            }
+            else
+            {
+                stylesMP.SetActive(false);
+                stylesSP.SetActive(true);
+            }
+        }
+
     }
+
+    
+
 
     public void ChangeLastCanvas()
     {
-        canvasPersonajes.SetActive(true);
-        canvasDificultad.SetActive(false);
+        if (ola)
+        {
+            ola = false;
+            canvasPersonajes.SetActive(true);
+            canvasDificultad.SetActive(false);
+        }
+        else
+        {
+            ola = true;
+            canvasPersonajes.SetActive(false);
+            canvasDificultad.SetActive(true);
+            canvasGameModes.SetActive(false);
+
+            if (PlayerPrefs.GetInt("GameMode") == 2)
+            {
+                stylesMP.SetActive(true);
+                stylesSP.SetActive(false);
+            }
+            else
+            {
+                stylesMP.SetActive(false);
+                stylesSP.SetActive(true);
+            }
+        }
+
+        
     }
 
     public void SelectDifficulty(string difficulty)
@@ -113,6 +183,13 @@ public class MenuSeleccion : MonoBehaviour
 
 
         Debug.Log(difficulty);
+    }
+
+    public void SelectGameStyle(string gameStyle)
+    {
+        PlayerPrefs.SetString("gameStyle", gameStyle);
+
+        Debug.Log(gameStyle);
     }
 
 
@@ -128,6 +205,9 @@ public class MenuSeleccion : MonoBehaviour
     public void StartGame()
     {
         quitButton.SetActive(false);
+        canvasPersonajes.SetActive(false);
+        canvasDificultad.SetActive(false);
+        canvasGameModes.SetActive(false);
         introVideoRawImage.gameObject.SetActive(true);
         StartCoroutine(PlayIntroAndStartGame());
     }
