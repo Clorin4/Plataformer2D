@@ -341,10 +341,8 @@ public class QGSP : MonoBehaviour
 
         if (J1Responde)
         {
-            
-            
             J1Responde = false;
-
+            player1Health -= 10;
             J1Dañado = true;
             //DetermineWinner();
             Debug.Log("RESPONDE MALL EL 1");
@@ -392,46 +390,21 @@ public class QGSP : MonoBehaviour
 
         if (player1Health > 0)
         {
-
-
             foreach (var playerController in playerControllers)
-            {
-                
-                
-                    
-                    if (playerController.playerTag == "Player2" && !J1Dañado)
-                    {
-                        playerController.StartDamageAnimation();
-                        Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
+            {    
+                if (playerController.playerTag == "Player1" && !J1Dañado)
+                {
+                    playerController.StartAttackAnimation();
+                    Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
 
-                        // Encuentra al jugador 1 y comienza la animación de ataque
-                        PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
-                        foreach (var controller in controllers)
-                        {
-                            if (controller.playerTag == "Player1")
-                            {
-                                controller.StartAttackAnimation();
-                                Debug.Log("ANIMACION DE ATAQUE A JUGADOR 1");
-                                break;
-                            }
-                        }
-                    }
+                        
+                }
                 else if (playerController.playerTag == "Player1" && J1Dañado)
                 {
                     playerController.StartDamageAnimation();
                     Debug.Log("ANIMACION DE DAÑO A JUGADOR 1");
 
-                    // Encuentra al jugador 1 y comienza la animación de ataque
-                    PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
-                    foreach (var controller in controllers)
-                    {
-                        if (controller.playerTag == "Player2")
-                        {
-                            controller.StartAttackAnimation();
-                            Debug.Log("ANIMACION DE ATAQUE A JUGADOR 2");
-                            break;
-                        }
-                    }
+                    
                 }
             }
 
@@ -439,42 +412,15 @@ public class QGSP : MonoBehaviour
             ReiniciarJuego();
         }
 
-        else if (player1Health <= 0)
-        {
-            
-            apuntador1.SetActive(false);
-            canvasWinners.gameObject.SetActive(true);
-            
-
-            PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
-            foreach (var controller in controllers)
-            {
-                if (controller.playerTag == "Player1")
-                {
-                    controller.StartLoseAnimation();
-                }
-                if (controller.playerTag == "Player2")
-                {
-                    controller.StartLoseAnimation();
-                }
-            }
-
-        }
+        
 
         else
         {
-            
             apuntador1.SetActive(false);
 
-            int indexJugador1 = PlayerPrefs.GetInt("Jugador1Index");
-            int indexJugador2 = PlayerPrefs.GetInt("Jugador2Index");
-
-            if (indexJugador1 >= 0 && indexJugador1 < GameManager.Instance.personajes.Count &&
-                indexJugador2 >= 0 && indexJugador2 < GameManager.Instance.personajes.Count &&
-                spawnPoints.Length >= 2)
-            {
                 if (player1Health <= 0) // PIERDE P1
                 {
+                    HeartsHUD();
                     Debug.Log("GANA JUGADOR 2");
                     canvasWinners.gameObject.SetActive(true);
                     
@@ -482,17 +428,14 @@ public class QGSP : MonoBehaviour
                     PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
                     foreach (var controller in controllers)
                     {
-                        if (controller.playerTag == "Player2")
-                        {
-                            controller.StartVictoryAnimation();
-                        }
-                        else if (controller.playerTag == "Player1")
+                        
+                        if (controller.playerTag == "Player1")
                         {
                             controller.StartLoseAnimation();
                         }
                     }
                 }
-                /*else if (player2Health <= 0) // Gana P1
+                /*else if (player2Health <= 0) // Gana P1  NO BORRAR, MODIFICAR
                 {
                     Debug.Log("GANA JUGADOR 1");
                     canvasWinners.gameObject.SetActive(true);
@@ -513,7 +456,7 @@ public class QGSP : MonoBehaviour
                     }
                 }*/
 
-            }
+            
         }
 
     }

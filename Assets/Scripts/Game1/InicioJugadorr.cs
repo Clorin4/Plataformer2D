@@ -5,6 +5,8 @@ using UnityEngine;
 public class InicioJugadorr : MonoBehaviour
 {
     public Transform[] spawnPoints; // Un arreglo para almacenar los puntos de spawn
+    GameObject jugador2;
+
 
     private void Start()
     {
@@ -22,12 +24,16 @@ public class InicioJugadorr : MonoBehaviour
                 player1Controller.SetPlayerIndexAndTag(indexJugador1, "Player1");
             }
 
-            GameObject jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
-            PlayerAnimatorController player2Controller = jugador2.GetComponent<PlayerAnimatorController>();
-            if (player2Controller != null)
+            if(PlayerPrefs.GetInt("GameMode") == 2)
             {
-                player2Controller.SetPlayerIndexAndTag(indexJugador2, "Player2");
+                jugador2 = Instantiate(GameManager.Instance.personajes[indexJugador2].personajeJugable, spawnPoints[1].position, Quaternion.identity);
+                PlayerAnimatorController player2Controller = jugador2.GetComponent<PlayerAnimatorController>();
+                if (player2Controller != null)
+                {
+                    player2Controller.SetPlayerIndexAndTag(indexJugador2, "Player2");
+                }
             }
+            
 
             int gameChoice = PlayerPrefs.GetInt("gameIndex");
             Debug.Log(gameChoice);
