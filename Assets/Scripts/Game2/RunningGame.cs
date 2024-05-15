@@ -45,6 +45,7 @@ public class RunningGame : MonoBehaviour
 
     public GameObject apuntadorP1;
     public GameObject apuntadorP2;
+    public TextMeshProUGUI turnoText;
 
     int zonaP1;
     int zonaP2;
@@ -219,7 +220,7 @@ public class RunningGame : MonoBehaviour
                 if (!isTimerRunning) break;
 
                 elapsedTime += Time.deltaTime;
-                Debug.Log(elapsedTime);
+                //Debug.Log(elapsedTime);
                 yield return null;
             }
             isTimerRunning = false;
@@ -310,7 +311,21 @@ public class RunningGame : MonoBehaviour
     private void Update()
     {
         RunAnimations();
-        
+
+        if (isPlayer1Turn)
+        {
+            turnoText.text = "Turno:  jugador 1";
+            Color colorP1;
+            ColorUtility.TryParseHtmlString("#0FA8EF", out colorP1); // Azul en hexadecimal
+            turnoText.color = colorP1;
+        }
+        else
+        {
+            turnoText.text = "Turno:  jugador 2";
+            Color colorP1;
+            ColorUtility.TryParseHtmlString("#FF453B", out colorP1); // Azul en hexadecimal
+            turnoText.color = colorP1;
+        }
     }
 
     private void RunAnimations()
