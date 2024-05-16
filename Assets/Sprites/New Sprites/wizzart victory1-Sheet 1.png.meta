@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,7 +127,574 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 9
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56b561ce985dd4c47831b5a878f62eab
+      internalID: 2084443972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 47
+        width: 4
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f548d7480d6f7b945bf7ba14d24a50f5
+      internalID: 1240500551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 7
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f607007a7fa5c542bc89b48b6fdd72e
+      internalID: 534711538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 8
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c3b0775e9325f548b062bb2fc8f4620
+      internalID: 476488617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 9
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158b302e93374894eb7ca886d3dcda08
+      internalID: 2040485087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 36
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 393837ba5dae7da459ac6162e66f7d17
+      internalID: 376502413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 13
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ef460d5b5ca524896e8e9b5b892e5d
+      internalID: 1772360008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 36
+        width: 2
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d054f8d98316a0d46b6d09835050a679
+      internalID: -1165987478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 6
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84ff850b5038e3845ad49bfced9adaaa
+      internalID: 1751824418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 5
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0ab189e1cac824a909fd8148eaf2be
+      internalID: 290288599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 12
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb5b20ae399ad5f4f8c4b83b5d0a4b7c
+      internalID: 1502685811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_11
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 5
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3731f3a2248472a4e9d38942b08d7039
+      internalID: 371908424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_12
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 7
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5cfe9792c6adb547a9fc8da151b2a45
+      internalID: 1380438249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_13
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 6
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d714454c9c52e6439e70a87345293ee
+      internalID: 434919468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_14
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 38
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b326b35c926c442be8a32225f8d6b6
+      internalID: 1874039926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_15
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 7
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a58ea4a368aa9345af0bf1c68446ca7
+      internalID: -665718308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 37
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 286b568ca4747064ca68ad5fa32ae346
+      internalID: -824888522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_17
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 5
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb8b1cc2258bac4b94852a14073a598
+      internalID: -682942837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_18
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 4
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b94318ee31ab64a92f1952a128cdef
+      internalID: -1048246242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_19
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 50
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bca8e1ca26577143a8a691ac43a6bfb
+      internalID: 1713300121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_20
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 3
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a2b978c99fc7e146b10ae5c9308bb37
+      internalID: -1322982189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_21
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 3
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeca44d765de8f84db009fcb19ba903a
+      internalID: -2092997432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_22
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 39
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043c84dad1ab7e945a0bada1d8d5c119
+      internalID: 1336835169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_23
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 4
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3ee7b165ad04d429861c4cdf972fcb
+      internalID: 511269163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_24
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 36
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1d2162be413f024f93809c7f62f1784
+      internalID: 907281678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_25
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 3
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6a7c7b29e29e3d459a9be1632d25899
+      internalID: -1623218793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wizzart victory1-Sheet 1_26
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 6
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60727d8f5dbefa64b8c76a6c525a0178
+      internalID: -2024485151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +705,34 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wizzart victory1-Sheet 1_0: 2084443972
+      wizzart victory1-Sheet 1_1: 1240500551
+      wizzart victory1-Sheet 1_10: 1502685811
+      wizzart victory1-Sheet 1_11: 371908424
+      wizzart victory1-Sheet 1_12: 1380438249
+      wizzart victory1-Sheet 1_13: 434919468
+      wizzart victory1-Sheet 1_14: 1874039926
+      wizzart victory1-Sheet 1_15: -665718308
+      wizzart victory1-Sheet 1_16: -824888522
+      wizzart victory1-Sheet 1_17: -682942837
+      wizzart victory1-Sheet 1_18: -1048246242
+      wizzart victory1-Sheet 1_19: 1713300121
+      wizzart victory1-Sheet 1_2: 534711538
+      wizzart victory1-Sheet 1_20: -1322982189
+      wizzart victory1-Sheet 1_21: -2092997432
+      wizzart victory1-Sheet 1_22: 1336835169
+      wizzart victory1-Sheet 1_23: 511269163
+      wizzart victory1-Sheet 1_24: 907281678
+      wizzart victory1-Sheet 1_25: -1623218793
+      wizzart victory1-Sheet 1_26: -2024485151
+      wizzart victory1-Sheet 1_3: 476488617
+      wizzart victory1-Sheet 1_4: 2040485087
+      wizzart victory1-Sheet 1_5: 376502413
+      wizzart victory1-Sheet 1_6: 1772360008
+      wizzart victory1-Sheet 1_7: -1165987478
+      wizzart victory1-Sheet 1_8: 1751824418
+      wizzart victory1-Sheet 1_9: 290288599
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
