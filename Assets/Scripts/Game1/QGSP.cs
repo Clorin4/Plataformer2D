@@ -22,9 +22,11 @@ public class QGSP : MonoBehaviour
     public SpriteRenderer sprite2Renderer;
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
+    public SpriteRenderer spriteFinishRenderer;
 
     public GameObject apuntador1;
-    
+    private int correctAnsCount;
+    public TextMeshProUGUI txtCAC;
 
     public GameObject Reloj;
 
@@ -39,14 +41,8 @@ public class QGSP : MonoBehaviour
     public Canvas howToPlay;
 
     public bool J1Responde;
-    
-
     private bool J1Dañado;
-    
-    private bool halfHeart;
 
-    
-    
     //private bool countDownStarted;
     private bool secondCountDownStarted;
 
@@ -59,7 +55,7 @@ public class QGSP : MonoBehaviour
     public Button[] answerButtons;
     int correctButtonIndex = -1;
 
-    public int player1Health = 100;
+    public int player1Health = 50;
     
 
 
@@ -68,7 +64,7 @@ public class QGSP : MonoBehaviour
     {
         howToPlay.gameObject.SetActive(true);
         TurnOffVariables();
-
+        
         SaberDificultad();
     }
 
@@ -86,7 +82,7 @@ public class QGSP : MonoBehaviour
         panelP1Winner.SetActive(false);
         
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             P1Hearts[i].SetActive(true);
             
@@ -99,15 +95,13 @@ public class QGSP : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite1Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+        spriteFinishRenderer.gameObject.SetActive(false);
 
         J1Responde = false;
-        
-
         J1Dañado = false;
-        
-        halfHeart = false;
 
-        
+        correctAnsCount = 0;
+        txtCAC.text = "Respuestas correctas: " + correctAnsCount;
 
     }
 
@@ -195,33 +189,25 @@ public class QGSP : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(ShowQuestionPanel());
+        
         StartCoroutine(DetectKeyPress());
     }
 
     IEnumerator DetectKeyPress()
     {
-        
-        
-
         yield return new WaitForSeconds(4f);
 
-        
-
-        DetermineWinner();
-
-    }
-
-    void DetermineWinner() //definir banderas de jugadores
-    {
         Reloj.SetActive(true);
-
         J1Responde = true;
         EnableAnswerButtons();
-
-        
     }
 
-    
+    IEnumerator Finish()
+    {
+        spriteFinishRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteFinishRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
+        
+    }
 
     IEnumerator ShowQuestionPanel()
     {
@@ -327,7 +313,8 @@ public class QGSP : MonoBehaviour
 
         if (J1Responde)
         {
-            //GANA PUNTO O X
+            correctAnsCount += 1;
+            txtCAC.text = "Respuestas correctas: " + correctAnsCount;
             Debug.Log("RESPONDE BIEN EL 1");
         }
         
@@ -418,23 +405,24 @@ public class QGSP : MonoBehaviour
         {
             apuntador1.SetActive(false);
 
-                if (player1Health <= 0) // PIERDE P1
-                {
-                    HeartsHUD();
-                    Debug.Log("GANA JUGADOR 2");
-                    canvasWinners.gameObject.SetActive(true);
-                    
+            if (player1Health <= 0) // PIERDE P1
+            {
+                HeartsHUD();
+                Debug.Log("GANA JUGADOR 2");
+                canvasWinners.gameObject.SetActive(true);
+                panelQuestion.SetActive(false);
+                StartCoroutine(Finish());
 
-                    PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
-                    foreach (var controller in controllers)
+                PlayerAnimatorController[] controllers = FindObjectsOfType<PlayerAnimatorController>();
+                foreach (var controller in controllers)
+                {
+
+                    if (controller.playerTag == "Player1")
                     {
-                        
-                        if (controller.playerTag == "Player1")
-                        {
                             controller.StartLoseAnimation();
-                        }
                     }
                 }
+            }
                 /*else if (player2Health <= 0) // Gana P1  NO BORRAR, MODIFICAR
                 {
                     Debug.Log("GANA JUGADOR 1");
@@ -524,8 +512,7 @@ public class QGSP : MonoBehaviour
 
     public void HeartsHUD()
     {
-        if (!halfHeart)
-        {
+        
             if (J1Dañado)
             {
                 int i = arrindex1;
@@ -537,7 +524,7 @@ public class QGSP : MonoBehaviour
                 }
                 while (J1Dañado);
             }
-        }    
+          
 
     }
 

@@ -42,9 +42,12 @@ public class CollectGame : MonoBehaviour
 
     public int ScoreP1 = 0;
     public int ScoreP2 = 0;
+    public GameObject[] P1ScoreUI;
+    public GameObject[] P2ScoreUI;
 
-    public  bool isTyping = false;
-    private int checkState = 0;
+
+    public bool isTyping = false;
+    
 
     void Start()
     {
@@ -52,6 +55,12 @@ public class CollectGame : MonoBehaviour
         SaberDificultad();
         
         StartGame();
+
+        for (int i = 1; i <= 5; i++)
+        {
+            P1ScoreUI[i].SetActive(false);
+            P2ScoreUI[i].SetActive(false);
+        }
 
     }
 
@@ -77,7 +86,7 @@ public class CollectGame : MonoBehaviour
         P2Checking = false;
         P1Correct = 0;
         P2Correct = 0;
-        checkState = 0;
+        
 
     }
 
@@ -89,7 +98,8 @@ public class CollectGame : MonoBehaviour
 
     public void ShowOrder(string difficulty)
     {
-        //canvasPedido.SetActive(true);
+        StartCoroutine(TypeText());
+        
 
         FruitOrderManager fruitOrderManager = FindObjectOfType<FruitOrderManager>();
         if (fruitOrderManager != null)
@@ -174,50 +184,42 @@ public class CollectGame : MonoBehaviour
 
     IEnumerator TypeText() //HACER TEXTO PARA EMPEZAR A PEDIR "QUIERO ESTAS FRUTAS"
     {
+        textComponent.text = "";
 
-        int lastState = 0;
-        /*if (!isTyping)
+        if (P1Correct == 0 && !isTyping)
         {
-            textComponent.text = "";
-        }*/
-        
+            fullText = "Necesito estas frutas por favor";
+        }
 
         if (P1Correct == 2 && !isTyping)
         {
             fullText = "PERFECTO JUGADOR 1";
-            checkState = 1;
+            
         }
         else if (P1Correct == 1 && !isTyping)
         {
             fullText = "CREO QUE ALGO ANDA MAL JUGADOR 1";
             P1Correct = 0;
             P2Correct = 0;
-            checkState = 2;
+            
         }
         
         if (P2Correct == 2 && !isTyping)
         {
             fullText = "BIEN HECHO JUGADOR 2";
-            checkState = 3;
+            
         }
         else if (P2Correct == 1 && !isTyping)
         {
             fullText = "SEGUROO JUGADOR 2?";
             P1Correct = 0;
             P2Correct = 0;
-            checkState = 4;
-        }
-
-        if(lastState != checkState)
-        {
-            textComponent.text = "";
-            //isTyping = false;
-
+            
         }
 
         if (!isTyping)
         {
-            lastState = checkState;
+            
             isTyping = true;
             foreach (char letter in fullText.ToCharArray())
             {
@@ -234,15 +236,12 @@ public class CollectGame : MonoBehaviour
         {
             CheckScore();
         }
-        
     }
 
     public void StartGame()
     {
         TurnOffVariables();
         StartCoroutine(Countdown());
-
-        
     }
 
 
@@ -269,11 +268,15 @@ public class CollectGame : MonoBehaviour
 
             if (isInRange == true && Input.GetKeyDown(KeyCode.E))
             {
-                P1Checking = true;
-                globoTextE.SetActive(false);
-                isOnClickedE = true;
-                CheckOrderCompletion();
-                Debug.Log("CHECAMO P1");
+                if (!P2Checking)
+                {
+                    P1Checking = true;
+                    globoTextE.SetActive(false);
+                    isOnClickedE = true;
+                    CheckOrderCompletion();
+                    Debug.Log("CHECAMO P1");
+                }
+                
             }
 
         }
@@ -301,11 +304,15 @@ public class CollectGame : MonoBehaviour
 
             if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift))
             {
-                P2Checking = true;
-                globoTextShift.SetActive(false);
-                isOnClickedE = true;
-                CheckOrderCompletion();
-                Debug.Log("CHECAMO P2");
+                if (!P1Checking)
+                {
+                    P2Checking = true;
+                    globoTextShift.SetActive(false);
+                    isOnClickedE = true;
+                    CheckOrderCompletion();
+                    Debug.Log("CHECAMO P2");
+                }
+                
             }
 
         }
@@ -323,22 +330,43 @@ public class CollectGame : MonoBehaviour
         }
     }
 
+    public void ScoreUI()
+    {
+        int indexP1 = ScoreP1;
+        int indexP2 = ScoreP2;
+
+        if(indexP1 != 0)
+        {
+            P1ScoreUI[indexP1].SetActive(true);
+            P1ScoreUI[indexP1 - 1].SetActive(false);
+        }
+        if (indexP2 != 0)
+        {
+            P2ScoreUI[indexP2].SetActive(true);
+            P2ScoreUI[indexP2 - 1].SetActive(false);
+        }
+    }
+
+
     private void CheckScore()
     {
         bool GanaP1 = false;
         bool GanaP2 = false;
 
-        if (ScoreP1 != 3 && ScoreP2 != 3)
+        if (ScoreP1 != 5 && ScoreP2 != 5)
         {
             StartGame();
+            ScoreUI();
         }
-        else if (ScoreP1 == 3)
+        else if (ScoreP1 == 5)
         {
             GanaP1 = true;
+            ScoreUI();
         }
-        else if (ScoreP2 == 3)
+        else if (ScoreP2 == 5)
         {
             GanaP2 = true;
+            ScoreUI();
         }
 
         if (GanaP1)
@@ -494,7 +522,7 @@ public class CollectGame : MonoBehaviour
                 }
             }
 
-            if (P2Checking)
+            if (P2Checking && !P1Checking)
             {
                 // Verificar para el Player2
                 foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer2)
@@ -531,7 +559,7 @@ public class CollectGame : MonoBehaviour
                 orderCompletedPlayer2 = false;
             }
 
-            if (P1Checking)
+            if (P1Checking && !P2Checking)
             {
                 // Verificar para el Player1
                 foreach (KeyValuePair<string, int> kvp in totalFruitsPlayer1)
@@ -571,7 +599,7 @@ public class CollectGame : MonoBehaviour
 
 
             //MOSTRAR GLOBOS DE TEXTO Y TEXTO
-            if (P1Checking)
+            if (P1Checking && !P2Checking)
             {
                 if (orderCompletedPlayer1)
                 {
@@ -591,10 +619,10 @@ public class CollectGame : MonoBehaviour
                     //CheckScore();
                     Debug.Log("¡El jugador 1 aún necesita recolectar más frutas!");
                 }
-                P1Checking = false;
+                
             }
 
-            else if (P2Checking)
+            else if (P2Checking && !P1Checking)
             {
                 if (orderCompletedPlayer2)
                 {
