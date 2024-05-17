@@ -13,6 +13,7 @@ public class CollectGame : MonoBehaviour
     public SpriteRenderer sprite2Renderer;
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
+    public SpriteRenderer spriteFinishRenderer;
 
     public List<Image> fruitImages; // Lista de objetos tipo Image para los sprites de las frutas
     public List<TextMeshProUGUI> quantityTexts;
@@ -77,6 +78,7 @@ public class CollectGame : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite3Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+        spriteFinishRenderer.gameObject.SetActive(false);
 
         canvasPedido.SetActive(false);
         globoTextE.SetActive(false);
@@ -226,14 +228,15 @@ public class CollectGame : MonoBehaviour
 
                 textComponent.text += letter; // Agrega la letra al texto
                 yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
-
+                
             }
             isTyping = false;
-            
+            yield return new WaitForSeconds(1f);
         }
 
         if(P1Correct == 2 || P2Correct == 2)
         {
+            //yield return new WaitForSeconds(1.5f);
             CheckScore();
         }
     }
@@ -347,6 +350,12 @@ public class CollectGame : MonoBehaviour
         }
     }
 
+    IEnumerator Finish()
+    {
+        spriteFinishRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteFinishRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
+
+    }
 
     private void CheckScore()
     {
@@ -362,11 +371,13 @@ public class CollectGame : MonoBehaviour
         {
             GanaP1 = true;
             ScoreUI();
+            StartCoroutine(Finish());
         }
         else if (ScoreP2 == 5)
         {
             GanaP2 = true;
             ScoreUI();
+            StartCoroutine(Finish());
         }
 
         if (GanaP1)

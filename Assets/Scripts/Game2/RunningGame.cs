@@ -11,6 +11,7 @@ public class RunningGame : MonoBehaviour
     public SpriteRenderer sprite2Renderer;
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
+    public SpriteRenderer spriteFinishRenderer;
 
     private Coroutine countdownCoroutine; 
     private Coroutine showPhraseCoroutine; 
@@ -50,6 +51,8 @@ public class RunningGame : MonoBehaviour
     int zonaP1;
     int zonaP2;
     bool alguienGano = false;
+    public GameObject[] P1ScoreUI;
+    public GameObject[] P2ScoreUI;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +60,12 @@ public class RunningGame : MonoBehaviour
         submitButton.onClick.AddListener(SubmitAnswerWithoutParameter);
         TurnOffVariables();
         SaberDificultad();
-        
+
+        for (int i = 1; i <= 5; i++)
+        {
+            P1ScoreUI[i].SetActive(false);
+            P2ScoreUI[i].SetActive(false);
+        }
     }
 
     public void ButtonStartGame()
@@ -87,6 +95,7 @@ public class RunningGame : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite1Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+        spriteFinishRenderer.gameObject.SetActive(false);
     }
 
     public void SaberDificultad()
@@ -334,12 +343,13 @@ public class RunningGame : MonoBehaviour
 
         foreach (var playerController in playerControllers)
         {
-            if (zonaP1 < 10 && zonaP2 < 10)
+            if (zonaP1 < 5 && zonaP2 < 5)
             {
+                
                 if (playerController.playerTag == "Player1" && avanzamo)
                 {
                     zonaP1++;
-                    Debug.Log("PLAYER 1" + zonaP1);
+                    Debug.Log("PLAYER 1 " + zonaP1);
                     avanzamo = false;
                     playerController.StartRunningAnimation();
                     StartCoroutine(AdvancePlayer1Grid());
@@ -349,28 +359,64 @@ public class RunningGame : MonoBehaviour
                 else if (playerController.playerTag == "Player2" && avanzamo2)
                 {
                     zonaP2++;
-                    Debug.Log("PLAYER 2" + zonaP2);
+                    Debug.Log("PLAYER 2 " + zonaP2);
                     avanzamo2 = false;
                     playerController.StartRunningAnimation();
                     StartCoroutine(AdvancePlayer2Grid());
                 }
+                ScoreUI();
             }
             else
             {
+                StartCoroutine(Finish());
                 alguienGano = true;
 
-                if (playerController.playerTag == "Player2" && zonaP1 == 10)
+                if (playerController.playerTag == "Player2" && zonaP1 == 5)
                 {
                     playerController.StartLoseAnimation();
                     WinnerP1.SetActive(true);
                 }
-                else if (playerController.playerTag == "Player1" && zonaP2 == 10)
+                else if (playerController.playerTag == "Player1" && zonaP1 == 5)
+                {
+                    playerController.StartVictoryAnimation();
+                }
+
+                else if (playerController.playerTag == "Player1" && zonaP2 == 5)
                 {
                     playerController.StartLoseAnimation();
                     WinnerP2.SetActive(true);
                 }
+                else if (playerController.playerTag == "Player2" && zonaP2 == 5)
+                {
+                    playerController.StartVictoryAnimation();
+                }
+                ScoreUI();
             }
         }
+
+    }
+
+    public void ScoreUI()
+    {
+        int indexP1 = zonaP1;
+        int indexP2 = zonaP2;
+
+        if (indexP1 != 0)
+        {
+            P1ScoreUI[indexP1].SetActive(true);
+            P1ScoreUI[indexP1 - 1].SetActive(false);
+        }
+        if (indexP2 != 0)
+        {
+            P2ScoreUI[indexP2].SetActive(true);
+            P2ScoreUI[indexP2 - 1].SetActive(false);
+        }
+    }
+
+    IEnumerator Finish()
+    {
+        spriteFinishRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteFinishRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
 
     }
 
@@ -408,7 +454,7 @@ public class RunningGame : MonoBehaviour
         if (!alguienGano)
         {
             EndCurrentTurn();
-
+            
         }
 
 
