@@ -12,10 +12,10 @@ public class QGSP : MonoBehaviour
 
     public Transform[] spawnPoints;
 
-    public GameObject[] P1Hearts = new GameObject[10];
+    public GameObject[] P1Hearts = new GameObject[5];
     
-    public int arrindex1 = 9;
-    public int arrindex2 = 9;
+    public int arrindex1 = 4;
+    
     
 
     public SpriteRenderer sprite3Renderer;
