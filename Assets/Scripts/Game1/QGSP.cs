@@ -10,6 +10,10 @@ public class QGSP : MonoBehaviour
 
     #region  VARIABLEEEES
 
+    public NewBehaviourScript questionData; // Referencia al nuevo script de dificultad
+
+
+
     public Transform[] spawnPoints;
 
     public GameObject[] P1Hearts = new GameObject[5];
@@ -48,9 +52,10 @@ public class QGSP : MonoBehaviour
 
     
 
-    public QuestionManager questionManager;
+    //public QuestionManager questionManager;
     public Question currentQuestion;
-
+    private List<Question> questions; // Lista de preguntas
+    private List<string> displayedAnswers;
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
     int correctButtonIndex = -1;
@@ -108,35 +113,33 @@ public class QGSP : MonoBehaviour
     public void SaberDificultad()
     {
         string selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
-        switch (selectedDifficulty)
+        DifficultyLeveln selectedLevel = questionData.difficultyLevels.Find(level => level.name == selectedDifficulty);
+
+        if (selectedLevel != null)
         {
-            case "dif1":
-                questionManager.questions = questionManager.Easyquestions.ConvertAll(q => (Question)q);
-                break;
+            questions = new List<Question>();
+            foreach (Materia materia in selectedLevel.materias)
+            {
+                questions.AddRange(materia.preguntas);
+            }
+        }
+        else
+        {
+            Debug.LogError("Dificultad no encontrada: " + selectedDifficulty);
+        }
+    }
 
-            case "dif2":
-                questionManager.questions = questionManager.Normalquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif3":
-                questionManager.questions = questionManager.Hardquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif4":
-                questionManager.questions = questionManager.Insanequestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif5":
-                questionManager.questions = questionManager.Demonquestions.ConvertAll(q => (Question)q);
-                break;
-
-            case "dif6":
-                questionManager.questions = questionManager.SuperDemonquestions.ConvertAll(q => (Question)q);
-                break;
-
-            default:
-                // Manejar una dificultad inesperada
-                break;
+    public void GetRandomQuestion()
+    {
+        if (questions != null && questions.Count > 0)
+        {
+            int randomIndex = Random.Range(0, questions.Count);
+            currentQuestion = questions[randomIndex];
+            StartCoroutine(ShowQuestionAndAnswers());
+        }
+        else
+        {
+            Debug.LogError("No hay preguntas disponibles.");
         }
     }
 
@@ -170,6 +173,7 @@ public class QGSP : MonoBehaviour
         // Lógica para iniciar el juego después de la cuenta regresiva
         StartGame();
     }
+
 
     IEnumerator ScaleSpriteTo(SpriteRenderer spriteRenderer, Vector3 startScale, Vector3 endScale, float duration)
     {
@@ -222,85 +226,92 @@ public class QGSP : MonoBehaviour
         yield return ShowQuestionAndAnswers();
     }
 
+
+
     IEnumerator ShowQuestionAndAnswers()
     {
-        secondCountDownStarted = false;
-        float countdownTimer = 12f;
-
-        if (countdownTimer > 0f && !secondCountDownStarted)
+        if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
-            // Obtener una pregunta aleatoria de la lista
-            int randomIndex = Random.Range(0, questionManager.questions.Count);
-            currentQuestion = questionManager.questions[randomIndex];
+            secondCountDownStarted = false;
+            float countdownTimer = 12f;
 
-            // Mostrar la pregunta en el TextMeshPro
-            questionText.text = currentQuestion.questionText;
-
-            List<string> answers = new List<string>(currentQuestion.options);
-            List<string> displayedAnswers = new List<string>();
-
-            // Añadir la respuesta correcta a las respuestas mostradas
-            displayedAnswers.Add(answers[currentQuestion.correctAnswerIndex]);
-            answers.RemoveAt(currentQuestion.correctAnswerIndex);
-
-            // Mostrar las respuestas incorrectas en los botones restantes
-            for (int i = 0; i < answerButtons.Length - 1; i++)
+            if (countdownTimer > 0f && !secondCountDownStarted)
             {
-                int randomAnswerIndex = Random.Range(0, answers.Count);
-                displayedAnswers.Add(answers[randomAnswerIndex]);
-                answers.RemoveAt(randomAnswerIndex);
-            }
+                // Obtener una pregunta aleatoria de la lista
+                int randomIndex = Random.Range(0, questions.Count);
+                currentQuestion = questions[randomIndex];
 
-            // Mezclar las respuestas mostradas
-            displayedAnswers = ShuffleList(displayedAnswers);
+                // Mostrar la pregunta en el TextMeshPro
+                questionText.text = currentQuestion.questionText;
 
-            // Asignar las respuestas a los botones y añadir listeners
-            for (int i = 0; i < answerButtons.Length; i++)
-            {
-                if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
+                List<string> answers = new List<string>(currentQuestion.options);
+                List<string> displayedAnswers = new List<string>();
+
+                // Añadir la respuesta correcta a las respuestas mostradas
+                string correctAnswer = answers[currentQuestion.correctAnswerIndex];
+                displayedAnswers.Add(correctAnswer);
+                answers.RemoveAt(currentQuestion.correctAnswerIndex);
+
+                // Mostrar las respuestas incorrectas en los botones restantes
+                for (int i = 0; i < answerButtons.Length - 1; i++)
                 {
-                    correctButtonIndex = i; // Almacena el índice del botón con la respuesta correcta
+                    int randomAnswerIndex = Random.Range(0, answers.Count);
+                    displayedAnswers.Add(answers[randomAnswerIndex]);
+                    answers.RemoveAt(randomAnswerIndex);
                 }
-                answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
 
-                if (displayedAnswers[i] == currentQuestion.options[currentQuestion.correctAnswerIndex])
+                // Mezclar las respuestas mostradas
+                displayedAnswers = ShuffleList(displayedAnswers);
+
+                // Asignar las respuestas a los botones y añadir listeners
+                for (int i = 0; i < answerButtons.Length; i++)
                 {
-                    answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
+                    answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
+                    answerButtons[i].onClick.RemoveAllListeners();
+
+                    // Verificar si la respuesta del botón es la respuesta correcta
+                    if (displayedAnswers[i] == correctAnswer)
+                    {
+                        answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
+                    }
+                    else
+                    {
+                        answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                    }
                 }
-                else
+
+                while (countdownTimer > 0f && !secondCountDownStarted)
                 {
-                    answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                    countdownTimer -= Time.deltaTime;
+                    yield return null;
+                }
+
+                if (countdownTimer <= 0f)
+                {
+                    player1Health -= 5;
+                    Reloj.SetActive(false);
+                    Daños();
                 }
             }
-
-            while (countdownTimer > 0f && !secondCountDownStarted)
-            {
-                countdownTimer -= Time.deltaTime;
-                //Debug.Log(countdownTimer);
-                yield return null;
-            }
-
-            if (countdownTimer <= 0f)
-            {
-                player1Health -= 10;
-                J1Dañado = true;
-                Reloj.SetActive(false);
-                Daños();
-            }
+        }
+        else if (PlayerPrefs.GetString("gameStyle") == "xmateria")
+        {
+            // Lógica para el otro modo de juego (si es necesario)
         }
     }
 
 
-    List<T> ShuffleList<T>(List<T> list)
+
+
+    public List<string> ShuffleList(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            T temp = list[i];
+            string temp = list[i];
             int randomIndex = Random.Range(i, list.Count);
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
-
         return list;
     }
 
@@ -341,17 +352,25 @@ public class QGSP : MonoBehaviour
     {
         Color color = correctAnswer ? Color.green : Color.red;
 
-        // Cambia solo el color del botón que contiene la respuesta correcta
-        if (correctAnswer && correctButtonIndex != -1)
+        // Accede a la variable miembro para verificar las respuestas mostradas
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+            Image img = answerButtons[i].GetComponent<Image>();
             if (img != null)
             {
-                img.color = color;
+                // Cambia el color del botón según si es la respuesta correcta o incorrecta
+                if (correctAnswer && answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text == currentQuestion.options[currentQuestion.correctAnswerIndex])
+                {
+                    img.color = Color.green; // Cambia el color del botón con la respuesta correcta a verde
+                }
+                else if (!correctAnswer && answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text != currentQuestion.options[currentQuestion.correctAnswerIndex])
+                {
+                    img.color = Color.red; // Cambia el color del botón con respuestas incorrectas a rojo
+                }
             }
         }
 
-        // Restablecer el color del botón correcto después de un tiempo determinado
+        // Restablecer el color de los botones después de un tiempo determinado
         StartCoroutine(ChangeButtonColorBack());
     }
 
@@ -359,16 +378,19 @@ public class QGSP : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // Cambia esto al tiempo que desees mantener los colores
 
-        if (correctButtonIndex != -1)
+        // Restablece el color de todos los botones al color original
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+            Image img = answerButtons[i].GetComponent<Image>();
             if (img != null)
             {
-                img.color = Color.white; // Cambia esto al color original que desees para el botón correcto
+                img.color = Color.white; // Cambia esto al color original que desees para los botones
             }
         }
-        Daños();
+        Daños(); // Llama a la función Daños después de restablecer los colores
     }
+
+
 
 
     public void Daños() //AQUI VAN LAS ANIMACIONES DE LOS DAÑOS

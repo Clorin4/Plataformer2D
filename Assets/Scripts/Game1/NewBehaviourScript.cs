@@ -10,17 +10,17 @@ public class Question
 }
 
 [System.Serializable]
-public class Subject
+public class Materia
 {
     public string name; // Nombre de la materia
-    public List<Question> questions; // Lista de preguntas de la materia
+    public List<Question> preguntas; // Lista de preguntas de la materia
 }
 
 [System.Serializable]
 public class DifficultyLeveln //n
 {
     public string name; // Nombre del grado de dificultad (por ejemplo: "Primer grado")
-    public List<Subject> subjects; // Lista de materias para este grado
+    public List<Materia> materias; // Lista de materias para este grado
 }
 
 public class NewBehaviourScript : MonoBehaviour
