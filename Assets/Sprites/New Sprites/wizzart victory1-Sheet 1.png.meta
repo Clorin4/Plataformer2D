@@ -133,11 +133,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 17
-        y: 9
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,36 +150,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_1
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 47
-        width: 4
-        height: 2
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f548d7480d6f7b945bf7ba14d24a50f5
-      internalID: 1240500551
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_2
       rect:
         serializedVersion: 2
         x: 82
-        y: 7
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,11 +175,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 149
-        y: 8
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,12 +195,12 @@ TextureImporter:
       name: wizzart victory1-Sheet 1_4
       rect:
         serializedVersion: 2
-        x: 216
-        y: 9
+        x: 217
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,7 +221,7 @@ TextureImporter:
         width: 1
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,12 +237,12 @@ TextureImporter:
       name: wizzart victory1-Sheet 1_6
       rect:
         serializedVersion: 2
-        x: 283
-        y: 13
+        x: 285
+        y: 4
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -276,36 +255,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_7
-      rect:
-        serializedVersion: 2
-        x: 328
-        y: 36
-        width: 2
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d054f8d98316a0d46b6d09835050a679
-      internalID: -1165987478
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_8
       rect:
         serializedVersion: 2
         x: 352
-        y: 6
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -322,11 +280,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 416
-        y: 5
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -339,36 +297,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_10
-      rect:
-        serializedVersion: 2
-        x: 325
-        y: 12
-        width: 2
-        height: 2
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 1, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb5b20ae399ad5f4f8c4b83b5d0a4b7c
-      internalID: 1502685811
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_11
       rect:
         serializedVersion: 2
         x: 475
-        y: 5
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -385,11 +322,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 543
-        y: 7
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,11 +343,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 608
-        y: 6
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -423,36 +360,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_14
-      rect:
-        serializedVersion: 2
-        x: 651
-        y: 38
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78b326b35c926c442be8a32225f8d6b6
-      internalID: 1874039926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_15
       rect:
         serializedVersion: 2
         x: 674
-        y: 7
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -465,36 +381,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 37
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 286b568ca4747064ca68ad5fa32ae346
-      internalID: -824888522
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_17
       rect:
         serializedVersion: 2
         x: 748
-        y: 5
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -511,11 +406,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 812
-        y: 4
+        y: 2
         width: 35
-        height: 33
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -528,36 +423,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_19
-      rect:
-        serializedVersion: 2
-        x: 826
-        y: 50
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8bca8e1ca26577143a8a691ac43a6bfb
-      internalID: 1713300121
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_20
       rect:
         serializedVersion: 2
         x: 873
         y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -576,9 +450,9 @@ TextureImporter:
         x: 940
         y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -591,36 +465,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_22
-      rect:
-        serializedVersion: 2
-        x: 975
-        y: 39
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 043c84dad1ab7e945a0bada1d8d5c119
-      internalID: 1336835169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_23
       rect:
         serializedVersion: 2
         x: 1004
-        y: 4
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -633,36 +486,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wizzart victory1-Sheet 1_24
-      rect:
-        serializedVersion: 2
-        x: 1047
-        y: 36
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1d2162be413f024f93809c7f62f1784
-      internalID: 907281678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wizzart victory1-Sheet 1_25
       rect:
         serializedVersion: 2
         x: 1064
         y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -679,11 +511,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1133
-        y: 6
+        y: 3
         width: 35
-        height: 33
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
