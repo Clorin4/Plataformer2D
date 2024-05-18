@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PersonjesNS : MonoBehaviour
 {
+    public Animator ObjectAnim;
     // Start is called before the first frame update
     void Start()
     {
