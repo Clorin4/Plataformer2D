@@ -2398,7 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc4854fb74b424ba7e80a166eaeb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionData: {fileID: 2046589599}
+  questionData: {fileID: 1151066420}
   spawnPoints:
   - {fileID: 1966129900}
   - {fileID: 2033535980}
@@ -5939,6 +5939,169 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097060639}
   m_CullTransparentMesh: 1
+--- !u!1 &1151066418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151066419}
+  - component: {fileID: 1151066420}
+  m_Layer: 0
+  m_Name: QuestionData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1151066419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151066418}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 801.28326, y: 441.82742, z: -54.350197}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1629114483}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151066420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151066418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a85c61e9424f484f9f45b4d4c37bc2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultyLevels:
+  - name: dif1
+    materias:
+    - name: matematicas
+      preguntas:
+      - questionText: haz
+        options:
+        - si
+        - no
+        - no
+        - no
+        correctAnswerIndex: 0
+      - questionText: ded
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mia
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: gryt
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+    - name: historia
+      preguntas:
+      - questionText: yoo?
+        options:
+        - si
+        - no
+        - no
+        - no
+        correctAnswerIndex: 0
+      - questionText: ooooo
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: fggfhhhnh
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+    - name: ciencia
+      preguntas:
+      - questionText: ciencia
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: kkklllljjnn
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: kkklllljjnn
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+  - name: dif2
+    materias:
+    - name: matematicas
+      preguntas: []
+    - name: historia
+      preguntas: []
+    - name: ciencia
+      preguntas: []
+  - name: dif3
+    materias:
+    - name: matematicas
+      preguntas: []
+    - name: historia
+      preguntas: []
+    - name: ciencia
+      preguntas: []
+  - name: dif4
+    materias:
+    - name: matematicas
+      preguntas: []
+    - name: historia
+      preguntas: []
+    - name: ciencia
+      preguntas: []
+  - name: dif5
+    materias:
+    - name: matematicas
+      preguntas: []
+    - name: historia
+      preguntas: []
+    - name: ciencia
+      preguntas: []
+  - name: dif6
+    materias:
+    - name: matematicas
+      preguntas: []
+    - name: historia
+      preguntas: []
+    - name: ciencia
+      preguntas: []
 --- !u!1 &1167302133
 GameObject:
   m_ObjectHideFlags: 0
@@ -8050,7 +8213,7 @@ Transform:
   m_Children:
   - {fileID: 477910668}
   - {fileID: 1020256040}
-  - {fileID: 2046589598}
+  - {fileID: 1151066419}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9175,7 +9338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4, y: -24.305115}
+  m_AnchoredPosition: {x: 4, y: -24.305145}
   m_SizeDelta: {x: -454.28998, y: 50.65851}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912975676
@@ -10256,169 +10419,6 @@ Transform:
   m_Father: {fileID: 477910668}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2046589597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2046589598}
-  - component: {fileID: 2046589599}
-  m_Layer: 0
-  m_Name: QuestionData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2046589598
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046589597}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 801.28326, y: 441.82742, z: -54.350197}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1629114483}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046589599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046589597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a85c61e9424f484f9f45b4d4c37bc2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficultyLevels:
-  - name: dif1
-    materias:
-    - name: matematicas
-      preguntas:
-      - questionText: haz
-        options:
-        - si
-        - no
-        - no
-        - no
-        correctAnswerIndex: 0
-      - questionText: ded
-        options:
-        - gbgbg
-        - bvbgxv
-        - vbvbv
-        - vbcvb
-        correctAnswerIndex: 0
-      - questionText: mia
-        options:
-        - hghgf
-        - ghsgfhg
-        - ghgh
-        - ghgh
-        correctAnswerIndex: 0
-      - questionText: gryt
-        options:
-        - jjjj
-        - oooo
-        - 777yy
-        - kouhh
-        correctAnswerIndex: 0
-    - name: historia
-      preguntas:
-      - questionText: yoo?
-        options:
-        - si
-        - no
-        - no
-        - no
-        correctAnswerIndex: 0
-      - questionText: ooooo
-        options:
-        - chmhmm
-        - chmhmm
-        - chmhmm
-        - chmhmm
-        correctAnswerIndex: 0
-      - questionText: fggfhhhnh
-        options:
-        - hhhhh
-        - hhhhh
-        - hhhhh
-        - hhhhh
-        correctAnswerIndex: 0
-    - name: ciencia
-      preguntas:
-      - questionText: ciencia
-        options:
-        - xxxxxxx
-        - xxxxxxx
-        - xxxxxxx
-        - xxxxxxx
-        correctAnswerIndex: 0
-      - questionText: kkklllljjnn
-        options:
-        - cccccv
-        - cccccv
-        - cccccv
-        - cccccv
-        correctAnswerIndex: 0
-      - questionText: kkklllljjnn
-        options:
-        - ssssswwww
-        - ssssswwww
-        - ssssswwww
-        - ssssswwww
-        correctAnswerIndex: 0
-  - name: dif2
-    materias:
-    - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
-    - name: ciencia
-      preguntas: []
-  - name: dif3
-    materias:
-    - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
-    - name: ciencia
-      preguntas: []
-  - name: dif4
-    materias:
-    - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
-    - name: ciencia
-      preguntas: []
-  - name: dif5
-    materias:
-    - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
-    - name: ciencia
-      preguntas: []
-  - name: dif6
-    materias:
-    - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
-    - name: ciencia
-      preguntas: []
 --- !u!1 &2078812253
 GameObject:
   m_ObjectHideFlags: 0
