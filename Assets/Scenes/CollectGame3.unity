@@ -2480,6 +2480,7 @@ MonoBehaviour:
   - {fileID: 1276269796}
   - {fileID: 461550135}
   - {fileID: 103978857}
+  animaciones: {fileID: 1722526542}
   isTyping: 0
 --- !u!212 &541538064
 SpriteRenderer:
@@ -10124,6 +10125,7 @@ GameObject:
   - component: {fileID: 1722526540}
   - component: {fileID: 1722526539}
   - component: {fileID: 1722526541}
+  - component: {fileID: 1722526542}
   m_Layer: 0
   m_Name: Zorrito
   m_TagString: Untagged
@@ -10219,6 +10221,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1722526542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722526538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a935f20ebf8c24997f2d6289dc7a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1763331365
 GameObject:
   m_ObjectHideFlags: 0

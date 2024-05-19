@@ -46,7 +46,7 @@ public class CollectGame : MonoBehaviour
     public GameObject[] P1ScoreUI;
     public GameObject[] P2ScoreUI;
 
-
+    public VNewSP animaciones;
     public bool isTyping = false;
     
 
@@ -100,6 +100,7 @@ public class CollectGame : MonoBehaviour
 
     public void ShowOrder(string difficulty)
     {
+        
         StartCoroutine(TypeText());
         
 
@@ -166,7 +167,7 @@ public class CollectGame : MonoBehaviour
         ShowOrder(selectedDifficulty);
         canvasPedido.SetActive(true);
         iTween.ScaleFrom(canvasPedido, Vector3.zero, 1f); // Animar la escala del canvas desde cero a su tamaño normal en 1 segundo
-                                                          
+        animaciones.StartTalk();
     }
 
     IEnumerator ScaleSpriteTo(SpriteRenderer spriteRenderer, Vector3 startScale, Vector3 endScale, float duration)
@@ -186,37 +187,39 @@ public class CollectGame : MonoBehaviour
 
     IEnumerator TypeText() //HACER TEXTO PARA EMPEZAR A PEDIR "QUIERO ESTAS FRUTAS"
     {
+        
         textComponent.text = "";
 
         if (P1Correct == 0 && !isTyping)
         {
+            
             fullText = "Necesito estas frutas por favor";
         }
 
         if (P1Correct == 2 && !isTyping)
         {
-            fullText = "PERFECTO JUGADOR 1";
-            
+            animaciones.StartWin();
+            fullText = "PERFECTO JUGADOR 1";   
         }
         else if (P1Correct == 1 && !isTyping)
         {
+            animaciones.StartLose();
             fullText = "CREO QUE ALGO ANDA MAL JUGADOR 1";
             P1Correct = 0;
             P2Correct = 0;
-            
         }
         
         if (P2Correct == 2 && !isTyping)
         {
+            animaciones.StartWin();
             fullText = "BIEN HECHO JUGADOR 2";
-            
         }
         else if (P2Correct == 1 && !isTyping)
         {
+            animaciones.StartLose();
             fullText = "SEGUROO JUGADOR 2?";
             P1Correct = 0;
             P2Correct = 0;
-            
         }
 
         if (!isTyping)

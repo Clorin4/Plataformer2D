@@ -58,7 +58,7 @@ public class QGSP : MonoBehaviour
     private List<string> displayedAnswers;
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
-    int correctButtonIndex = -1;
+    //int correctButtonIndex = -1;
 
     public int player1Health = 50;
     
