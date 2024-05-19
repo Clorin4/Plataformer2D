@@ -14,29 +14,15 @@ public class MenudePausa : MonoBehaviour
     public float sliderValue;
  
 
-    public Toggle toggleMute;
-
-    void Start()
+   void Start()
     {
         menuopciones.SetActive(false);
         menuPausa.SetActive(false);
-        // Obtener el componente Toggle
-        toggleMute = GetComponent<Toggle>();
-
-        // Configurar el estado del toggle según el volumen actual
-        toggleMute.isOn = AudioListener.volume == 0;
-
-        // Configurar el volumen inicial
-        PlayerPrefs.SetFloat("volumenAudio", 0.75f);
-        slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
-        AudioListener.volume = slider.value;
-
-        // Mostrar el icono de mute según el volumen inicial
-   
     }
 
     public void ChangeSlider(float valor)
     {
+        
         sliderValue = valor;
         PlayerPrefs.SetFloat("volumenAudio", sliderValue);
         AudioListener.volume = slider.value;
@@ -71,19 +57,18 @@ public class MenudePausa : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void MuteVolumen(bool mute)
-    {
-        if (mute)
-        {
-            AudioListener.volume = 0;
-        }
-        else
-        {
-            AudioListener.volume = slider.value; // Restaurar el volumen al valor del slider
-        }
 
-        // Actualizar el valor del slider y la imagen de mute
-        sliderValue = AudioListener.volume;
-      
-    }
+    public void MuteToggle(bool muted)
+         {
+              if (muted)
+                 {
+                     AudioListener.volume = 0;
+                 }
+              else
+                 {
+                    AudioListener.volume = 1;
+                 } 
+
+
+         }
 }
