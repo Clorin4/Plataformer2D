@@ -1979,7 +1979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1038.0005, y: -6.9000854}
+  m_AnchoredPosition: {x: -1038.0005, y: -6.9001465}
   m_SizeDelta: {x: 841.9995, y: 147.91913}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &442331925
@@ -2740,7 +2740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627979278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 4.3, z: -6.8160534}
+  m_LocalPosition: {x: 1, y: 4.3, z: -6.8160534}
   m_LocalScale: {x: 0.57613, y: 0.51616997, z: 0.97170997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2788,7 +2788,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b41793c461cd077499ed07814a37fc3c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 165b4d845130c864db0723f2f9031831, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4502,7 +4502,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9e2f2e57592135f438e597d563ab0f7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 401510dcdd958cb418fbdd67d0273323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10193,7 +10193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722526538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -952.317, y: -537.263, z: 0}
+  m_LocalPosition: {x: -952.17, y: -537.263, z: 0}
   m_LocalScale: {x: 2.3069, y: 2.2416, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10688,7 +10688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1031.2046, y: -6.9000854}
+  m_AnchoredPosition: {x: 1031.2046, y: -6.9001465}
   m_SizeDelta: {x: 840.8517, y: 147.91913}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1870503743
