@@ -53,7 +53,8 @@ public class QuizzGame : MonoBehaviour
     private bool player1Pressed;
     private bool player2Pressed;
     private bool countDownStarted;
-    private bool secondCountDownStarted;
+    private int secondCountDownStarted = 1;
+    public float countdownTimer;
 
     public GameObject teclaD;
     public GameObject teclaK;
@@ -219,9 +220,10 @@ public class QuizzGame : MonoBehaviour
         float countdownTimer = 8f;
         while (countdownTimer > 0f && !countDownStarted)
         {
+            //Reloj.SetActive(true);
             teclaD.SetActive(true);
             teclaK.SetActive(true);
-            Reloj.SetActive(true);
+            
 
             if (Input.GetKeyDown(KeyCode.D) && !player1Pressed)
             {
@@ -245,8 +247,8 @@ public class QuizzGame : MonoBehaviour
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
-
         
+
         DetermineWinner();
 
     } 
@@ -258,7 +260,7 @@ public class QuizzGame : MonoBehaviour
         if (player1Pressed && !player2Pressed)
         {
             J1Responde = true;
-
+            secondCountDownStarted = 1;
             EnableAnswerButtons();
             Debug.Log("GANA EL 1");
             // Acciones si solo el jugador 1 presionó más rápido
@@ -266,7 +268,7 @@ public class QuizzGame : MonoBehaviour
         else if (!player1Pressed && player2Pressed)
         {
             J2Responde = true;
-
+            secondCountDownStarted = 1;
             EnableAnswerButtons();
             Debug.Log("GANA EL 2");
             // Acciones si solo el jugador 2 presionó más rápido
@@ -274,7 +276,7 @@ public class QuizzGame : MonoBehaviour
         else if (player1Pressed && player2Pressed)
         {
             dañoPaDos = true;
-            secondCountDownStarted = true;
+            secondCountDownStarted = 2;
             player1Health -= 5;
             player2Health -= 5;
             Daños();
@@ -322,11 +324,17 @@ public class QuizzGame : MonoBehaviour
     {
         if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
-            secondCountDownStarted = false;
-            float countdownTimer = 12f;
+            Debug.Log("HDUJEDHIWNDED");
 
-            if (countdownTimer > 0f && !secondCountDownStarted)
+            if (secondCountDownStarted == 1)
             {
+                countdownTimer = 12f;
+            }
+            
+
+            if (countdownTimer > 0f)
+            {
+                
                 // Obtener una pregunta aleatoria de la lista
                 int randomIndex = Random.Range(0, questions.Count);
                 currentQuestion = questions[randomIndex];
@@ -370,19 +378,25 @@ public class QuizzGame : MonoBehaviour
                     }
                 }
 
-                while (countdownTimer > 0f && !secondCountDownStarted)
+                while (countdownTimer > 0f && secondCountDownStarted != 0)
                 {
                     countdownTimer -= Time.deltaTime;
+                    Debug.Log(secondCountDownStarted);
+                    if (countdownTimer <= 8)
+                    {
+                        Reloj.SetActive(true);
+                    }
                     yield return null;
                 }
 
                 if (countdownTimer <= 0f)
                 {
-                    player1Health -= 5;
-                    player2Health -= 5;
+                    secondCountDownStarted = 0;
+                    player1Health -= 10;
+                    player2Health -= 10;
                     dañoPaDos = true;
                     Reloj.SetActive(false);
-                    Daños();
+                    StartCoroutine(ChangeButtonColorBack());
                 }
             }
 
@@ -411,7 +425,7 @@ public class QuizzGame : MonoBehaviour
     public void OnCorrectAnswerSelected()
     {
         Reloj.SetActive(false);
-        secondCountDownStarted = true;
+        secondCountDownStarted = 0;
         ChangeButtonColor(true);
 
         if (J1Responde)
@@ -434,39 +448,57 @@ public class QuizzGame : MonoBehaviour
 
     public void OnWrongAnswerSelected(int buttonIndex) //PASAR TURNOOOOOOOOOOOOOO
     {
-        secondCountDownStarted = true;
-        ChangeButtonColor(false, buttonIndex);
-
-        if (J1Responde && !venganza)
+        Reloj.SetActive(false);
+        if (secondCountDownStarted == 1)
         {
-            player1Pressed = false;
-            player2Pressed = true;
-            J1Responde = false;
-            venganza = true;
+            ChangeButtonColor(false, buttonIndex);
+            countdownTimer = 8;
+            
 
-            DetermineWinner();
-            Debug.Log("RESPONDE MAL EL 1");
+            if (J1Responde && !venganza)
+            {
+                player1Pressed = false;
+                player2Pressed = true;
+                J1Responde = false;
+                venganza = true;
+
+                DetermineWinner();
+                Debug.Log("RESPONDE MAL EL 1");
+            }
+            else if (J2Responde && !venganza)
+            {
+                player2Pressed = false;
+                player1Pressed = true;
+                J2Responde = false;
+                venganza = true;
+
+                DetermineWinner();
+                Debug.Log("RESPONDE MAL EL 2");
+            }
+            secondCountDownStarted = 3;
         }
-        else if (J2Responde && !venganza)
+        else if(secondCountDownStarted == 3)
         {
-            player2Pressed = false;
-            player1Pressed = true;
-            J2Responde = false;
-            venganza = true;
+            secondCountDownStarted = 0;
+            ChangeButtonColor(false, buttonIndex);
 
-            DetermineWinner();
-            Debug.Log("RESPONDE MAL EL 2");
-        }
-        else if (venganza)
-        {
-            player1Health -= 5;
-            player2Health -= 5;
-            Reloj.SetActive(false);
-            dañoPaDos = true;
-            Debug.Log("DAÑO PA LOS DOS");
-            StartCoroutine(ChangeButtonColorBack());
+            
+            if (venganza)
+            {
+                player1Health -= 5;
+                player2Health -= 5;
+                Reloj.SetActive(false);
+                dañoPaDos = true;
+                Debug.Log("DAÑO PA LOS DOS");
+                StartCoroutine(ChangeButtonColorBack());
+
+            }
             
         }
+        
+        
+
+        
     }
 
     void ChangeButtonColor(bool correctAnswer, int buttonIndex = -1)
@@ -682,6 +714,7 @@ public class QuizzGame : MonoBehaviour
         J1Responde = false;
         J2Responde = false;
         venganza = false;
+        secondCountDownStarted = 1;
 
         J1Dañado = false;
         J2Dañado = false;
