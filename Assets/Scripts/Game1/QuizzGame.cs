@@ -320,8 +320,7 @@ public class QuizzGame : MonoBehaviour
 
     IEnumerator ShowQuestionAndAnswers()
     {
-
-        if(PlayerPrefs.GetString("gameStyle") == "survival")
+        if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
             secondCountDownStarted = false;
             float countdownTimer = 12f;
@@ -356,6 +355,7 @@ public class QuizzGame : MonoBehaviour
                 // Asignar las respuestas a los botones y añadir listeners
                 for (int i = 0; i < answerButtons.Length; i++)
                 {
+                    int buttonIndex = i; // Captura el índice del botón
                     answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
                     answerButtons[i].onClick.RemoveAllListeners();
 
@@ -366,7 +366,7 @@ public class QuizzGame : MonoBehaviour
                     }
                     else
                     {
-                        answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                        answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected(buttonIndex));
                     }
                 }
 
@@ -389,10 +389,10 @@ public class QuizzGame : MonoBehaviour
         }
         else if (PlayerPrefs.GetString("gameStyle") == "xmateria")
         {
-            
+            // Lógica para el modo "xmateria"
         }
-        
     }
+
 
 
     public List<string> ShuffleList(List<string> list)
@@ -428,12 +428,14 @@ public class QuizzGame : MonoBehaviour
             //DAÑO AL 1
             Debug.Log("RESPONDE BIEN EL 2");
         }
+        StartCoroutine(ChangeButtonColorBack());
+
     }
 
-    public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
+    public void OnWrongAnswerSelected(int buttonIndex) //PASAR TURNOOOOOOOOOOOOOO
     {
         secondCountDownStarted = true;
-        //ChangeButtonColor(false);
+        ChangeButtonColor(false, buttonIndex);
 
         if (J1Responde && !venganza)
         {
@@ -441,9 +443,9 @@ public class QuizzGame : MonoBehaviour
             player2Pressed = true;
             J1Responde = false;
             venganza = true;
-            
+
             DetermineWinner();
-            Debug.Log("RESPONDE MALL EL 1");
+            Debug.Log("RESPONDE MAL EL 1");
         }
         else if (J2Responde && !venganza)
         {
@@ -462,39 +464,50 @@ public class QuizzGame : MonoBehaviour
             Reloj.SetActive(false);
             dañoPaDos = true;
             Debug.Log("DAÑO PA LOS DOS");
-            Daños();
+            StartCoroutine(ChangeButtonColorBack());
+            
         }
-
     }
 
-    void ChangeButtonColor(bool correctAnswer)
+    void ChangeButtonColor(bool correctAnswer, int buttonIndex = -1)
     {
-        Color color = correctAnswer ? Color.green : Color.red;
-
-        // Cambia solo el color del botón que contiene la respuesta correcta
-        if (correctAnswer && correctButtonIndex != -1)
+        if (correctAnswer)
         {
-            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
-            if (img != null)
+            Color correctColor = Color.green;
+            if (correctButtonIndex != -1)
             {
-                img.color = color;
+                Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+                if (img != null)
+                {
+                    img.color = correctColor;
+                }
             }
         }
-
-        // Restablecer el color del botón correcto después de un tiempo determinado
-        StartCoroutine(ChangeButtonColorBack());
+        else
+        {
+            Color incorrectColor = Color.red;
+            if (buttonIndex != -1)
+            {
+                Image img = answerButtons[buttonIndex].GetComponent<Image>();
+                if (img != null)
+                {
+                    img.color = incorrectColor;
+                }
+            }
+        }
     }
 
     IEnumerator ChangeButtonColorBack()
     {
         yield return new WaitForSeconds(1f); // Cambia esto al tiempo que desees mantener los colores
 
-        if (correctButtonIndex != -1)
+        // Restablece el color de todos los botones al color original
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            Image img = answerButtons[correctButtonIndex].GetComponent<Image>();
+            Image img = answerButtons[i].GetComponent<Image>();
             if (img != null)
             {
-                img.color = Color.white; // Cambia esto al color original que desees para el botón correcto
+                img.color = Color.white; // Cambia esto al color original que desees para los botones
             }
         }
         Daños();
