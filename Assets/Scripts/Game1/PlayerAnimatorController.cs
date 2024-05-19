@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
-    private Animator animator;
+    private Animator animator; 
     public int playerIndex; // Indica el índice del jugador
     public string playerTag; // Indica si es "Player1" o "Player2"
 
