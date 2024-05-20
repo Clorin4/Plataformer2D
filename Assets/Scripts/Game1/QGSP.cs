@@ -55,6 +55,13 @@ public class QGSP : MonoBehaviour
     //public QuestionManager questionManager;
     public Question currentQuestion;
     private List<Question> questions; // Lista de preguntas
+    private int currentMateriaIndex = 0; // Índice de la materia actual
+    private int questionsPerMateria = 1; // Cantidad de preguntas por materia
+    private List<Question> currentMateriaQuestions; // Preguntas de la materia actual
+    private int currentQuestionIndex = 0; // Índice de la pregunta actual
+    private List<Materia> materiasList; // Lista de materias
+
+
     private List<string> displayedAnswers;
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
@@ -118,9 +125,20 @@ public class QGSP : MonoBehaviour
         if (selectedLevel != null)
         {
             questions = new List<Question>();
-            foreach (Materia materia in selectedLevel.materias)
+            materiasList = selectedLevel.materias;
+
+            if (PlayerPrefs.GetString("gameStyle") == "fases" && materiasList.Count > 0)
             {
-                questions.AddRange(materia.preguntas);
+                currentMateriaIndex = 0;
+                currentMateriaQuestions = new List<Question>(materiasList[currentMateriaIndex].preguntas);
+                currentMateriaQuestions = ShuffleList(currentMateriaQuestions);
+            }
+            else
+            {
+                foreach (Materia materia in materiasList)
+                {
+                    questions.AddRange(materia.preguntas);
+                }
             }
         }
         else
@@ -128,6 +146,7 @@ public class QGSP : MonoBehaviour
             Debug.LogError("Dificultad no encontrada: " + selectedDifficulty);
         }
     }
+
 
     public void GetRandomQuestion()
     {
@@ -294,16 +313,99 @@ public class QGSP : MonoBehaviour
                 }
             }
         }
-        else if (PlayerPrefs.GetString("gameStyle") == "xmateria")
+        else if (PlayerPrefs.GetString("gameStyle") == "fases")
         {
-            // Lógica para el otro modo de juego (si es necesario)
+            
+                if (currentMateriaQuestions == null || currentMateriaQuestions.Count == 0)
+                {
+                    Debug.LogError("No hay preguntas disponibles para la materia actual.");
+                    yield break;
+                }
+
+            if (currentQuestionIndex < questionsPerMateria && currentQuestionIndex < currentMateriaQuestions.Count)
+            {
+                // Obtener una pregunta aleatoria de la lista actual
+                int randomIndex = Random.Range(0, currentMateriaQuestions.Count);
+                currentQuestion = currentMateriaQuestions[randomIndex];
+                currentMateriaQuestions.RemoveAt(randomIndex); // Eliminar la pregunta seleccionada para evitar repetición
+                currentQuestionIndex++;
+
+                // Mostrar la pregunta en el TextMeshPro
+                questionText.text = currentQuestion.questionText;
+
+                List<string> answers = new List<string>(currentQuestion.options);
+                List<string> displayedAnswers = new List<string>();
+
+                // Añadir la respuesta correcta a las respuestas mostradas
+                string correctAnswer = answers[currentQuestion.correctAnswerIndex];
+                displayedAnswers.Add(correctAnswer);
+                answers.RemoveAt(currentQuestion.correctAnswerIndex);
+
+                // Mostrar las respuestas incorrectas en los botones restantes
+                for (int j = 0; j < answerButtons.Length - 1; j++)
+                {
+                    int randomAnswerIndex = Random.Range(0, answers.Count);
+                    displayedAnswers.Add(answers[randomAnswerIndex]);
+                    answers.RemoveAt(randomAnswerIndex);
+                }
+
+                // Mezclar las respuestas mostradas
+                displayedAnswers = ShuffleList(displayedAnswers);
+
+                // Asignar las respuestas a los botones y añadir listeners
+                for (int i = 0; i < answerButtons.Length; i++)
+                {
+                    int index = i; // Se necesita una variable local para mantener el valor correcto de 'i' en el cierre
+                    answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = displayedAnswers[i];
+                    answerButtons[i].onClick.RemoveAllListeners(); // Limpiar listeners previos
+                                                                   // Verificar si la respuesta del botón es la respuesta correcta
+                    if (displayedAnswers[index] == correctAnswer)
+                    {
+                        answerButtons[i].onClick.AddListener(() => OnCorrectAnswerSelected());
+                    }
+                    else
+                    {
+                        answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
+                    }
+                }
+            }
+            else
+            {
+                // Lógica para cuando se terminan las preguntas de la materia actual
+                // Avanzar a la siguiente materia o finalizar el modo "fases"
+                currentMateriaIndex++;
+                if (currentMateriaIndex < materiasList.Count)
+                {
+                    // Reiniciar las preguntas de la nueva materia
+                    currentMateriaQuestions = new List<Question>(materiasList[currentMateriaIndex].preguntas);
+                    currentQuestionIndex = 0;
+                    StartCoroutine(ShowQuestionAndAnswers());
+                }
+                else
+                {
+                    Debug.Log("Todas las materias han sido completadas.");
+                    // Lógica para finalizar el modo "fases"
+                }
+            }
         }
     }
 
 
 
+    public List<T> ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+        return list;
+    }
 
-    public List<string> ShuffleList(List<string> list)
+
+    /*public List<string> ShuffleList(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
@@ -313,7 +415,7 @@ public class QGSP : MonoBehaviour
             list[randomIndex] = temp;
         }
         return list;
-    }
+    }*/
 
 
     public void OnCorrectAnswerSelected()
@@ -328,7 +430,7 @@ public class QGSP : MonoBehaviour
             txtCAC.text = "Respuestas correctas: " + correctAnsCount;
             Debug.Log("RESPONDE BIEN EL 1");
         }
-        
+
     }
 
     public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
@@ -345,7 +447,6 @@ public class QGSP : MonoBehaviour
             //DetermineWinner();
             Debug.Log("RESPONDE MALL EL 1");
         }
-        
     }
 
     void ChangeButtonColor(bool correctAnswer)
@@ -555,7 +656,4 @@ public class QGSP : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-
-
-
 }
