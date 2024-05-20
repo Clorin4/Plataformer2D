@@ -17,13 +17,14 @@ public class QuizzGame : MonoBehaviour
     public GameObject[] P2Hearts = new GameObject[10];
     public int arrindex1 = 9;
     public int arrindex2 = 9;
-    public GameObject[] P1HalfHearts = new GameObject[10];
-    public GameObject[] P2HalfHearts = new GameObject[10];
+    //public GameObject[] P1HalfHearts = new GameObject[10];
+    //public GameObject[] P2HalfHearts = new GameObject[10];
 
     public SpriteRenderer sprite3Renderer;
     public SpriteRenderer sprite2Renderer;
     public SpriteRenderer sprite1Renderer;
     public SpriteRenderer spriteAdelanteRenderer;
+    public SpriteRenderer spriteFinishRenderer;
 
     public GameObject apuntador1;
     public GameObject apuntador2;
@@ -48,7 +49,7 @@ public class QuizzGame : MonoBehaviour
     private bool J1Dañado;
     private bool J2Dañado;
     private bool dañoPaDos;
-    private bool halfHeart;
+    //private bool halfHeart;
 
     private bool player1Pressed;
     private bool player2Pressed;
@@ -99,8 +100,7 @@ public class QuizzGame : MonoBehaviour
         {
             P1Hearts[i].SetActive(true);
             P2Hearts[i].SetActive(true);
-            P1HalfHearts[i].SetActive(false);
-            P2HalfHearts[i].SetActive(false);
+            
         }
 
         apuntador1.SetActive(false);
@@ -110,6 +110,7 @@ public class QuizzGame : MonoBehaviour
         sprite2Renderer.gameObject.SetActive(false);
         sprite1Renderer.gameObject.SetActive(false);
         spriteAdelanteRenderer.gameObject.SetActive(false);
+        spriteFinishRenderer.gameObject.SetActive(false);
 
         J1Responde = false;
         J2Responde = false;
@@ -118,7 +119,7 @@ public class QuizzGame : MonoBehaviour
         J1Dañado = false;
         J2Dañado = false;
         dañoPaDos = false;
-        halfHeart = false;
+        //halfHeart = false;
 
         teclaD.SetActive(false);
         teclaK.SetActive(false);
@@ -206,6 +207,14 @@ public class QuizzGame : MonoBehaviour
         spriteRenderer.transform.localScale = endScale;
     }
 
+    IEnumerator Finish()
+    {
+        spriteFinishRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteFinishRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
+
+    }
+
+
     public void StartGame()
     {
         StartCoroutine(ShowQuestionPanel());
@@ -286,9 +295,13 @@ public class QuizzGame : MonoBehaviour
         }
         else
         {
+            secondCountDownStarted = 0;
             Debug.Log("Ninguno");
             Reloj.SetActive(false);
-            // Acciones si ninguno presionó
+            player1Health -= 10;
+            player2Health -= 10;
+            dañoPaDos = true;
+            StartCoroutine(ChangeButtonColorBack());
         }
     }
 
@@ -324,7 +337,7 @@ public class QuizzGame : MonoBehaviour
     {
         if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
-            Debug.Log("HDUJEDHIWNDED");
+            
 
             if (secondCountDownStarted == 1)
             {
@@ -378,9 +391,14 @@ public class QuizzGame : MonoBehaviour
                     }
                 }
 
-                while (countdownTimer > 0f && secondCountDownStarted != 0)
+                
+                 
+            }
+
+            while (countdownTimer > 0f && secondCountDownStarted != 0)
                 {
                     countdownTimer -= Time.deltaTime;
+                    //Debug.Log(countdownTimer);
                     Debug.Log(secondCountDownStarted);
                     if (countdownTimer <= 8)
                     {
@@ -389,16 +407,57 @@ public class QuizzGame : MonoBehaviour
                     yield return null;
                 }
 
-                if (countdownTimer <= 0f)
+            if (countdownTimer <= 0f && secondCountDownStarted == 1)
+            {
+                
+                countdownTimer += 8f;
+                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBYWUEFCIWE");
+
+                if (J1Responde && !venganza)
                 {
-                    secondCountDownStarted = 0;
-                    player1Health -= 10;
-                    player2Health -= 10;
-                    dañoPaDos = true;
-                    Reloj.SetActive(false);
-                    StartCoroutine(ChangeButtonColorBack());
+                    player1Pressed = false;
+                    player2Pressed = true;
+                    J1Responde = false;
+                    venganza = true;
+
+                    DetermineWinner();
+                    Debug.Log("RESPONDE MAL EL 1");
+                }
+                else if (J2Responde && !venganza)
+                {
+                    player2Pressed = false;
+                    player1Pressed = true;
+                    J2Responde = false;
+                    venganza = true;
+
+                    DetermineWinner();
+                    Debug.Log("RESPONDE MAL EL 2");
+                }
+                secondCountDownStarted = 3;
+
+                while (countdownTimer > 0f && secondCountDownStarted != 0)
+                {
+                    countdownTimer -= Time.deltaTime;
+                    //Debug.Log(countdownTimer);
+                    Debug.Log(secondCountDownStarted);
+                    if (countdownTimer <= 8)
+                    {
+                        Reloj.SetActive(true);
+                    }
+                    yield return null;
                 }
             }
+
+            if (countdownTimer <= 0 && secondCountDownStarted == 3)
+            {
+                Debug.Log("CEROOOOOOOOOOOOOO");
+                player1Health -= 10;
+                player2Health -= 10;
+                dañoPaDos = true;
+                Reloj.SetActive(false);
+                StartCoroutine(ChangeButtonColorBack());
+            }
+
 
         }
         else if (PlayerPrefs.GetString("gameStyle") == "xmateria")
@@ -424,26 +483,28 @@ public class QuizzGame : MonoBehaviour
 
     public void OnCorrectAnswerSelected()
     {
-        Reloj.SetActive(false);
-        secondCountDownStarted = 0;
-        ChangeButtonColor(true);
-
-        if (J1Responde)
+        if (secondCountDownStarted != 0)
         {
-            J2Dañado = true;
-            player2Health -= 10;
-            //DAÑO AL 2
-            Debug.Log("RESPONDE BIEN EL 1");
-        }
-        else if (J2Responde)
-        {
-            J1Dañado = true;
-            player1Health -= 10;
-            //DAÑO AL 1
-            Debug.Log("RESPONDE BIEN EL 2");
-        }
-        StartCoroutine(ChangeButtonColorBack());
+            Reloj.SetActive(false);
+            secondCountDownStarted = 0;
+            ChangeButtonColor(true);
 
+            if (J1Responde)
+            {
+                J2Dañado = true;
+                player2Health -= 10;
+                //DAÑO AL 2
+                //Debug.Log("RESPONDE BIEN EL 1");
+            }
+            else if (J2Responde)
+            {
+                J1Dañado = true;
+                player1Health -= 10;
+                //DAÑO AL 1
+                //Debug.Log("RESPONDE BIEN EL 2");
+            }
+            StartCoroutine(ChangeButtonColorBack());
+        }
     }
 
     public void OnWrongAnswerSelected(int buttonIndex) //PASAR TURNOOOOOOOOOOOOOO
@@ -463,7 +524,7 @@ public class QuizzGame : MonoBehaviour
                 venganza = true;
 
                 DetermineWinner();
-                Debug.Log("RESPONDE MAL EL 1");
+                //Debug.Log("RESPONDE MAL EL 1");
             }
             else if (J2Responde && !venganza)
             {
@@ -473,7 +534,7 @@ public class QuizzGame : MonoBehaviour
                 venganza = true;
 
                 DetermineWinner();
-                Debug.Log("RESPONDE MAL EL 2");
+                //Debug.Log("RESPONDE MAL EL 2");
             }
             secondCountDownStarted = 3;
         }
@@ -485,8 +546,8 @@ public class QuizzGame : MonoBehaviour
             
             if (venganza)
             {
-                player1Health -= 5;
-                player2Health -= 5;
+                player1Health -= 10;
+                player2Health -= 10;
                 Reloj.SetActive(false);
                 dañoPaDos = true;
                 Debug.Log("DAÑO PA LOS DOS");
@@ -606,6 +667,7 @@ public class QuizzGame : MonoBehaviour
 
         else if (player1Health <= 0 && player2Health <= 0)
         {
+            StartCoroutine(Finish());
             apuntador2.SetActive(false);
             apuntador1.SetActive(false);
             canvasWinners.gameObject.SetActive(true);
@@ -628,6 +690,7 @@ public class QuizzGame : MonoBehaviour
 
         else
         {
+            StartCoroutine(Finish());
             apuntador2.SetActive(false);
             apuntador1.SetActive(false);
 
@@ -749,101 +812,50 @@ public class QuizzGame : MonoBehaviour
 
     public void HeartsHUD()
     {
-        if (!halfHeart)
+        if (J1Dañado && !dañoPaDos)
         {
-            if (J1Dañado && !dañoPaDos)
+            int i = arrindex1;
+            do
             {
-                int i = arrindex1;
-                do
-                {
-                    J1Dañado = false;
-                    P1Hearts[i].SetActive(false);
-                    arrindex1--;
-                }
-                while (J1Dañado);
+                J1Dañado = false;
+                P1Hearts[i].SetActive(false);
+                arrindex1--;
             }
-            else if (J2Dañado && !dañoPaDos)
+            while (J1Dañado);
+        }
+        else if (J2Dañado && !dañoPaDos)
+        {
+            int j = arrindex2;
+            do
             {
-                int j = arrindex2;
-                do
-                {
-                    J2Dañado = false;
-                    P2Hearts[j].SetActive(false);
-                    arrindex2--;
-                }
-                while (J2Dañado);
+                J2Dañado = false;
+                P2Hearts[j].SetActive(false);
+                arrindex2--;
             }
-            else if (dañoPaDos)
+            while (J2Dañado);
+        }
+        else if (dañoPaDos)
+        {
+            int i = arrindex1;
+            int j = arrindex2;
+            do
             {
-                int i = arrindex1;
-                int j = arrindex2;
-                do
-                {
-                    halfHeart = true;
 
-                    P2Hearts[j].SetActive(false);
-                    P2HalfHearts[j].SetActive(true);
-                    arrindex2--;
 
-                    P1Hearts[i].SetActive(false);
-                    P1HalfHearts[i].SetActive(true);
-                    arrindex1--;
+                P2Hearts[j].SetActive(false);
 
-                    dañoPaDos = false;
-                }
-                while (dañoPaDos);
+                arrindex2--;
+
+                P1Hearts[i].SetActive(false);
+
+                arrindex1--;
+
+                dañoPaDos = false;
             }
+            while (dañoPaDos);
         }
 
-        else if (halfHeart)
-        {
-            if (J1Dañado && !dañoPaDos)
-            {
-                int i = arrindex1;
-                int aux = i + 1;
-                do
-                {
-                    J1Dañado = false;
-                    P1Hearts[i].SetActive(false);
-                    P1HalfHearts[aux].SetActive(false);
-                    P1HalfHearts[i].SetActive(true);
-                    arrindex1--;
-                }
-                while (J1Dañado);
-            }
-            else if (J2Dañado && !dañoPaDos)
-            {
-                int j = arrindex2;
-                int aux = j + 1;
-                do
-                {
-                    J2Dañado = false;
-                    P2Hearts[j].SetActive(false);
-                    P2HalfHearts[aux].SetActive(false);
-                    P2HalfHearts[j].SetActive(true);
-                    arrindex2--;
-                }
-                while (J2Dañado);
-            }
-            else if (dañoPaDos)
-            {
-                int i = arrindex1;
-                int aux = i + 1;
-                int j = arrindex2;
-                int aux2 = j + 1;
-                do
-                {
-                    halfHeart = false;
 
-                    P1HalfHearts[aux].SetActive(false);
-                    //arrindex1--;
-                    P2HalfHearts[aux2].SetActive(false);
-                    //arrindex2--;
-                    dañoPaDos = false;
-                }
-                while (dañoPaDos);
-            }
-        }
 
     }
 
