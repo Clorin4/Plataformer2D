@@ -64,18 +64,20 @@ public class MenudePausa : MonoBehaviour
 
 
     public void MuteToggle(bool muted)
-         {
-              if (muted)
-                 {
-                     AudioListener.volume = 0;
-                 }
-              else
-                 {
-                    AudioListener.volume = 1;
-                 } 
+    {
+        if (!muted)
+        {
+            
+            AudioListener.volume = 0;
+        }
+        else
+        {
+            
+            AudioListener.volume = 1;
+        } 
 
 
-         }
+    }
     public void MenuButton(string button)
     {
         menuConfirmar.SetActive(true);
