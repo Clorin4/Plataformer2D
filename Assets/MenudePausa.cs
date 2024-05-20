@@ -9,13 +9,17 @@ public class MenudePausa : MonoBehaviour
     public GameObject botonPausa;
     public GameObject menuPausa;
     public GameObject menuopciones;
+    public GameObject menuConfirmar;
 
     public Slider slider;
     public float sliderValue;
+    public string selectedButton;
+    
  
 
    void Start()
     {
+        menuConfirmar.SetActive(false);
         menuopciones.SetActive(false);
         menuPausa.SetActive(false);
     }
@@ -36,6 +40,7 @@ public class MenudePausa : MonoBehaviour
         botonPausa.SetActive(false);
         menuPausa.SetActive(true);
         menuopciones.SetActive(false);
+        menuConfirmar.SetActive(false);
     }
 
     public void Reanudar()
@@ -71,4 +76,53 @@ public class MenudePausa : MonoBehaviour
 
 
          }
+    public void MenuButton(string button)
+    {
+        menuConfirmar.SetActive(true);
+        menuPausa.SetActive(false);
+        selectedButton = button;
+        
+    }
+    public void SelectedButton()
+    {
+        menuPausa.SetActive(false);
+        menuConfirmar.SetActive(false);
+
+        switch (selectedButton) // decenas indican juego , unidades tipo de juego
+        {
+            case "reiniciar11":
+                SceneManager.LoadScene(3);
+                Time.timeScale = 1f;
+                break;
+
+            case "reiniciar12":
+                SceneManager.LoadScene(7);
+                Time.timeScale = 1f;
+                break;
+
+            case "reiniciar21":
+                SceneManager.LoadScene(4);
+                Time.timeScale = 1f;
+                break;
+
+            case "reiniciar31":
+                SceneManager.LoadScene(5);
+                Time.timeScale = 1f;
+                break;
+
+            case "isla":
+                SceneManager.LoadScene(1);
+                Time.timeScale = 1f;
+                break;
+
+            case "personajes":
+                SceneManager.LoadScene(2);
+                Time.timeScale = 1f;
+                break;
+        }
+
+            
+    }
+
+    
 }
