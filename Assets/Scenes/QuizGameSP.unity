@@ -4913,7 +4913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.3000488, y: -3.960022}
+  m_AnchoredPosition: {x: 3.3000488, y: -3.9600525}
   m_SizeDelta: {x: 339.11, y: 203.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597181026
@@ -5229,28 +5229,21 @@ MonoBehaviour:
     materias:
     - name: matematicas
       preguntas:
-      - questionText: haz
+      - questionText: matehaz
         options:
         - si
         - no
         - no
         - no
         correctAnswerIndex: 0
-      - questionText: ded
+      - questionText: mate
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: mia
-        options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
-      - questionText: gryt
+      - questionText: mate
         options:
         - a
         - b
@@ -5259,21 +5252,21 @@ MonoBehaviour:
         correctAnswerIndex: 0
     - name: historia
       preguntas:
-      - questionText: yoo?
+      - questionText: histo
         options:
         - si
         - no
         - no
         - no
         correctAnswerIndex: 0
-      - questionText: ooooo
+      - questionText: histo
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: fggfhhhnh
+      - questionText: histo
         options:
         - a
         - b
@@ -5289,14 +5282,14 @@ MonoBehaviour:
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: kkklllljjnn
+      - questionText: ciencia
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: kkklllljjnn
+      - questionText: ciencia
         options:
         - a
         - b
