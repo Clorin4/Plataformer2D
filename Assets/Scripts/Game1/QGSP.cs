@@ -56,7 +56,7 @@ public class QGSP : MonoBehaviour
     public Question currentQuestion;
     private List<Question> questions; // Lista de preguntas
     private int currentMateriaIndex = 0; // Índice de la materia actual
-    private int questionsPerMateria = 1; // Cantidad de preguntas por materia
+    public int questionsPerMateria = 1; // Cantidad de preguntas por materia
     private List<Question> currentMateriaQuestions; // Preguntas de la materia actual
     private int currentQuestionIndex = 0; // Índice de la pregunta actual
     private List<Materia> materiasList; // Lista de materias
@@ -384,6 +384,8 @@ public class QGSP : MonoBehaviour
                 else
                 {
                     Debug.Log("Todas las materias han sido completadas.");
+                    panelQuestion.SetActive(false);
+                    //StartCoroutine(Finish());
                     // Lógica para finalizar el modo "fases"
                 }
             }
@@ -403,20 +405,6 @@ public class QGSP : MonoBehaviour
         }
         return list;
     }
-
-
-    /*public List<string> ShuffleList(List<string> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            string temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
-        }
-        return list;
-    }*/
-
 
     public void OnCorrectAnswerSelected()
     {
@@ -444,13 +432,14 @@ public class QGSP : MonoBehaviour
             J1Responde = false;
             player1Health -= 10;
             J1Dañado = true;
-            //DetermineWinner();
+            
             Debug.Log("RESPONDE MALL EL 1");
         }
     }
 
     void ChangeButtonColor(bool correctAnswer)
     {
+        DisableAnswerButtons();
         Color color = correctAnswer ? Color.green : Color.red;
 
         // Accede a la variable miembro para verificar las respuestas mostradas
