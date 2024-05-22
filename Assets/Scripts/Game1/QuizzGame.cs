@@ -337,14 +337,10 @@ public class QuizzGame : MonoBehaviour
     {
         if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
-            
-
             if (secondCountDownStarted == 1)
             {
                 countdownTimer = 12f;
             }
-            
-
             if (countdownTimer > 0f)
             {
                 
@@ -399,7 +395,7 @@ public class QuizzGame : MonoBehaviour
                 {
                     countdownTimer -= Time.deltaTime;
                     //Debug.Log(countdownTimer);
-                    Debug.Log(secondCountDownStarted);
+                    //Debug.Log(secondCountDownStarted);
                     if (countdownTimer <= 8)
                     {
                         Reloj.SetActive(true);
@@ -481,7 +477,7 @@ public class QuizzGame : MonoBehaviour
     }
 
 
-    public void OnCorrectAnswerSelected()
+    public void OnCorrectAnswerSelected()  // USAR BANDERA PARA DESHABILITAR
     {
         if (secondCountDownStarted != 0)
         {

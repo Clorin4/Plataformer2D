@@ -46,6 +46,7 @@ public class QGSP : MonoBehaviour
 
     public bool J1Responde;
     private bool J1Dañado;
+    private bool disableButtons = false;
 
     //private bool countDownStarted;
     private bool secondCountDownStarted;
@@ -322,7 +323,7 @@ public class QGSP : MonoBehaviour
                     yield break;
                 }
 
-            if (currentQuestionIndex < questionsPerMateria && currentQuestionIndex < currentMateriaQuestions.Count)
+            if (currentQuestionIndex > questionsPerMateria && currentQuestionIndex > currentMateriaQuestions.Count)
             {
                 // Obtener una pregunta aleatoria de la lista actual
                 int randomIndex = Random.Range(0, currentMateriaQuestions.Count);
@@ -374,6 +375,7 @@ public class QGSP : MonoBehaviour
                 // Lógica para cuando se terminan las preguntas de la materia actual
                 // Avanzar a la siguiente materia o finalizar el modo "fases"
                 currentMateriaIndex++;
+                Debug.Log(currentMateriaIndex);
                 if (currentMateriaIndex < materiasList.Count)
                 {
                     // Reiniciar las preguntas de la nueva materia
@@ -385,7 +387,8 @@ public class QGSP : MonoBehaviour
                 {
                     Debug.Log("Todas las materias han sido completadas.");
                     panelQuestion.SetActive(false);
-                    //StartCoroutine(Finish());
+                    Reloj.SetActive(false);
+                    StartCoroutine(Finish());
                     // Lógica para finalizar el modo "fases"
                 }
             }
@@ -408,38 +411,45 @@ public class QGSP : MonoBehaviour
 
     public void OnCorrectAnswerSelected()
     {
-        Reloj.SetActive(false);
-        secondCountDownStarted = true;
-        ChangeButtonColor(true);
-
-        if (J1Responde)
+        if (!disableButtons)
         {
-            correctAnsCount += 1;
-            txtCAC.text = "Respuestas correctas: " + correctAnsCount;
-            Debug.Log("RESPONDE BIEN EL 1");
-        }
+            disableButtons = true;
+            Reloj.SetActive(false);
+            secondCountDownStarted = true;
+            ChangeButtonColor(true);
 
+            if (J1Responde)
+            {
+                correctAnsCount += 1;
+                txtCAC.text = "Respuestas correctas: " + correctAnsCount;
+                Debug.Log("RESPONDE BIEN EL 1");
+            }
+        }
     }
 
-    public void OnWrongAnswerSelected() //PASAR TURNOOOOOOOOOOOOOO
+    public void OnWrongAnswerSelected() 
     {
-        secondCountDownStarted = true;
-        ChangeButtonColor(false);
-        Reloj.SetActive(false);
-
-        if (J1Responde)
+        if (!disableButtons)
         {
-            J1Responde = false;
-            player1Health -= 10;
-            J1Dañado = true;
-            
-            Debug.Log("RESPONDE MALL EL 1");
+            disableButtons = true;
+            secondCountDownStarted = true;
+            ChangeButtonColor(false);
+            Reloj.SetActive(false);
+
+            if (J1Responde)
+            {
+                J1Responde = false;
+                player1Health -= 10;
+                J1Dañado = true;
+
+                Debug.Log("RESPONDE MALL EL 1");
+            }
         }
     }
 
     void ChangeButtonColor(bool correctAnswer)
     {
-        DisableAnswerButtons();
+        
         Color color = correctAnswer ? Color.green : Color.red;
 
         // Accede a la variable miembro para verificar las respuestas mostradas
@@ -579,10 +589,8 @@ public class QGSP : MonoBehaviour
 
     void ReiniciarJuego()
     {
-
-
         apuntador1.SetActive(false);
-        
+        disableButtons = false;   
         Reloj.SetActive(false);
 
         panelQuestion.SetActive(false);
