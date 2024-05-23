@@ -246,8 +246,9 @@ public class CollectGame : MonoBehaviour
                 yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
                 
             }
-            isTyping = false;
+            
             yield return new WaitForSeconds(1f);
+            isTyping = false;
         }
 
         if(P1Correct == 2 || P2Correct == 2)
@@ -316,7 +317,7 @@ public class CollectGame : MonoBehaviour
         {
             isInRange = true;
 
-            if (!isOnClickedE)
+            if (!isOnClickedE && !isTyping)
             {
                 globoTextShift.SetActive(true);
             }

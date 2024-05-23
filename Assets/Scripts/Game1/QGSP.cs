@@ -323,7 +323,7 @@ public class QGSP : MonoBehaviour
                     yield break;
                 }
 
-            if (currentQuestionIndex > questionsPerMateria && currentQuestionIndex > currentMateriaQuestions.Count)
+            if (currentQuestionIndex < questionsPerMateria && currentQuestionIndex < currentMateriaQuestions.Count)
             {
                 // Obtener una pregunta aleatoria de la lista actual
                 int randomIndex = Random.Range(0, currentMateriaQuestions.Count);
@@ -388,7 +388,7 @@ public class QGSP : MonoBehaviour
                     Debug.Log("Todas las materias han sido completadas.");
                     panelQuestion.SetActive(false);
                     Reloj.SetActive(false);
-                    StartCoroutine(Finish());
+                    //StartCoroutine(Finish());
                     // Lógica para finalizar el modo "fases"
                 }
             }
