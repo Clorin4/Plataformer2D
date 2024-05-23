@@ -286,7 +286,7 @@ public class CollectGame : MonoBehaviour
                 globoTextE.SetActive(true);
             }
 
-            if (isInRange == true && Input.GetKeyDown(KeyCode.E))
+            if (isInRange == true && Input.GetKeyDown(KeyCode.E) && !isTyping)
             {
                 if (!P2Checking)
                 {
@@ -322,7 +322,7 @@ public class CollectGame : MonoBehaviour
                 globoTextShift.SetActive(true);
             }
 
-            if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift))
+            if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift) && !isTyping)
             {
                 if (!P1Checking)
                 {
