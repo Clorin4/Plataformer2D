@@ -7,8 +7,8 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRB;
-    public float playerSpeed = 5f;
-    public float jumpforce = 5f;
+    public float playerSpeed = 50f;
+    public float jumpforce = 40f;
     public LayerMask groundMask;
     public bool TouchGround = false;
 

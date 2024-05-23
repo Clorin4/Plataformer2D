@@ -17,15 +17,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private AudioClip colect1;
     
 
-
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
-       
+        if (PlayerPrefs.GetInt("GameMode") == 2)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
      

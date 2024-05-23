@@ -2377,7 +2377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477910667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8386412, y: -0.17850314, z: 8.785084}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4181,15 +4181,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 0
   m_fontColorGradient:
@@ -4506,22 +4506,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 2
+  m_colorMode: 0
   m_fontColorGradient:
-    topLeft: {r: 0.25913137, g: 0.2735849, b: 0.25986013, a: 1}
-    topRight: {r: 0.25913137, g: 0.2735849, b: 0.25986013, a: 1}
-    bottomLeft: {r: 0.3019608, g: 0.27058825, b: 0.27058825, a: 1}
-    bottomRight: {r: 0.3019608, g: 0.27058825, b: 0.27058825, a: 1}
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -5856,10 +5856,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.066037714, g: 0.06535899, b: 0.06011924, a: 1}
-    topRight: {r: 0.066037714, g: 0.06535899, b: 0.06011924, a: 1}
-    bottomLeft: {r: 0.8679245, g: 0, b: 0, a: 1}
-    bottomRight: {r: 0.8679245, g: 0, b: 0, a: 1}
+    topLeft: {r: 1, g: 1, b: 0.41037738, a: 1}
+    topRight: {r: 1, g: 1, b: 0.41037738, a: 1}
+    bottomLeft: {r: 0.8666667, g: 0.25143316, b: 0, a: 1}
+    bottomRight: {r: 0.8666667, g: 0.25143316, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -5944,7 +5944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151066418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 801.28326, y: 441.82742, z: -54.350197}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5966,81 +5966,190 @@ MonoBehaviour:
   difficultyLevels:
   - name: dif1
     materias:
+    - name: "espa\xF1ol"
+      preguntas:
+      - questionText: "Qu\xE9 s\xEDlaba hace falta en esta palabra?      _ _ l l
+          a"
+        options:
+        - si
+        - co
+        - pla
+        - su
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 s\xEDlaba hace falta en esta palabra?      _ _ s a"
+        options:
+        - ca
+        - sal
+        - la
+        - ce
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 s\xEDlaba hace falta en esta palabra?      _ _ l o
+          j"
+        options:
+        - re
+        - te
+        - ca
+        - pe
+        correctAnswerIndex: 0
+      - questionText: Que vocales hacen falta en la palabra?     _ v _ s
+        options:
+        - u, a
+        - e, a
+        - o, o
+        - a, i
+        correctAnswerIndex: 0
+      - questionText: 'Que vocales hacen falta en la palabra?     g _ t _ '
+        options:
+        - a, o
+        - u, a
+        - o, e
+        - a, i
+        correctAnswerIndex: 0
+      - questionText: Que vocales hacen falta en la palabra?      p _ n _
+        options:
+        - i, o
+        - i, a
+        - e, u
+        - a, i
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1les son los signos de interrogaci\xF3n?"
+        options:
+        - "\xBF ?"
+        - "\xA1 !"
+        - +-
+        - ( )
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1les son los signos de exclamaaci\xF3n?"
+        options:
+        - "\xBF ?"
+        - "\xA1 !"
+        - +-
+        - ( )
+        correctAnswerIndex: 1
     - name: matematicas
       preguntas:
-      - questionText: haz
+      - questionText: Figura que tiene 3 lados iguales
         options:
-        - si
-        - no
-        - no
-        - no
+        - "Tri\xE1ngulo"
+        - Circulo
+        - Cuadrado
+        - Rombo
         correctAnswerIndex: 0
-      - questionText: ded
+      - questionText: Figura que tiene 4 lados iguales
         options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
-      - questionText: mia
+        - "Tri\xE1ngulo"
+        - Circulo
+        - Cuadrado
+        - Rombo
+        correctAnswerIndex: 1
+      - questionText: Figura que tiene un solo lado
         options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
-      - questionText: gryt
+        - "Tri\xE1ngulo"
+        - Circulo
+        - Cuadrado
+        - Rombo
+        correctAnswerIndex: 2
+      - questionText: Figura que tiene 5 lados iguales
         options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
-    - name: historia
-      preguntas:
-      - questionText: yoo?
+        - "Tri\xE1ngulo"
+        - Circulo
+        - Cuadrado
+        - Pentagono
+        correctAnswerIndex: 3
+      - questionText: "Cu\xE1nto le falta al n\xFAmero 7 para la docena"
         options:
-        - si
-        - no
-        - no
-        - no
-        correctAnswerIndex: 0
-      - questionText: ooooo
+        - 2
+        - 3
+        - 5
+        - 7
+        correctAnswerIndex: 3
+      - questionText: Figura que tiene 5 lados iguales
         options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
-      - questionText: fggfhhhnh
-        options:
-        - a
-        - b
-        - c
-        - d
-        correctAnswerIndex: 0
+        - "Tri\xE1ngulo"
+        - Circulo
+        - Cuadrado
+        - Pentagono
+        correctAnswerIndex: 3
     - name: ciencia
       preguntas:
-      - questionText: ciencia
+      - questionText: "Por qu\xE9 de noche no se puede ver bien?"
         options:
-        - a
-        - b
-        - c
-        - d
+        - Porque ya es tarde
+        - Porque casi no hay luz
+        - Porque ya es hora de dormir
+        - Porque se cansan los ojos
+        correctAnswerIndex: 1
+      - questionText: "C\xF3mo sabes que es de d\xEDa?"
+        options:
+        - Porque se ve el sol
+        - Porque se ve la luna
+        - Porque se ven las estrellas
+        - "Porque est\xE1 pscuro"
         correctAnswerIndex: 0
-      - questionText: kkklllljjnn
+      - questionText: El sol es una fuente de luz...
         options:
-        - a
-        - b
-        - c
-        - d
+        - Natural
+        - Artificial
+        - Espacial
+        - Simple
         correctAnswerIndex: 0
-      - questionText: kkklllljjnn
+      - questionText: "Las l\xE1mparas son una fuente de luz..."
         options:
-        - a
-        - b
-        - c
-        - d
+        - Natural
+        - Artificial
+        - Espacial
+        - Simple
+        correctAnswerIndex: 1
+      - questionText: Los focos son una fuente de luz...
+        options:
+        - Natural
+        - Artificial
+        - Espacial
+        - Simple
+        correctAnswerIndex: 1
+      - questionText: "Este es un animal dom\xE9stico"
+        options:
+        - Jirafa
+        - Perro
+        - Oso
+        - Cucaracha
+        correctAnswerIndex: 0
+      - questionText: "Esta es una necesidad b\xE1sica"
+        options:
+        - Alimentarse
+        - Celular
+        - Ver la TV
+        - Comer muchos dulces
+        correctAnswerIndex: 0
+      - questionText: Ejemplo de flora
+        options:
+        - Arboles
+        - Gato
+        - Ver la TV
+        - Comer muchos dulces
+        correctAnswerIndex: 0
+    - name: etica
+      preguntas:
+      - questionText: NO corresponde a un acuerdo escolar
+        options:
+        - Pelear en clase
+        - Llegar puntual
+        - Trabajar en equipo
+        - Estudiar en clase
+        correctAnswerIndex: 0
+      - questionText: Este es un simbolo patrio
+        options:
+        - Bandera
+        - Sombrero
+        - Tacos
+        - Sarape
+        correctAnswerIndex: 0
+      - questionText: "Tradici\xF3n t\xEDpica de M\xE9xico"
+        options:
+        - Dia de muertos
+        - Haloween
+        - Semana santa
+        - Dia de los inocentes
         correctAnswerIndex: 0
   - name: dif2
     materias:
@@ -6690,22 +6799,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 0
   m_fontColorGradient:
-    topLeft: {r: 0, g: 0, b: 0, a: 1}
-    topRight: {r: 0, g: 0, b: 0, a: 1}
-    bottomLeft: {r: 0, g: 0, b: 0, a: 1}
-    bottomRight: {r: 0, g: 0, b: 0, a: 1}
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -10137,15 +10246,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 0
   m_fontColorGradient:
