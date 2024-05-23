@@ -151,11 +151,15 @@ public class PlayerController : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector2(moveHorizontal, 0);
-        playerRB.AddForce(movement * playerSpeed);
 
+        // Establece la velocidad del Rigidbody2D directamente para mantener una velocidad constante
+        playerRB.velocity = new Vector2(movement.x * playerSpeed, playerRB.velocity.y);
+
+        // Actualiza la animación
         animatorrun.SetFloat("Horizontal", Mathf.Abs(moveHorizontal));
 
-        if(moveHorizontal > 0 && !mirandoDerecha)
+        // Girar el personaje
+        if (moveHorizontal > 0 && !mirandoDerecha)
         {
             Girar();
         }
@@ -163,9 +167,9 @@ public class PlayerController : MonoBehaviour
         {
             Girar();
         }
-
     }
-    
+
+
     private void Girar()
     {
         

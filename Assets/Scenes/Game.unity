@@ -12777,7 +12777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &710903459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13252,7 +13252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &802861026
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14469,8 +14469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0010986328, y: 0.18612671}
-  m_SizeDelta: {x: 14.8594, y: 11.24752}
+  m_AnchoredPosition: {x: 0.041, y: 0.158}
+  m_SizeDelta: {x: 14.24845, y: 14.08687}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065125274
 MonoBehaviour:
@@ -14492,7 +14492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Saludos hijo, te gustaria recorrer la cueva secreta?
+  m_text: "Saludos hijo, me podr\xEDas ayudar a recolectar algunas frutas?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ad7e8a156d5f474e982d7783f966c96, type: 2}
   m_sharedMaterial: {fileID: -3237613273424263367, guid: 0ad7e8a156d5f474e982d7783f966c96, type: 2}
@@ -14900,8 +14900,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124657338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.121929504, y: -0.32203346, z: -1.2838256}
-  m_LocalScale: {x: 0.12537296, y: 0.19422236, z: 1}
+  m_LocalPosition: {x: 0.41, y: -0.252, z: -1.2838256}
+  m_LocalScale: {x: 0.142556, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1110161248}
@@ -38290,7 +38290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465173818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 204.02, y: 48.309998, z: 1}
+  m_LocalPosition: {x: 204.02, y: 48.53, z: 1}
   m_LocalScale: {x: 1.3889, y: 1.3005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42517,7 +42517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2065544080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42847,7 +42847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b039da12de93e489cb051f0ede7808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 50
+  playerSpeed: 25
   jumpforce: 40
   groundMask:
     serializedVersion: 2

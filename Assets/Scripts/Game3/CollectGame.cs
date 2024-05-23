@@ -21,6 +21,8 @@ public class CollectGame : MonoBehaviour
     private Order currentOrder;
 
     public GameObject canvasPedido;
+    public GameObject canvasUI;
+    public GameObject canvasHTP;
 
     public TMP_Text textComponent;
     public string fullText;
@@ -54,8 +56,10 @@ public class CollectGame : MonoBehaviour
     {
         TurnOffVariables();
         SaberDificultad();
-        
-        StartGame();
+
+        canvasHTP.SetActive(true);
+        canvasPedido.SetActive(false);
+        canvasUI.SetActive(false);
 
         for (int i = 1; i <= 5; i++)
         {
@@ -97,6 +101,15 @@ public class CollectGame : MonoBehaviour
         selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
 
     }
+
+    public void StartButton()
+    {
+        canvasHTP.SetActive(false);
+        canvasPedido.SetActive(true);
+        canvasUI.SetActive(true);
+        StartGame();
+    }
+
 
     public void ShowOrder(string difficulty)
     {
