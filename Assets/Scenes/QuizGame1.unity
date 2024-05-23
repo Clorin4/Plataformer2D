@@ -6070,6 +6070,20 @@ MonoBehaviour:
         - Cuadrado
         - Pentagono
         correctAnswerIndex: 3
+      - questionText: "Elige el n\xFAmero m\xE1s grande"
+        options:
+        - 9
+        - 5
+        - 2
+        - 7
+        correctAnswerIndex: 0
+      - questionText: 17 - 20 =
+        options:
+        - 3
+        - 6
+        - 20
+        - 7
+        correctAnswerIndex: 0
     - name: ciencia
       preguntas:
       - questionText: "Por qu\xE9 de noche no se puede ver bien?"
@@ -6125,8 +6139,22 @@ MonoBehaviour:
         options:
         - Arboles
         - Gato
-        - Ver la TV
-        - Comer muchos dulces
+        - Sombrero
+        - Ciudades
+        correctAnswerIndex: 0
+      - questionText: Ejemplo de fauna
+        options:
+        - Aves
+        - Flores
+        - Libros
+        - Ciudades
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de estos es un objeto flexible"
+        options:
+        - Madera
+        - Papel
+        - "Jarr\xF3n"
+        - Silla
         correctAnswerIndex: 0
     - name: etica
       preguntas:
@@ -6151,13 +6179,39 @@ MonoBehaviour:
         - Semana santa
         - Dia de los inocentes
         correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de las siguientes es una profesi\xF3n?"
+        options:
+        - "M\xE9dico"
+        - Carpintero
+        - Pintor
+        - Cerrajero
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de las siguientes es un oficio?"
+        options:
+        - "M\xE9dico"
+        - Carpintero
+        - Maestro
+        - Arquitecto
+        correctAnswerIndex: 1
+      - questionText: "Cu\xE1l de las estas representa una autoridad en casa?"
+        options:
+        - Policia
+        - Padre, Madre
+        - Maestro
+        - Presidente
+        correctAnswerIndex: 1
   - name: dif2
     materias:
+    - name: "espa\xF1ol"
+      preguntas:
+      - questionText: 
+        options: []
+        correctAnswerIndex: 0
     - name: matematicas
       preguntas: []
-    - name: historia
-      preguntas: []
     - name: ciencia
+      preguntas: []
+    - name: etica
       preguntas: []
   - name: dif3
     materias:
