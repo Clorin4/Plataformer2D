@@ -6041,14 +6041,14 @@ MonoBehaviour:
         - Circulo
         - Cuadrado
         - Rombo
-        correctAnswerIndex: 1
+        correctAnswerIndex: 2
       - questionText: Figura que tiene un solo lado
         options:
         - "Tri\xE1ngulo"
         - Circulo
         - Cuadrado
         - Rombo
-        correctAnswerIndex: 2
+        correctAnswerIndex: 1
       - questionText: Figura que tiene 5 lados iguales
         options:
         - "Tri\xE1ngulo"
@@ -6062,7 +6062,7 @@ MonoBehaviour:
         - 3
         - 5
         - 7
-        correctAnswerIndex: 3
+        correctAnswerIndex: 2
       - questionText: Figura que tiene 5 lados iguales
         options:
         - "Tri\xE1ngulo"
@@ -6077,7 +6077,7 @@ MonoBehaviour:
         - 2
         - 7
         correctAnswerIndex: 0
-      - questionText: 17 - 20 =
+      - questionText: 20 - 17  =
         options:
         - 3
         - 6
@@ -6127,7 +6127,7 @@ MonoBehaviour:
         - Perro
         - Oso
         - Cucaracha
-        correctAnswerIndex: 0
+        correctAnswerIndex: 1
       - questionText: "Esta es una necesidad b\xE1sica"
         options:
         - Alimentarse
@@ -6155,7 +6155,7 @@ MonoBehaviour:
         - Papel
         - "Jarr\xF3n"
         - Silla
-        correctAnswerIndex: 0
+        correctAnswerIndex: 1
     - name: etica
       preguntas:
       - questionText: NO corresponde a un acuerdo escolar
@@ -6204,13 +6204,119 @@ MonoBehaviour:
     materias:
     - name: "espa\xF1ol"
       preguntas:
-      - questionText: 
-        options: []
+      - questionText: "En d\xF3nde buscar\xEDas el significado de una palabra?"
+        options:
+        - Diccionario
+        - Recetario
+        - Revista
+        - "Peri\xF3dico"
         correctAnswerIndex: 0
+      - questionText: "Qu\xE9 palabra necesita MAY\xDASCULA al inicio"
+        options:
+        - "m\xE9xico"
+        - "mel\xF3n"
+        - lobo
+        - libro
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 palabra necesita MAY\xDASCULA al inicio"
+        options:
+        - maria
+        - "mel\xF3n"
+        - lobo
+        - libro
+        correctAnswerIndex: 0
+      - questionText: "Composici\xF3n literaria escrita en verso y es del g\xE9nero
+          l\xEDrico"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - Historieta
+        correctAnswerIndex: 0
+      - questionText: "Texto de car\xE1cter ficticio que provienen de tradici\xF3n
+          oral"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - "Canci\xF3n"
+        correctAnswerIndex: 2
+      - questionText: "Cuando uno o m\xE1s individuos realizan preguntas a otra persona"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - "Canci\xF3n"
+        correctAnswerIndex: 1
     - name: matematicas
-      preguntas: []
+      preguntas:
+      - questionText: "Tengo 4 bolsas de 10 chicles cada una, Cu\xE1ntos chicles
+          tengo en total?"
+        options:
+        - 4
+        - 40
+        - 10
+        - 14
+        correctAnswerIndex: 1
+      - questionText: "Tengo 5 monedas de 10 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 5
+        - 50
+        - 10
+        - 15
+        correctAnswerIndex: 1
+      - questionText: "Tengo 3 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 5
+        - 50
+        - 10
+        - 15
+        correctAnswerIndex: 3
+      - questionText: "Tengo 6 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 3
+      - questionText: "Tengo 6 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 3
+      - questionText: "Qu\xE9 n\xFAmero falta en esta serie?     5, 10,  _,  20, 
+          25"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 1
     - name: ciencia
-      preguntas: []
+      preguntas:
+      - questionText: "Cu\xE1ntos sentidos hay?"
+        options:
+        - 5
+        - 4
+        - 6
+        - 3
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 alimentos da\xF1an tu salud?"
+        options:
+        - Comida chatarra
+        - Frutas y verduras
+        - Alimentos de origen animal
+        - Cereales y legumbres
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 alimentos da\xF1an tu salud?"
+        options:
+        - Comida chatarra
+        - Frutas y verduras
+        - Alimentos de origen animal
+        - Cereales y legumbres
+        correctAnswerIndex: 0
     - name: etica
       preguntas: []
   - name: dif3
