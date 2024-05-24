@@ -1718,11 +1718,12 @@ MonoBehaviour:
   panelP1Winner: {fileID: 1608228423}
   howToPlay: {fileID: 784670354}
   J1Responde: 0
+  finPregun: 0
   currentQuestion:
     questionText: 
     options: []
     correctAnswerIndex: 0
-  questionsPerMateria: 2
+  questionsPerMateria: 4
   questionText: {fileID: 1097060641}
   answerButtons:
   - {fileID: 563929942}
@@ -4914,7 +4915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.3000488, y: -3.960083}
+  m_AnchoredPosition: {x: 3.3000488, y: -3.9601135}
   m_SizeDelta: {x: 339.11, y: 203.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597181026
@@ -5230,21 +5231,70 @@ MonoBehaviour:
     materias:
     - name: matematicas
       preguntas:
-      - questionText: matehaz
+      - questionText: mate1
         options:
         - si
         - no
         - no
         - no
         correctAnswerIndex: 0
-      - questionText: mate
+      - questionText: mate2
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: mate
+      - questionText: mate3
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate4
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate5
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate6
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate7
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate8
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate9
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: mate10
         options:
         - a
         - b
@@ -5253,21 +5303,70 @@ MonoBehaviour:
         correctAnswerIndex: 0
     - name: historia
       preguntas:
-      - questionText: histo
+      - questionText: histo1
         options:
         - si
         - no
         - no
         - no
         correctAnswerIndex: 0
-      - questionText: histo
+      - questionText: histo2
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: histo
+      - questionText: histo3
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo4
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo5
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo6
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo7
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo8
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo9
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: histo10
         options:
         - a
         - b
@@ -5276,21 +5375,70 @@ MonoBehaviour:
         correctAnswerIndex: 0
     - name: ciencia
       preguntas:
-      - questionText: ciencia
+      - questionText: ciencia1
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: ciencia
+      - questionText: ciencia2
         options:
         - a
         - b
         - c
         - d
         correctAnswerIndex: 0
-      - questionText: ciencia
+      - questionText: ciencia3
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia4
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia5
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia6
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia7
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia8
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia9
+        options:
+        - a
+        - b
+        - c
+        - d
+        correctAnswerIndex: 0
+      - questionText: ciencia10
         options:
         - a
         - b
@@ -5652,7 +5800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4, y: -24.305115}
+  m_AnchoredPosition: {x: 4, y: -24.305145}
   m_SizeDelta: {x: -454.28998, y: 50.65851}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912975676
