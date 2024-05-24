@@ -686,7 +686,6 @@ public class QuizzGame : MonoBehaviour
 
         else
         {
-            HeartsHUD();
             StartCoroutine(Finish());
             apuntador2.SetActive(false);
             apuntador1.SetActive(false);
