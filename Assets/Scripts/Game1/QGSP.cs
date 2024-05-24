@@ -50,14 +50,14 @@ public class QGSP : MonoBehaviour
 
     //private bool countDownStarted;
     private bool secondCountDownStarted;
-    public bool finPregun;
+
     
 
     //public QuestionManager questionManager;
     public Question currentQuestion;
     private List<Question> questions; // Lista de preguntas
     private int currentMateriaIndex = 0; // Índice de la materia actual
-    public int questionsPerMateria = 3; // Cantidad de preguntas por materia
+    public int questionsPerMateria = 1; // Cantidad de preguntas por materia
     private List<Question> currentMateriaQuestions; // Preguntas de la materia actual
     private int currentQuestionIndex = 0; // Índice de la pregunta actual
     private List<Materia> materiasList; // Lista de materias
@@ -93,7 +93,7 @@ public class QGSP : MonoBehaviour
         panelQuestion.SetActive(false);
         canvasWinners.gameObject.SetActive(false);
         panelP1Winner.SetActive(false);
-        finPregun = false;
+        
 
         for (int i = 0; i < 5; i++)
         {
@@ -168,39 +168,30 @@ public class QGSP : MonoBehaviour
     {
         //yield return new WaitForSeconds(.3f);
 
-        if (!finPregun)
-        {
-            sprite3Renderer.gameObject.SetActive(true);
-            yield return ScaleSpriteTo(sprite3Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
-            sprite3Renderer.gameObject.SetActive(false);
+        sprite3Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite3Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite3Renderer.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.1f);
 
-            sprite2Renderer.gameObject.SetActive(true);
-            yield return ScaleSpriteTo(sprite2Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
-            sprite2Renderer.gameObject.SetActive(false);
+        sprite2Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite2Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite2Renderer.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.1f);
 
-            sprite1Renderer.gameObject.SetActive(true);
-            yield return ScaleSpriteTo(sprite1Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
-            sprite1Renderer.gameObject.SetActive(false);
+        sprite1Renderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(sprite1Renderer, Vector3.zero, Vector3.one * 1f, .9f); // Escalar de 0 a un tamaño específico
+        sprite1Renderer.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.1f);
 
-            spriteAdelanteRenderer.gameObject.SetActive(true);
-            yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
-            spriteAdelanteRenderer.gameObject.SetActive(false);
+        spriteAdelanteRenderer.gameObject.SetActive(true);
+        yield return ScaleSpriteTo(spriteAdelanteRenderer, Vector3.zero, Vector3.one * .7f, .9f); // Escalar de 0 a un tamaño específico
+        spriteAdelanteRenderer.gameObject.SetActive(false);
 
-            // Lógica para iniciar el juego después de la cuenta regresiva
-            StartGame();
-
-        }
-        else
-        {
-            StartCoroutine(Finish());
-        }
-        
+        // Lógica para iniciar el juego después de la cuenta regresiva
+        StartGame();
     }
 
 
@@ -234,7 +225,7 @@ public class QGSP : MonoBehaviour
         J1Responde = true;
         EnableAnswerButtons();
     }
-      
+
     IEnumerator Finish()
     {
         spriteFinishRenderer.gameObject.SetActive(true);
@@ -259,13 +250,10 @@ public class QGSP : MonoBehaviour
 
     IEnumerator ShowQuestionAndAnswers()
     {
-        float countdownTimer = 12f;
-        secondCountDownStarted = false;
-
         if (PlayerPrefs.GetString("gameStyle") == "survival")
         {
-            
-            
+            secondCountDownStarted = false;
+            float countdownTimer = 12f;
 
             if (countdownTimer > 0f && !secondCountDownStarted)
             {
@@ -320,8 +308,7 @@ public class QGSP : MonoBehaviour
 
                 if (countdownTimer <= 0f)
                 {
-                    J1Dañado = true;
-                    player1Health -= 10;
+                    player1Health -= 5;
                     Reloj.SetActive(false);
                     Daños();
                 }
@@ -329,22 +316,15 @@ public class QGSP : MonoBehaviour
         }
         else if (PlayerPrefs.GetString("gameStyle") == "fases")
         {
-            if (currentMateriaQuestions == null || currentMateriaQuestions.Count == 0)
-            {
-                Debug.LogError("No hay preguntas disponibles para la materia actual.");
-                yield break;
-            }
+            
+                if (currentMateriaQuestions == null || currentMateriaQuestions.Count == 0)
+                {
+                    Debug.LogError("No hay preguntas disponibles para la materia actual.");
+                    yield break;
+                }
 
-            // Verificar si es la penúltima pregunta de la última materia
-            if (currentMateriaIndex == materiasList.Count - 1 && currentQuestionIndex == questionsPerMateria - 1)
+            if (currentQuestionIndex > questionsPerMateria && currentQuestionIndex > currentMateriaQuestions.Count)
             {
-               Debug.Log("Penúltima pregunta de la última materia");
-                finPregun = true;
-            }
-
-            if (currentQuestionIndex < questionsPerMateria && currentQuestionIndex < currentMateriaQuestions.Count)
-            {
-                Debug.Log("Questions per Materia: " + questionsPerMateria);
                 // Obtener una pregunta aleatoria de la lista actual
                 int randomIndex = Random.Range(0, currentMateriaQuestions.Count);
                 currentQuestion = currentMateriaQuestions[randomIndex];
@@ -389,47 +369,31 @@ public class QGSP : MonoBehaviour
                         answerButtons[i].onClick.AddListener(() => OnWrongAnswerSelected());
                     }
                 }
-
-                while (countdownTimer > 0f && !secondCountDownStarted)
-                {
-                    countdownTimer -= Time.deltaTime;
-                    yield return null;
-                }
-
-                if (countdownTimer <= 0f)
-                {
-                    J1Dañado = true;
-                    player1Health -= 10;
-                    Reloj.SetActive(false);
-                    Daños();
-                }
             }
             else
             {
                 // Lógica para cuando se terminan las preguntas de la materia actual
                 // Avanzar a la siguiente materia o finalizar el modo "fases"
                 currentMateriaIndex++;
+                Debug.Log(currentMateriaIndex);
                 if (currentMateriaIndex < materiasList.Count)
                 {
                     // Reiniciar las preguntas de la nueva materia
                     currentMateriaQuestions = new List<Question>(materiasList[currentMateriaIndex].preguntas);
-                    currentMateriaQuestions = ShuffleList(currentMateriaQuestions); // Mezclar las preguntas de la nueva materia
                     currentQuestionIndex = 0;
                     StartCoroutine(ShowQuestionAndAnswers());
                 }
                 else
                 {
-                   
                     Debug.Log("Todas las materias han sido completadas.");
                     panelQuestion.SetActive(false);
                     Reloj.SetActive(false);
-                    
+                    StartCoroutine(Finish());
                     // Lógica para finalizar el modo "fases"
                 }
             }
         }
-
-    } 
+    }
 
 
 
@@ -539,7 +503,7 @@ public class QGSP : MonoBehaviour
             {    
                 if (playerController.playerTag == "Player1" && !J1Dañado)
                 {
-                    playerController.StartVictoryAnimation();
+                    playerController.StartAttackAnimation();
                     Debug.Log("ANIMACION DE DAÑO A JUGADOR 2");
 
                         
