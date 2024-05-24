@@ -10617,7 +10617,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 17088684}
         m_TargetAssemblyTypeName: MenudePausa, Assembly-CSharp
-        m_MethodName: SelectedButton
+        m_MethodName: Pausa
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
