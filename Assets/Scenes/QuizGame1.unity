@@ -8749,14 +8749,14 @@ MonoBehaviour:
         - Circulo
         - Cuadrado
         - Rombo
-        correctAnswerIndex: 1
+        correctAnswerIndex: 2
       - questionText: Figura que tiene un solo lado
         options:
         - "Tri\xE1ngulo"
         - Circulo
         - Cuadrado
         - Rombo
-        correctAnswerIndex: 2
+        correctAnswerIndex: 1
       - questionText: Figura que tiene 5 lados iguales
         options:
         - "Tri\xE1ngulo"
@@ -8770,7 +8770,7 @@ MonoBehaviour:
         - 3
         - 5
         - 7
-        correctAnswerIndex: 3
+        correctAnswerIndex: 2
       - questionText: Figura que tiene 5 lados iguales
         options:
         - "Tri\xE1ngulo"
@@ -8778,6 +8778,20 @@ MonoBehaviour:
         - Cuadrado
         - Pentagono
         correctAnswerIndex: 3
+      - questionText: "Elige el n\xFAmero m\xE1s grande"
+        options:
+        - 9
+        - 5
+        - 2
+        - 7
+        correctAnswerIndex: 0
+      - questionText: 20 - 17  =
+        options:
+        - 3
+        - 6
+        - 20
+        - 7
+        correctAnswerIndex: 0
     - name: ciencia
       preguntas:
       - questionText: "Por qu\xE9 de noche no se puede ver bien?"
@@ -8821,7 +8835,7 @@ MonoBehaviour:
         - Perro
         - Oso
         - Cucaracha
-        correctAnswerIndex: 0
+        correctAnswerIndex: 1
       - questionText: "Esta es una necesidad b\xE1sica"
         options:
         - Alimentarse
@@ -8833,9 +8847,23 @@ MonoBehaviour:
         options:
         - Arboles
         - Gato
-        - Ver la TV
-        - Comer muchos dulces
+        - Sombrero
+        - Ciudades
         correctAnswerIndex: 0
+      - questionText: Ejemplo de fauna
+        options:
+        - Aves
+        - Flores
+        - Libros
+        - Ciudades
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de estos es un objeto flexible"
+        options:
+        - Madera
+        - Papel
+        - "Jarr\xF3n"
+        - Silla
+        correctAnswerIndex: 1
     - name: etica
       preguntas:
       - questionText: NO corresponde a un acuerdo escolar
@@ -8859,13 +8887,145 @@ MonoBehaviour:
         - Semana santa
         - Dia de los inocentes
         correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de las siguientes es una profesi\xF3n?"
+        options:
+        - "M\xE9dico"
+        - Carpintero
+        - Pintor
+        - Cerrajero
+        correctAnswerIndex: 0
+      - questionText: "Cu\xE1l de las siguientes es un oficio?"
+        options:
+        - "M\xE9dico"
+        - Carpintero
+        - Maestro
+        - Arquitecto
+        correctAnswerIndex: 1
+      - questionText: "Cu\xE1l de las estas representa una autoridad en casa?"
+        options:
+        - Policia
+        - Padre, Madre
+        - Maestro
+        - Presidente
+        correctAnswerIndex: 1
   - name: dif2
     materias:
+    - name: "espa\xF1ol"
+      preguntas:
+      - questionText: "En d\xF3nde buscar\xEDas el significado de una palabra?"
+        options:
+        - Diccionario
+        - Recetario
+        - Revista
+        - "Peri\xF3dico"
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 palabra necesita MAY\xDASCULA al inicio"
+        options:
+        - "m\xE9xico"
+        - "mel\xF3n"
+        - lobo
+        - libro
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 palabra necesita MAY\xDASCULA al inicio"
+        options:
+        - maria
+        - "mel\xF3n"
+        - lobo
+        - libro
+        correctAnswerIndex: 0
+      - questionText: "Composici\xF3n literaria escrita en verso y es del g\xE9nero
+          l\xEDrico"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - Historieta
+        correctAnswerIndex: 0
+      - questionText: "Texto de car\xE1cter ficticio que provienen de tradici\xF3n
+          oral"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - "Canci\xF3n"
+        correctAnswerIndex: 2
+      - questionText: "Cuando uno o m\xE1s individuos realizan preguntas a otra persona"
+        options:
+        - Poema
+        - Entrevista
+        - Cuento
+        - "Canci\xF3n"
+        correctAnswerIndex: 1
     - name: matematicas
-      preguntas: []
-    - name: historia
-      preguntas: []
+      preguntas:
+      - questionText: "Tengo 4 bolsas de 10 chicles cada una, Cu\xE1ntos chicles
+          tengo en total?"
+        options:
+        - 4
+        - 40
+        - 10
+        - 14
+        correctAnswerIndex: 1
+      - questionText: "Tengo 5 monedas de 10 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 5
+        - 50
+        - 10
+        - 15
+        correctAnswerIndex: 1
+      - questionText: "Tengo 3 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 5
+        - 50
+        - 10
+        - 15
+        correctAnswerIndex: 3
+      - questionText: "Tengo 6 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 3
+      - questionText: "Tengo 6 monedas de 5 pesos, Cu\xE1ntos dinero tengo en total?"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 3
+      - questionText: "Qu\xE9 n\xFAmero falta en esta serie?     5, 10,  _,  20, 
+          25"
+        options:
+        - 60
+        - 15
+        - 5
+        - 30
+        correctAnswerIndex: 1
     - name: ciencia
+      preguntas:
+      - questionText: "Cu\xE1ntos sentidos hay?"
+        options:
+        - 5
+        - 4
+        - 6
+        - 3
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 alimentos da\xF1an tu salud?"
+        options:
+        - Comida chatarra
+        - Frutas y verduras
+        - Alimentos de origen animal
+        - Cereales y legumbres
+        correctAnswerIndex: 0
+      - questionText: "Qu\xE9 alimentos da\xF1an tu salud?"
+        options:
+        - Comida chatarra
+        - Frutas y verduras
+        - Alimentos de origen animal
+        - Cereales y legumbres
+        correctAnswerIndex: 0
+    - name: etica
       preguntas: []
   - name: dif3
     materias:

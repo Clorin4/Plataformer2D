@@ -21,6 +21,8 @@ public class CollectGame : MonoBehaviour
     private Order currentOrder;
 
     public GameObject canvasPedido;
+    public GameObject canvasUI;
+    public GameObject canvasHTP;
 
     public TMP_Text textComponent;
     public string fullText;
@@ -54,8 +56,10 @@ public class CollectGame : MonoBehaviour
     {
         TurnOffVariables();
         SaberDificultad();
-        
-        StartGame();
+
+        canvasHTP.SetActive(true);
+        canvasPedido.SetActive(false);
+        canvasUI.SetActive(false);
 
         for (int i = 1; i <= 5; i++)
         {
@@ -97,6 +101,15 @@ public class CollectGame : MonoBehaviour
         selectedDifficulty = PlayerPrefs.GetString("SelectedDifficulty");
 
     }
+
+    public void StartButton()
+    {
+        canvasHTP.SetActive(false);
+        canvasPedido.SetActive(true);
+        canvasUI.SetActive(true);
+        StartGame();
+    }
+
 
     public void ShowOrder(string difficulty)
     {
@@ -233,8 +246,9 @@ public class CollectGame : MonoBehaviour
                 yield return new WaitForSeconds(typingSpeed); // Espera un breve tiempo antes de agregar la siguiente letra
                 
             }
-            isTyping = false;
+            
             yield return new WaitForSeconds(1f);
+            isTyping = false;
         }
 
         if(P1Correct == 2 || P2Correct == 2)
@@ -272,7 +286,7 @@ public class CollectGame : MonoBehaviour
                 globoTextE.SetActive(true);
             }
 
-            if (isInRange == true && Input.GetKeyDown(KeyCode.E))
+            if (isInRange == true && Input.GetKeyDown(KeyCode.E) && !isTyping)
             {
                 if (!P2Checking)
                 {
@@ -303,12 +317,12 @@ public class CollectGame : MonoBehaviour
         {
             isInRange = true;
 
-            if (!isOnClickedE)
+            if (!isOnClickedE && !isTyping)
             {
                 globoTextShift.SetActive(true);
             }
 
-            if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift))
+            if (isInRange == true && Input.GetKeyDown(KeyCode.RightShift) && !isTyping)
             {
                 if (!P1Checking)
                 {
